@@ -1,0 +1,43 @@
+/* 
+font and size for full document
+styles for other classes will overide the general rules
+*/
+html{
+    font-family: Helvetica, sans-serif;
+}
+/* index */
+.body{
+    padding: 5px;
+}
+
+.Wrapper {
+	display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px;
+}
+/* educationandcerts */
+.edtitles{
+    font-size: 20px;
+    background-color:pink;
+    border-radius: 25px;
+    padding: 20px;
+    width: 500px;
+    height: 20px;
+
+
+}
+
+.logo {
+  background:src="github-logo.png"; width:400px; height:400px;
+  
+  margin:0 auto;
+}
+
+/* projects */
+.projbody {
+    text-align: center;
+    padding: 10px;
+}
+
+
