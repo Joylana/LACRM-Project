@@ -16,7 +16,7 @@
     <h1 style="text-align: center; margin: 15%; padding:15%; ">Alana Joy Morrison</h1>
 
 
-<div style="background-image: linear-gradient(rgba(255, 192, 203, 0.04) 10px, pink 65%, #95B2B8  );">
+<div style="background-image: linear-gradient(pinkwhite 20%, pink 70%, #463F3A 50%);">
 <!-- About me section and other pages-->
     <div style="background-color:pink;border-radius: 25px;padding: 20px;">
         <h2>About Me</h2>
@@ -28,11 +28,8 @@
 
         </p>
     </div>
-    <div style="background-color:rgba(255, 255, 255, 0) ; padding: 50px"></div> <!-- adding space between tiles-->
 
-<div style="background-image: linear-gradient(rgba(255, 255, 255, 0) 15%, #95B2B8 100px, #463F3A );">
-
-    <div style="background-color: #95B2B8 ;border-radius: 30px;padding: 20px;">
+    <div style="background-color: #463F3A ;border-radius: 25px;padding: 20px;">
         <h2>View My Work</h2>
 
         <a style="color:darkmagenta" href="experience.php" target="_blank">Education and Certifications</a>
@@ -42,17 +39,13 @@
         <a style="color:darkmagenta" href="skills.php" target="_blank">Skills</a>
 
     </div>
-    <div style="background-color:rgba(255, 255, 255, 0) ; padding: 50px"></div> <!-- adding space between tiles-->
-    
+    </div black> 
 
 <!-- Contact Me and Socials-->
-    <div style="background-color: #463F3A ;border-radius: 30px;padding: 20px;">
-        <h2>Get in Touch</h2>
+    <h2>Get in Touch</h2>
         <a style="color:darkmagenta;" href="https://www.linkedin.com/in/alana-joy-morrison/"target="_blank">LinkedIn</a>
 <br> 
-</div>
-</div>
-
+    
     
     <footer style="background-color: #463F3A; padding: 50px;border: 0px"> hey boo bear ;)</footer>
     
