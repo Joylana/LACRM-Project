@@ -9,6 +9,8 @@
 
 <body>
 
+<h1 style="padding: 110px"> My <br> Skills</h1>
+
     <!-- Languages n skills -->
     <h3 style="text-align: center;">Languages</h3>
     <div class="Wrapper">
@@ -20,6 +22,12 @@
         </div> 
         <div>
             c++
+        </div> 
+        <div>
+            PHP
+        </div> 
+        <div>
+            HTML
         </div> 
     </div>
 
@@ -55,5 +63,9 @@
         </div>
 
     </div>
+    
+    <div style="padding: 110px;"></div>
+    </body>
 
-</body>
+    <footer style="border:0px; padding: 110px; background-color: #463F3A; "> hey boo bear ;)</footer>
+

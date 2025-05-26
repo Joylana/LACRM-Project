@@ -35,11 +35,11 @@
     <div style="background-color: #95B2B8 ;border-radius: 30px;padding: 20px;">
         <h2>View My Work</h2>
 
-        <a style="color:darkmagenta" href="experience.php" target="_blank">Education and Certifications</a>
+        <a style="color:rgb(41, 89, 99)" href="experience.php" target="_blank">Education and Certifications</a>
 <br> 
-        <a style="color:darkmagenta" href="projects.php" target="_blank">Projects</a>
+        <a style="color:rgb(41, 89, 99)" href="projects.php" target="_blank">Projects</a>
 <br> 
-        <a style="color:darkmagenta" href="skills.php" target="_blank">Skills</a>
+        <a style="color:rgb(41, 89, 99)" href="skills.php" target="_blank">Skills</a>
 
     </div>
     <div style="background-color:rgba(255, 255, 255, 0) ; padding: 50px"></div> <!-- adding space between tiles-->
@@ -48,7 +48,7 @@
 <!-- Contact Me and Socials-->
     <div style="background-color: #463F3A ;border-radius: 30px;padding: 20px;">
         <h2>Get in Touch</h2>
-        <a style="color:darkmagenta;" href="https://www.linkedin.com/in/alana-joy-morrison/"target="_blank">LinkedIn</a>
+        <a style="color:rgb(43, 31, 12);" href="https://www.linkedin.com/in/alana-joy-morrison/"target="_blank">LinkedIn</a>
 <br> 
 </div>
 </div>
