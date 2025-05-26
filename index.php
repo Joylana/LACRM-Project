@@ -16,7 +16,7 @@
     <h1 style="text-align: center; margin: 15%; padding:15%; ">Alana Joy Morrison</h1>
 
 
-<div style="background-image: linear-gradient(rgba(255, 192, 203, 0.04) 10px, pink 65%, #95B2B8  );">
+<div style="background-image: linear-gradient(rgba(255, 192, 203, 0.04) 400px, #95B2B8 52% );">
 <!-- About me section and other pages-->
     <div style="background-color:pink;border-radius: 25px;padding: 20px;">
         <h2>About Me</h2>
@@ -30,7 +30,7 @@
     </div>
     <div style="background-color:rgba(255, 255, 255, 0) ; padding: 50px"></div> <!-- adding space between tiles-->
 
-<div style="background-image: linear-gradient(rgba(255, 255, 255, 0) 15%, #95B2B8 100px, #463F3A );">
+<div style="background-image: linear-gradient(rgba(255, 255, 255, 0) 1px, #95B2B8 42%, #463F3A );">
 
     <div style="background-color: #95B2B8 ;border-radius: 30px;padding: 20px;">
         <h2>View My Work</h2>
