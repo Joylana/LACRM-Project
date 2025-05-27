@@ -3,7 +3,7 @@
 	$Posts = [
 		1 => [
 			'postID' => 1,
-            'title' => 'About Me',
+            'title' => 'Multicultural Scholars Program',
 		],
 		2 => [
             'postID' => 2,
@@ -38,7 +38,7 @@
 			
 	}
 
-	function GetPost(){
+	function GetPost( $Num ){
 		$All = GetAllPosts();
-		return $All['postID'];
+		return $All[$Num];
 	}

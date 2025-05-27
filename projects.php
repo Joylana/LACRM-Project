@@ -1,10 +1,15 @@
+<?php
+    include('include/init.php');
+?>
+
 <!DOCTYPE html >
     <head >
         <meta charset="'utf-8">
         <title>Joy's Projects</title>
         <link rel="stylesheet" href="mystyle.css">
     </head>
-    
+
+<body style ="margin: 0px;"  >
     <!-- GitHub -->
     <h2 class="projbody">GitHub</h2>
     <div style="text-align: center">
@@ -36,3 +41,5 @@
     </a>
     </div>
 
+    <?php echoFooter() ?>
+</body>

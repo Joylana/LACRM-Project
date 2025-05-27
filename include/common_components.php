@@ -18,7 +18,11 @@
 //If you want a footer you can add one this is the bare minimum
 function echoFooter(){
 	echo "
-            <footer style='background-color: #463F3A; padding: 50px;border: 0px'> hey boo bear ;)</footer>
+            <footer style='background-color: #463F3A; padding: 50px;'> hey boo bear ;)
+            <h2>Get in Touch</h2>
+            <a style='color:rgb(43, 31, 12);' href='https://www.linkedin.com/in/alana-joy-morrison/'target='_blank'>LinkedIn</a>
+            
+            </footer>
 			</body>
 		</html>
 	";

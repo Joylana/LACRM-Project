@@ -1,3 +1,7 @@
+<?php
+    include('include/init.php');
+?>
+
 <!DOCTYPE html >
     <head >
         <meta charset="'utf-8" name="viewport" content="width=device-width">
@@ -7,7 +11,7 @@
 
     </head>
 
-<body>
+<body style ="margin: 0px;">
 
 <h1 style="padding: 110px"> My <br> Skills</h1>
 
@@ -65,7 +69,10 @@
     </div>
     
     <div style="padding: 110px;"></div>
+
+
+    <?php echoFooter() ?>
     </body>
 
-    <footer style="border:0px; padding: 110px; background-color: #463F3A; "> hey boo bear ;)</footer>
+    
 

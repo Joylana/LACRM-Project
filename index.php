@@ -51,19 +51,19 @@
 
 <!-- Contact Me and Socials-->
     <div style="background-color: #463F3A ;border-radius: 30px;padding: 20px;">
-        <h2>Get in Touch</h2>
-        <a style="color:rgb(43, 31, 12);" href="https://www.linkedin.com/in/alana-joy-morrison/"target="_blank">LinkedIn</a>
+
+        <?php
+        foreach ($Posts as $p){
+
+            echo "<span> <a href='post-view.php?index=".$p['postID']."'> ".$p['title']." </a> </span>";
+            
+        };
+    ?>
 <br> 
 </div>
 </div>
 
-    <?php
-        foreach ($Posts as $p){
-
-            echo "<span> <a href='post-view.php?index=".$p['postID']."'> ".$p['postID']." </a> </span>";
-            
-        };
-    ?>
+    
 
     
     <!--<footer style="background-color: #463F3A; padding: 50px;border: 0px"> hey boo bear ;)</footer> -->
