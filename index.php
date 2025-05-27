@@ -1,3 +1,7 @@
+<?php
+    include('include/init.php');
+    ?>
+
 <!DOCTYPE html >
     <head >
         <meta charset="'utf-8" name="viewport" content="width=device-width">
@@ -53,8 +57,17 @@
 </div>
 </div>
 
+    <?php
+        foreach ($Posts as $p){
+
+            echo "<span> <a href='post-view.php?index=".$p['postID']."'> ".$p['postID']." </a> </span>";
+            
+        };
+    ?>
+
     
-    <footer style="background-color: #463F3A; padding: 50px;border: 0px"> hey boo bear ;)</footer>
+    <!--<footer style="background-color: #463F3A; padding: 50px;border: 0px"> hey boo bear ;)</footer> -->
+    <?php echoFooter() ?>
     
 
 </body>
