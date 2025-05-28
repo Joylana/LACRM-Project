@@ -7,24 +7,28 @@
         <meta charset="'utf-8" >
         <title>Joy's Experience</title>
         <link rel="stylesheet" href="mystyle.css">
-</head>
+    </head>
 
-<body style ="margin: 0px;">
-    <p>
-        <h1>Experience</h1>
+    <body style ="margin: 0px;">
+  
+        <h1 class = pagetitles> My<br>Experience</h1>
             
 
-
-    </p>
-
+        <p style ="text-align: center;">
+        <div class="float-container" >
+            
             <?php
-        $Posts = GetAllPosts();
-        foreach ($Posts as $p){
+            $Posts = GetAllPosts();
+            foreach ($Posts as $p){
 
-            echo "<span> <a href='post-view.php?index=".$p['postId']."'> ".$p['title']." </a> </span>";
+                echo "<div class='float-child'> <div><a href='post-view.php?index=".$p['postId']."'> ".$p['title']." </a> </div> </div>";
+                    
+            };
+            ?>
             
-        };
-    ?>
+        </div>
+        </p>
 
-    <?php echoFooter() ?>
-</body>
+        <?php echoFooter() ?>
+    </body>
+

@@ -5,7 +5,7 @@
 <!DOCTYPE html >
     <head >
         <meta charset="'utf-8" name="viewport" content="width=device-width">
-        <title>Joy</title>
+        <title>Joy's Skills</title>
         <link rel="stylesheet" href="mystyle.css">
 
 
@@ -15,17 +15,19 @@
 
 <h1 class= pagetitles> My <br> Skills</h1>
 
+<h2 style="padding: 50px;">Hard Skills</h2>
+
     <!-- Languages n skills -->
     <h3 style="text-align: center;">Languages</h3>
     <div class="Wrapper">
         <div>
-            python 
+            Python 
         </div>
         <div>
-            java 
+            Java 
         </div> 
         <div>
-            c++
+            C++
         </div> 
         <div>
             PHP
@@ -45,29 +47,52 @@
             Tensorflow 
         </div>
         <div>
-            seaborn 
+            Seaborn 
         </div>
         <div>
-            spacy 
+            Spacy 
         </div>
         <div>
-            scikitlearn 
+            Scikit-Learn 
         </div>
         <div>
-            numpy 
+            Numpy 
         </div>
         <div>
-            pandas 
+            Pandas 
         </div>
         <div>
-            pyspark 
+            PySpark 
         </div>
         <div>
-            rltools
+            RLtools
         </div>
 
     </div>
-    
+    <h2 style="padding: 50px;">Soft Skills</h2>
+        <h3 style="text-align: center;">Inter-Personal</h3>
+    <div class="Wrapper" >
+
+        <div>
+            Project Management 
+        </div>
+        <div>
+            Leadership 
+        </div>
+        <div>
+            Public Speaking 
+        </div>
+        <div>
+            Inter-cultural Communication 
+        </div>
+        <div>
+            Dependability 
+        </div>
+        <div>
+            Critical Thinking 
+        </div>
+    </div>
+
     <div style="padding: 110px;"></div>
 
 
