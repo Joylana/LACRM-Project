@@ -5,7 +5,16 @@
 
     }
 
-    echo "<h2>".$Test['title']."</h2>";
+    echo "<h2>".$Test['title']."</h2><br>".
+
+        $Test['description'].  "<br>".
+        $Test['content']
+    
+    ;
+
+
+    ?>
+    
 
 
 

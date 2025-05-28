@@ -9,3 +9,4 @@
 	
     include('include/common_components.php');
 		include('include/posts.php');
+    include('include/helper_functions.php');
