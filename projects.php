@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="mystyle.css">
     </head>
 
+    <h1 class= pagetitles> My <br> Skills</h1>
+    
 <body style ="margin: 0px;"  >
     <!-- GitHub -->
     <h2 class="projbody">GitHub</h2>

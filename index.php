@@ -39,7 +39,7 @@
     <div style="background-color: #95B2B8 ;border-radius: 30px;padding: 20px;">
         <h2>View My Work</h2>
 
-        <a style="color:rgb(41, 89, 99)" href="experience.php" target="_blank">Education and Certifications</a>
+        <a style="color:rgb(41, 89, 99)" href="experience.php" target="_blank">Experience</a>
 <br> 
         <a style="color:rgb(41, 89, 99)" href="projects.php" target="_blank">Projects</a>
 <br> 
@@ -52,14 +52,6 @@
 <!-- Contact Me and Socials-->
     <div style="background-color: #463F3A ;border-radius: 30px;padding: 20px;">
 
-        <?php
-        $Posts = GetAllPosts();
-        foreach ($Posts as $p){
-
-            echo "<span> <a href='post-view.php?index=".$p['postId']."'> ".$p['title']." </a> </span>";
-            
-        };
-    ?>
 <br> 
 </div>
 </div>
@@ -67,8 +59,6 @@
     
 
     
-    <!--<footer style="background-color: #463F3A; padding: 50px;border: 0px"> hey boo bear ;)</footer> -->
-    <?php debugOutput($Posts); ?>
     <?php echoFooter() ?>
     
 

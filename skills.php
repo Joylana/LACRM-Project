@@ -13,7 +13,7 @@
 
 <body style ="margin: 0px;">
 
-<h1 style="padding: 110px"> My <br> Skills</h1>
+<h1 class= pagetitles> My <br> Skills</h1>
 
     <!-- Languages n skills -->
     <h3 style="text-align: center;">Languages</h3>
