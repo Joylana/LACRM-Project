@@ -83,9 +83,6 @@
             Public Speaking 
         </div>
         <div>
-            Inter-cultural Communication 
-        </div>
-        <div>
             Dependability 
         </div>
         <div>

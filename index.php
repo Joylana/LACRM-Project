@@ -36,14 +36,13 @@
 
 <div style="background-image: linear-gradient(rgba(255, 255, 255, 0) 1px, #95B2B8 42%, #463F3A );">
 
+<!-- At A Glance -->
     <div style="background-color: #95B2B8 ;border-radius: 30px;padding: 20px;">
-        <h2>View My Work</h2>
+        <h2>At a Glance</h2>
 
-        <a style="color:rgb(41, 89, 99)" href="experience.php" target="_blank">Experience</a>
-<br> 
-        <a style="color:rgb(41, 89, 99)" href="projects.php" target="_blank">Projects</a>
-<br> 
-        <a style="color:rgb(41, 89, 99)" href="skills.php" target="_blank">Skills</a>
+        <img src="me photo.jpeg" alt="image of alana" style="  height: 10%;width: 10%;"/>
+        <img src="me photo.jpeg" alt="image of alana" style="  height: 10%;width: 10%;"/>
+        <img src="me photo.jpeg" alt="image of alana" style="  height: 10%;width: 10%;"/>
 
     </div>
     <div style="background-color:rgba(255, 255, 255, 0) ; padding: 50px"></div> <!-- adding space between tiles-->
@@ -52,11 +51,18 @@
 <!-- Contact Me and Socials-->
     <div style="background-color: #463F3A ;border-radius: 30px;padding: 20px;">
 
+            <h2>View My Work</h2>
+
+            <a style="color:rgb(41, 89, 99)" href="experience.php" target="_blank">Experience</a>
+    <br> 
+            <a style="color:rgb(41, 89, 99)" href="projects.php" target="_blank">Projects</a>
+    <br> 
+            <a style="color:rgb(41, 89, 99)" href="skills.php" target="_blank">Skills</a>
+
+
 <br> 
 </div>
 </div>
-
-    
 
     
     <?php echoFooter() ?>

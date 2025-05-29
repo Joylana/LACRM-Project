@@ -21,7 +21,7 @@
             $Posts = GetAllPosts();
             foreach ($Posts as $p){
 
-                echo "<div class='float-child'> <div><a href='post-view.php?index=".$p['postId']."'> ".$p['title']." </a> </div> </div>";
+                echo "<div class='float-child'> <div><a style='color:black' href='post-view.php?index=".$p['postId']."'> ".$p['title']." </a> </div> </div>";
                     
             };
             ?>
