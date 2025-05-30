@@ -1,0 +1,34 @@
+/* 
+font and size for full document
+styles for other classes will overide the general rules
+URL for colors: https://coolors.co/ffc0cb-463f3a-95b2b8
+*/
+html{
+    font-family: Helvetica, sans-serif;
+}
+
+/* index */
+.body{
+    padding: 5px;
+}
+
+.Wrapper {
+	display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 20px;
+}
+
+.float-container {
+    padding: 0px;
+    margin:20px;
+}
+
+.float-child {
+    float: left;
+    color: rgb(32, 38, 41);
+    line-height: 22px;
+    padding: 0px;
+    margin: 4px;
+    width:16%;
+}  
