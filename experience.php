@@ -13,17 +13,35 @@
   
         <h1 class = pagetitles> My<br>Experience</h1>
             
-
+        <p>
+            Tags:
+            
+        </p>
         <p style ="text-align: center;">
         <div class="float-container" >
             
             <?php
-            $Posts = GetAllPosts();
-            foreach ($Posts as $p){
+            $tag = $_REQUEST['tag'];
+            $tags_array = ['cultural','work','volunteer'];
+            ?>
 
-                echo "<div class='float-child'> <div><a style='color:black' href='post-view.php?index=".$p['postId']."'> ".htmlspecialchars($p['title'])." </a> </div> </div>";
-                    
-            };
+            <?php
+
+            if ($tag == 'all'){
+                $Posts = GetAllPosts();
+                foreach ($Posts as $p){
+
+                    echo "<div class='float-child'> <div><a style='color:black' href='post-view.php?index=".$p['postId']."'> ".htmlspecialchars($p['title'])." </a> </div> </div>";
+                        
+                };
+            }else {
+                $Posts = GetTaggedPosts($tag);
+                foreach ($Posts as $p){
+
+                    echo "<div class='float-child'> <div><a style='color:black' href='post-view.php?index=".$p['postId']."'> ".htmlspecialchars($p['title'])." </a> </div> </div>";
+                        
+                };
+            }
             ?>
             
         </div>

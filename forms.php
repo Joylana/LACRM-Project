@@ -2,7 +2,7 @@
     include('include/init.php');
 
     if (isset( $_REQUEST['title']) && isset($_REQUEST['content']) && isset($_REQUEST['description'])){
-        InsertComment($_REQUEST['title'],$_REQUEST['content'],$_REQUEST['description']);
+        InsertExperience($_REQUEST['title'],$_REQUEST['content'],$_REQUEST['description']);
         header("Location: forms.php");
         exit;
     };
