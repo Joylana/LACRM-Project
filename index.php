@@ -6,7 +6,7 @@
     <head >
         <meta charset="'utf-8" name="viewport" content="width=device-width">
         <title>Joy</title>
-        <link rel="stylesheet" href="indexstyle.css">
+        <link rel="stylesheet" href="mystyle.css">
         <!--<style>
             body{
                 background-image: linear-gradient(white 45%, pink 70%);
@@ -40,13 +40,13 @@
     <div style="background-color: #95B2B8 ;border-radius: 30px;padding: 20px;">
         <h2>At a Glance</h2>
 
-        <div class="float-container" >
-            <div class='float-child'> <img src="IMG_0055.jpg" alt="image of alana" style="  height: 100%;width: 100%;"/> </div>
-            <div class='float-child'>  I’m passionate about building ethical, intelligent systems and creating innovative solutions that make a real difference. Whether I’m coding a project, mentoring others, or organizing events, I bring energy, empathy, and a drive to make an impact. </div>
-            <div class='float-child'> <img src="IMG_1428.jpg" alt="image of alana" style="  height: 100%;width: 100%;"/> </div>
-            <div class='float-child'>Beyond the classroom, I’ve been deeply involved in leadership and community engagement. I’ve served as Executive Chair of the Campus Activities Board and the International Student Association, worked as an Orientation Coordinator, and supported new students as a Peer Mentor. </div>
-            <div class='float-child'> <img src="IMG_0653.jpg" alt="image of alana" style="  height: 100%;width: 100%;"/> </div>
-            <div class='float-child'>My passion for community building extends beyond campus—I’ve been a dedicated FIRST Robotics volunteer for over seven years, always looking for ways to give back. </div>
+        <div class="index-float-container" >
+            <div class='index-float-child'> <img src="IMG_0055.jpg" alt="image of alana" style="  height: 100%;width: 100%;"/> </div>
+            <div class='index-float-child'>  I’m passionate about building ethical, intelligent systems and creating innovative solutions that make a real difference. Whether I’m coding a project, mentoring others, or organizing events, I bring energy, empathy, and a drive to make an impact. </div>
+            <div class='index-float-child'> <img src="IMG_1428.jpg" alt="image of alana" style="  height: 100%;width: 100%;"/> </div>
+            <div class='index-float-child'>Beyond the classroom, I’ve been deeply involved in leadership and community engagement. I’ve served as Executive Chair of the Campus Activities Board and the International Student Association, worked as an Orientation Coordinator, and supported new students as a Peer Mentor. </div>
+            <div class='index-float-child'> <img src="IMG_0653.jpg" alt="image of alana" style="  height: 100%;width: 100%;"/> </div>
+            <div class='index-float-child'>My passion for community building extends beyond campus—I’ve been a dedicated FIRST Robotics volunteer for over seven years, always looking for ways to give back. </div>
         </div>
 
         <div style="background-color:rgba(255, 255, 255, 0);clear: both;  padding: 1px"></div>

@@ -13,28 +13,29 @@
   
         <h1 class = pagetitles> My<br>Experience</h1>
             
-        <p>
-            Tags:
-            
-        </p>
-        <p style ="text-align: center;">
-        <div class="float-container" >
-            
+        <div style="margin: 100px;">
+            Tags:<br>
             <?php
-            $tag = $_REQUEST['tag'];
             $tags_array = ['cultural','work','volunteer'];
+            foreach  ($tags_array as $t){
+                echo "<span style='padding: 20px;'><a style='color:rgb(0, 0, 0)' href='experience.php?tag=".$t."'>".$t."</a></span>";
+            }
             ?>
 
-            <?php
+        </div>
+        <div class="float-container" >
+            
+            <?php // displaying tiles for experience
+            $tag = $_REQUEST['tag'];
 
-            if ($tag == 'all'){
+            if ($tag == 'all'){  // display all posts
                 $Posts = GetAllPosts();
                 foreach ($Posts as $p){
 
                     echo "<div class='float-child'> <div><a style='color:black' href='post-view.php?index=".$p['postId']."'> ".htmlspecialchars($p['title'])." </a> </div> </div>";
                         
                 };
-            }else {
+            }else {  // diplay posts under the tag selected (url)
                 $Posts = GetTaggedPosts($tag);
                 foreach ($Posts as $p){
 
@@ -45,7 +46,6 @@
             ?>
             
         </div>
-        </p>
 
         <?php echoFooter() ?>
     </body>
