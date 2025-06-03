@@ -30,7 +30,7 @@
 
             if ($tag == 'all'){  // display all posts
                 $Posts = GetAllPosts();
-                foreach ($Posts as $p){
+                foreach ($Posts as $p){ 
 
                     echo "<div class='float-child'> <div><a style='color:black' href='post-view.php?index=".$p['postId']."'> ".htmlspecialchars($p['title'])." </a> </div> </div>";
                         

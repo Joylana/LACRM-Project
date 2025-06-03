@@ -8,16 +8,18 @@
     };
 
 // function to insert experiences into the database is an easier format
-    function InsertExperience($title,$content,$description){
+    function InsertExperience($title,$content,$description,$tag){
         $now = date_create('now');
         $dateCreated = date_format($now,"Y-m-d");
         dbQuery(
-            "INSERT INTO posts(title, content, description, dateCreated)
-            VALUES (:title,:content,:description,:dateCreated)",
+            "INSERT INTO posts(title, content, description,tag, dateCreated)
+            VALUES (:title,:content,:description,:tag,:dateCreated)",
             [
-                'title'=> $name,
+                'title'=> $title,
                 'content'=>$content,
-                'description'=>$description
+                'description'=>$description,
+                'tag'=>$tag,
+                'dateCreated' =>$dateCreated
             ]
         ) ;
     };
@@ -46,4 +48,23 @@
 	")-> fetchAll();
 
 		return $posts;
+    }
+
+//function to archive posts
+
+    function ArchivePost($title){
+        $now = date_create('now');
+        $dateArchived = date_format($now,"Y-m-d");
+        dbQuery("
+         UPDATE posts SET dateArchived = '".$dateArchived."'
+          WHERE title = '".$title."'
+        ");
+    }
+
+//function to edit posts
+    function EditPost($title,$field,$edit){
+         dbQuery("
+            UPDATE posts SET ".$field."='".$edit."'
+            WHERE title = '".$title."'
+         ");
     }
