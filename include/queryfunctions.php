@@ -33,6 +33,36 @@
     return $workouts; 
     }
 
-    function GetWorkout(){
+    function GetWorkout($workoutId,$userId){
+        $workout = GetPrograms($userId);
+        return $program[$workoutId];
         
+    }
+
+    //movement functions
+    function GetMovementsForWorkout($workoutId){
+        // $movements = dbQuery("
+        // SELECT movementId FROM sets
+        // WHERE workoutId = ". $workoutId."
+        // ")->fetchAll();
+        $movements = dbQuery("
+        SELECT * FROM movements
+        WHERE workoutId = ". $workoutId ."
+        ")->fetchAll();
+        return $movements;
+
+    }
+
+    function GetMovementsForSet($workoutId){ //we need this one?
+
+
+    }
+
+    //set functions
+    function GetSetsForWorkout($workoutId){
+        $sets = dbQuery("
+            SELECT * FROM sets
+            WHERE workoutId = ".$workoutId."
+        ")->fetchAll();
+        return $sets;
     }
