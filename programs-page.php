@@ -13,7 +13,8 @@
 
 <html>
     <body>
-        <?php
+
+        <?php //displaying saved programs
         foreach ($programs as $p){
             echo " <a href='program-view.php?program=". $p['workoutId'] ."'>". $p['workoutName'] ."</a> ";
         }
