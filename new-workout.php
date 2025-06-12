@@ -2,9 +2,9 @@
     include("include/init.php");
 
     if (isset( $_REQUEST['workoutName']) && isset($_REQUEST['movementName']) && isset($_REQUEST['weight1'])){
-        InsertProgram(3,$_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
+        $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
         
-        InsertMovement(3,$_REQUEST['movementName'],$_REQUEST['movementType'],3);
+        $movementId = InsertMovement($_REQUEST['movementName'],$_REQUEST['movementType'],3);
 
         InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],3,3);
         InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],3,3);

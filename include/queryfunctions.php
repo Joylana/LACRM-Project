@@ -67,28 +67,47 @@
         return $sets;
     };
 
+    function FinishSet($setId){
+        dbQuery("
+        UPDATE sets
+        SET isComplete = 1
+        WHERE setId = ".$setId." 
+        ");
+    }
+
     //Inserting new workout, movement, and set
 
-    // NOTE: ALL functions below have id's hard coded... gotta fix that
+    // NOTE: a baddie just left the baddie factory
 
-    function InsertProgram($workoutId,$name,$userId){// creates a new EMPTY program and returns the id of said program
+    function GenreateId(){// take the current hour,minute, and second then add a random number to return an id. (I feel like i ate with this one or the bar is in hell)
+        $id = date("his"); // each id is 6 digits long
+        $add = rand(100000,889999);
+        $id = $id +$add;
+
+        return $id;
+    }
+
+    function InsertProgram($name,$userId){// creates a new program
+        $workoutId = GenreateId();
         dbQuery("INSERT INTO workouts(workoutId,workoutName, isProgram, userId) 
         VALUES (".$workoutId.",'".$name."',1,".$userId.")
         ");
-        //return $workoutId;
+        return $workoutId;
     };
-    function InsertMovement($movementId,$movementName,$movementType,$workoutId){
+    function InsertMovement($movementName,$movementType,$workoutId){
+        $movementId = GenreateId();
         dbQuery("
         INSERT INTO movements(movementId, movementName, movementType, workoutId)
         VALUES (".$movementId.",'".$movementName."', '".$movementType."', ".$workoutId.")
         ");
-        //return $movementId;
+        return $movementId;
         
     };
     function InsertSet($weight,$reps,$workoutId,$movementId){
+        $setId = GenreateId();
         dbQuery("
-            INSERT INTO sets(weight,reps,workoutId,movementId)
-            VALUES(".$weight.",".$reps.",".$workoutId.",".$movementId.")
+            INSERT INTO sets(setId,weight,reps,workoutId,movementId)
+            VALUES(".$setId.",".$weight.",".$reps.",".$workoutId.",".$movementId.")
         ");
 
     };
