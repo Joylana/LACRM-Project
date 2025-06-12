@@ -34,7 +34,7 @@
     }
 
     function GetWorkout($workoutId,$userId){
-        $workout = GetPrograms($userId);
+        $workout = GetWorkouts($userId);
         return $program[$workoutId];
         
     }
@@ -50,11 +50,6 @@
         WHERE workoutId = ". $workoutId ."
         ")->fetchAll();
         return $movements;
-
-    }
-
-    function GetMovementsForSet($workoutId){ //we need this one?
-
 
     }
 
@@ -94,7 +89,8 @@
         ");
         return $workoutId;
     };
-    function InsertMovement($movementName,$movementType,$workoutId){
+
+    function InsertMovement($movementName,$movementType,$workoutId=NULL){//should this be NewMovement()?
         $movementId = GenreateId();
         dbQuery("
         INSERT INTO movements(movementId, movementName, movementType, workoutId)
@@ -103,12 +99,14 @@
         return $movementId;
         
     };
+
     function InsertSet($weight,$reps,$workoutId,$movementId){
         $setId = GenreateId();
         dbQuery("
             INSERT INTO sets(setId,weight,reps,workoutId,movementId)
             VALUES(".$setId.",".$weight.",".$reps.",".$workoutId.",".$movementId.")
         ");
+        return $setId;
 
     };
 

@@ -1,7 +1,7 @@
 <?php 
     include('include/init.php');
     $movements = GetMovementsForWorkout(2);
-    $sets = GetMovementsForSet(2);
+    $sets = GetSetsForWorkout(2);
 
     echo 'sets:';
     debugOutput($sets);

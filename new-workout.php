@@ -6,9 +6,9 @@
         
         $movementId = InsertMovement($_REQUEST['movementName'],$_REQUEST['movementType'],3);
 
-        InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],3,3);
-        InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],3,3);
-        InsertSet($_REQUEST['weight3'],$_REQUEST['reps3'],3,3);
+        InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],$workoutId,$movementId);
+        InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],$workoutId,$movementId);
+        InsertSet($_REQUEST['weight3'],$_REQUEST['reps3'],$workoutId,$movementId);
         header("Location: new-workout.php");
         exit;
     };
