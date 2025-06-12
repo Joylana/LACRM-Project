@@ -1,6 +1,13 @@
 <?php 
     include('include/init.php');
-    $program = $_REQUEST['program'];
-    
+    $workoutid = $_REQUEST['workoutid'];
+       
+    $movements = GetMovementsForWorkout($workoutid);
+    $sets = GetSetsForWorkout($workoutid);
+
+    echo 'sets:';
+    debugOutput($sets);
+    echo '<br>movements for workout:';
+    debugOutput($movements);
 ?>
 
