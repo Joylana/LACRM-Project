@@ -7,5 +7,9 @@
     include('include/db_query.php');
     include('include/queryfunctions.php');
 		
-	
     include('include/helper_functions.php');
+
+    //hard coding user id as 1
+    
+    $userId = 1;
+
