@@ -90,7 +90,7 @@
         return $workoutId;
     };
 
-    function InsertMovement($movementName,$movementType,$workoutId=NULL){//should this be NewMovement()?
+    function InsertMovement($movementName,$movementType,$workoutId=NULL){
         $movementId = GenreateId();
         dbQuery("
         INSERT INTO movements(movementId, movementName, movementType, workoutId)
