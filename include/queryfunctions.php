@@ -25,32 +25,26 @@
 
     // Workout Functions
     function GetWorkouts($userId){
-    $workouts = dbQuery("
-        SELECT * FROM workouts
-        WHERE isProgram IS NULL AND
-        userId = ".$userId."
-    ")->fetchAll();
-    return $workouts; 
+        $workouts = dbQuery("
+            SELECT * FROM workouts
+            WHERE isProgram IS NULL AND
+            userId = ".$userId."
+        ")->fetchAll();
+        return $workouts; 
     }
 
     function GetWorkout($workoutId,$userId){
         $workout = GetWorkouts($userId);
         return $program[$workoutId];
-        
     }
 
     //movement functions
     function GetMovementsForWorkout($workoutId){
-        // $movements = dbQuery("
-        // SELECT movementId FROM sets
-        // WHERE workoutId = ". $workoutId."
-        // ")->fetchAll();
         $movements = dbQuery("
         SELECT * FROM movements
         WHERE workoutId = ". $workoutId ."
         ")->fetchAll();
         return $movements;
-
     }
 
     //set functions
@@ -74,7 +68,7 @@
 
     // NOTE: a baddie just left the baddie factory
 
-    function GenreateId(){// take the current hour,minute, and second then add a random number to return an id. (I feel like i ate with this one or the bar is in hell)
+    function GenerateId(){// take the current hour,minute, and second then add a random number to return an id. (I feel like i ate with this one or the bar is in hell)
         $id = date("his"); // each id is 6 digits long
         $add = rand(100000,889999);
         $id = $id +$add;
@@ -83,7 +77,7 @@
     }
 
     function InsertProgram($name,$userId){// creates a new program
-        $workoutId = GenreateId();
+        $workoutId = GenerateId();
         dbQuery("INSERT INTO workouts(workoutId,workoutName, isProgram, userId) 
         VALUES (".$workoutId.",'".$name."',1,".$userId.")
         ");
@@ -91,7 +85,7 @@
     };
 
     function InsertMovement($movementName,$movementType,$workoutId=NULL){
-        $movementId = GenreateId();
+        $movementId = GenerateId();
         dbQuery("
         INSERT INTO movements(movementId, movementName, movementType, workoutId)
         VALUES (".$movementId.",'".$movementName."', '".$movementType."', ".$workoutId.")
@@ -101,7 +95,7 @@
     };
 
     function InsertSet($weight,$reps,$workoutId,$movementId){
-        $setId = GenreateId();
+        $setId = GenerateId();
         dbQuery("
             INSERT INTO sets(setId,weight,reps,workoutId,movementId)
             VALUES(".$setId.",".$weight.",".$reps.",".$workoutId.",".$movementId.")
