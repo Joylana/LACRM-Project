@@ -102,7 +102,6 @@
     };
 
 
-    // didn't use a single one of the other functions... oops?
     function createWorkoutFromProgram($workoutId){  // takes a program and duplicates all of the data: workout info, movements, sets
 
         //create a new row in workouts
