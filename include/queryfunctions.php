@@ -106,11 +106,12 @@
 
         //create a new row in workouts
         $newWorkoutId = GenerateId();
+        $start = date("Y-m-d h:i:s"); //dateTimeStarted
         dbQuery("
         INSERT INTO workouts
-            (workoutId,workoutName, isProgram, userId) 
+            (workoutId, workoutName, dateTimeStarted, isProgram, userId) 
         SELECT 
-            ".$newWorkoutId.", workoutName, NULL, userId
+            ".$newWorkoutId.", ". $start .",workoutName, NULL, userId
         FROM 
             workouts
         WHERE 

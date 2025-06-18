@@ -9,7 +9,7 @@
 ?>
 <html>
     <body>
-        <?php
+        <?php // only displays the workout info rn
         foreach($movements as $m){
             echo $m['movementName']."<br>";
             foreach($sets as $s){
