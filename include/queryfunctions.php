@@ -20,7 +20,6 @@
     function GetProgram($programId,$userId){
         $program = GetPrograms($userId);
         return $program[$programId];
-
     }
 
     // Workout Functions
@@ -91,7 +90,6 @@
         VALUES (".$movementId.",'".$movementName."', '".$movementType."', ".$workoutId.")
         ");
         return $movementId;
-        
     };
 
     function InsertSet($weight,$reps,$workoutId,$movementId){
@@ -101,7 +99,67 @@
             VALUES(".$setId.",".$weight.",".$reps.",".$workoutId.",".$movementId.")
         ");
         return $setId;
-
     };
 
+
+    function createWorkoutFromProgram($workoutId){  // takes a program and duplicates all of the data: workout info, movements, sets
+
+        //create a new row in workouts
+        $newWorkoutId = GenerateId();
+        dbQuery("
+        INSERT INTO workouts
+            (workoutId,workoutName, isProgram, userId) 
+        SELECT 
+            ".$newWorkoutId.", workoutName, NULL, userId
+        FROM 
+            workouts
+        WHERE 
+            workoutId = ".$workoutId."
+        ");
+
+        $movements = GetMovementsForWorkout($workoutId);
+        $sets = GetSetsForWorkout($workoutId);
+
+        $movementIds = [];
+        $setIds = [];
+
+        foreach($movements as $m){// returns the id's of movements
+            $movementIds[] = $m['movementId'];
+        }
+
+        foreach($sets as $s){// returns the id's of sets
+            $setIds[] = $s['setId'];
+        }
+        //loop thru and insert new rows for each table
+        foreach($movementIds as $movementId){//movements
+            $newMovementId = GenerateId();
+            dbQuery("
+                INSERT INTO movements
+                    (movementId, movementName, movementType, workoutId)
+                SELECT 
+                    ".$newMovementId.", movementName, movementType, ".$newWorkoutId."
+                FROM 
+                    movements
+                WHERE 
+                    movementId = ".$movementId."
+            ");
+
+            foreach($setIds as $setId){//sets only adding if the id's match
+                $newSetId = GenerateId();
+                dbQuery("
+                    INSERT INTO sets
+                        (setId,weight,reps,workoutId,movementId)
+                    SELECT 
+                        ".$newSetId.",weight,reps,".$newWorkoutId.", ".$newMovementId."
+                    FROM 
+                        sets
+                    WHERE 
+                        setId = ".$setId."
+                        AND
+                        movementId = ".$movementId."
+                ");
+            }
+        }
+        return $newWorkoutId;
+    };
     
