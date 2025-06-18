@@ -102,7 +102,7 @@
     };
 
 
-    function createWorkoutFromProgram($workoutId){  // takes a program and duplicates all of the data: workout info, movements, sets
+    function StartWorkoutFromProgram($workoutId){  // takes a program and duplicates all of the data: workout info, movements, sets
 
         //create a new row in workouts
         $newWorkoutId = GenerateId();

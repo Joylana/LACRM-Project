@@ -1,11 +1,14 @@
 <?php 
     include('include/init.php');
-    $workoutid = $_REQUEST['workoutid'];
+    $workoutId = $_REQUEST['workoutId'];
        
-    $movements = GetMovementsForWorkout($workoutid);
-    $sets = GetSetsForWorkout($workoutid);
+    $movements = GetMovementsForWorkout($workoutId);
+    $sets = GetSetsForWorkout($workoutId);
 
-    echo 'sets:';
+
+    echo " <a href='workout-view.php?workoutId=". $workoutId ."'> Start Workout </a> ";
+
+    echo '<br>sets:';
     debugOutput($sets);
     echo '<br>movements for workout:';
     debugOutput($movements);

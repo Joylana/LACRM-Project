@@ -9,7 +9,7 @@
 
         <?php //displaying saved programs
         foreach ($programs as $p){
-            echo " <a href='program-view.php?workoutid=". $p['workoutId'] ."'>". $p['workoutName'] ."</a> ";
+            echo " <a href='program-view.php?workoutId=". $p['workoutId'] ."'>". $p['workoutName'] ."</a> ";
         }
         ?>
     </body>
