@@ -42,6 +42,7 @@
         $movements = dbQuery("
         SELECT * FROM movements
         WHERE workoutId = ". $workoutId ."
+        ORDER BY movementOrder
         ")->fetchAll();
         return $movements;
     }
@@ -51,6 +52,7 @@
         $sets = dbQuery("
             SELECT * FROM sets
             WHERE workoutId = ".$workoutId."
+            ORDER BY setOrder
         ")->fetchAll();
         return $sets;
     };
@@ -83,20 +85,20 @@
         return $workoutId;
     };
 
-    function InsertMovement($movementName,$movementType,$workoutId=NULL){
+    function InsertMovement($movementName,$movementType,$movementOrder,$workoutId=NULL){
         $movementId = GenerateId();
         dbQuery("
-        INSERT INTO movements(movementId, movementName, movementType, workoutId)
-        VALUES (".$movementId.",'".$movementName."', '".$movementType."', ".$workoutId.")
+        INSERT INTO movements(movementId, movementName, movementType,movementOrder, workoutId)
+        VALUES (".$movementId.",'".$movementName."', '".$movementType."',".$movementOrder.", ".$workoutId.")
         ");
         return $movementId;
     };
 
-    function InsertSet($weight,$reps,$workoutId,$movementId){
+    function InsertSet($weight,$reps,$setOrder,$workoutId,$movementId){
         $setId = GenerateId();
         dbQuery("
-            INSERT INTO sets(setId,weight,reps,workoutId,movementId)
-            VALUES(".$setId.",".$weight.",".$reps.",".$workoutId.",".$movementId.")
+            INSERT INTO sets(setId,weight,reps,setOrder,workoutId,movementId)
+            VALUES(".$setId.",".$weight.",".$reps.",".$setOrder.",".$workoutId.",".$movementId.")
         ");
         return $setId;
     };

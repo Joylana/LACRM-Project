@@ -4,11 +4,11 @@
     if (isset( $_REQUEST['workoutName']) && isset($_REQUEST['movementName']) && isset($_REQUEST['weight1'])){
         $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
         
-        $movementId = InsertMovement($_REQUEST['movementName'],$_REQUEST['movementType'],$workoutId);
+        $movementId = InsertMovement($_REQUEST['movementName'],$_REQUEST['movementType'],1,$workoutId);
 
-        InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],$workoutId,$movementId);
-        InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],$workoutId,$movementId);
-        InsertSet($_REQUEST['weight3'],$_REQUEST['reps3'],$workoutId,$movementId);
+        InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],1,$workoutId,$movementId);
+        InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],2,$workoutId,$movementId);
+        InsertSet($_REQUEST['weight3'],$_REQUEST['reps3'],3,$workoutId,$movementId);
         header("Location: new-workout.php");
         exit;
     };
@@ -36,7 +36,7 @@
             <br>
             set3 weight: <input type="number" name="weight3" > reps: <input type="number" name="reps3" > 
             <br>
-            submit: <input type="submit"  >
+            <input type="submit"  >
 
         </form>
     </body>
