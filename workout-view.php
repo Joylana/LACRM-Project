@@ -4,8 +4,6 @@
     // $workoutId = StartWorkoutFromProgram($programid)
     $sets = GetSetsForWorkout($workoutId);
     $movements = GetMovementsForWorkout($workoutId);
-    debugOutput($sets);
-    debugOutput($movements);
 ?>
 <html>
     <body>
