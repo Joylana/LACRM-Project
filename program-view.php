@@ -16,10 +16,5 @@
         }
     
     }
-
-    echo '<br>sets:';
-    debugOutput($sets);
-    echo '<br>movements for workout:';
-    debugOutput($movements);
 ?>
 
