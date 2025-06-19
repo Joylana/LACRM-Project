@@ -2,6 +2,7 @@
     include('include/init.php');
     $workoutId = $_REQUEST['workoutId']; // switch to $programId
     //$workoutId = StartWorkoutFromProgram($programid);
+
     $sets = GetSetsForWorkout($workoutId);
     $movements = GetMovementsForWorkout($workoutId);
 
@@ -25,12 +26,13 @@
             }
             
         }
+
         ?>
 
         <form method="post">
             <button type="submit" name="complete">Complete Workout!</button>
         </form>
-        
+
         
     </body>
 </html>
