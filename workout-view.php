@@ -1,12 +1,16 @@
 <?php 
     include('include/init.php');
-    $programid = $_REQUEST['workoutId']; // switch to $programId
-    $workoutId = StartWorkoutFromProgram($programid);
+    $workoutId = $_REQUEST['workoutId']; // switch to $programId
+    //$workoutId = StartWorkoutFromProgram($programid);
     $sets = GetSetsForWorkout($workoutId);
     $movements = GetMovementsForWorkout($workoutId);
 
     if(isset($_POST['complete'])){
         FinishWorkout($workoutId);
+        echo "Workout Finished!
+        <br>
+        <a href='programs-page.php'>Return</a>
+        <br>";
     }
 ?>
 <html>
