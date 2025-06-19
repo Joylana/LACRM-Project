@@ -1,11 +1,16 @@
 <?php 
     include('include/init.php');
-    $workoutId = $_REQUEST['workoutId']; // switch to $programId
-    // $workoutId = StartWorkoutFromProgram($programid)
+    $programid = $_REQUEST['workoutId']; // switch to $programId
+    $workoutId = StartWorkoutFromProgram($programid);
     $sets = GetSetsForWorkout($workoutId);
     $movements = GetMovementsForWorkout($workoutId);
+
+    if(isset($_POST['complete'])){
+        FinishWorkout($workoutId);
+    }
 ?>
 <html>
+
     <body>
         <?php // only displays the workout info rn
         foreach($movements as $m){
@@ -17,6 +22,13 @@
             
         }
         ?>
+
+        <form method="post">
+            <button type="submit" name="complete">Complete Workout!</button>
+        </form>
+        
         
     </body>
 </html>
+
+
