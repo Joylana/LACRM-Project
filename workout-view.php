@@ -1,7 +1,7 @@
 <?php 
     include('include/init.php');
-    $programId = $_REQUEST['workoutId']; // switch to $programId
-    $workoutId = StartWorkoutFromProgram($programId);
+    $workoutId = $_REQUEST['workoutId']; // switch to $programId
+    //$workoutId = StartWorkoutFromProgram($programId);
     $sets = GetSetsForWorkout($workoutId);
     $movements = GetMovementsForWorkout($workoutId);
 ?>
