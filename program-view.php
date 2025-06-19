@@ -1,13 +1,21 @@
 <?php 
     include('include/init.php');
-    $workoutid = $_REQUEST['workoutid'];
+    $workoutId = $_REQUEST['workoutId'];
        
-    $movements = GetMovementsForWorkout($workoutid);
-    $sets = GetSetsForWorkout($workoutid);
+    $movements = GetMovementsForWorkout($workoutId);
+    $sets = GetSetsForWorkout($workoutId);
 
-    echo 'sets:';
-    debugOutput($sets);
-    echo '<br>movements for workout:';
-    debugOutput($movements);
+
+    echo " <a href='workout-view.php?workoutId=". $workoutId ."'> Start Workout </a> ";
+
+    foreach($movements as $m){//displaying current program info
+        echo "<br>".$m['movementName']."<br>";
+        foreach($sets as $s){
+            if ($s['movementId'] == $m['movementId'])
+            echo "weight: ". $s['weight'] ." Reps: ". $s['reps'] ."<br>";
+        }
+    
+    }
+
 ?>
 
