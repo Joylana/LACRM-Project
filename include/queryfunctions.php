@@ -37,6 +37,15 @@
         return $program[$workoutId];
     }
 
+    // function FinishWorkout($workoutId){
+    //     $end = date("Y-m-d h:i:s");
+    //     dbQuery("
+    //     UPDATE workouts
+    //     SET dateTimeEnded = ".$end."
+    //     WHERE workoutId = ".$workoutId." 
+    //     ");
+    // }
+
     //movement functions
     function GetMovementsForWorkout($workoutId){
         $movements = dbQuery("
@@ -69,7 +78,7 @@
 
     // NOTE: a baddie just left the baddie factory
 
-    function GenerateId(){// take the current hour,minute, and second then add a random number to return an id. (I feel like i ate with this one or the bar is in hell)
+    function GenerateId(){// take the current hour, minute, and second then add a random number to return an id. (I feel like i ate with this one or the bar is in hell)
         $id = date("his"); // each id is 6 digits long
         $add = rand(100000,889999);
         $id = $id +$add;
@@ -113,7 +122,7 @@
         INSERT INTO workouts
             (workoutId, workoutName, dateTimeStarted, isProgram, userId) 
         SELECT 
-            ".$newWorkoutId.", ". $start .",workoutName, NULL, userId
+            ".$newWorkoutId.",workoutName, '".$start."', NULL, userId
         FROM 
             workouts
         WHERE 
