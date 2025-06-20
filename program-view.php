@@ -5,6 +5,8 @@
     $movements = GetMovementsForWorkout($workoutId);
     $sets = GetSetsForWorkout($workoutId);
 
+    debugOutput($movements);
+
 
     echo " <a href='workout-view.php?workoutId=". $workoutId ."'> Start Workout </a> ";
 

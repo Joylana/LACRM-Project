@@ -47,12 +47,16 @@
     }
 
     //movement functions
-    function GetMovementsForWorkout($workoutId){
+    function GetMovementsForWorkout($workoutId){// adding join to pull movementInstances and movements together
         $movements = dbQuery("
-        SELECT * FROM movementInstances
+        SELECT * FROM movementInstances INNER JOIN movements ON movementInstances.movementId = movements.movementId
         WHERE workoutId = ". $workoutId ."
         ORDER BY movementOrder
         ")->fetchAll();
+
+        //SELECT * FROM table1 INNER JOIN table2 ON table1.id = table2.id;
+
+
         return $movements;
     }
 
