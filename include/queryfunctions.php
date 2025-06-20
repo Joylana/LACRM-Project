@@ -49,7 +49,7 @@
     //movement functions
     function GetMovementsForWorkout($workoutId){
         $movements = dbQuery("
-        SELECT * FROM movements
+        SELECT * FROM movementInstances
         WHERE workoutId = ". $workoutId ."
         ORDER BY movementOrder
         ")->fetchAll();
@@ -95,19 +95,19 @@
     };
 
     function InsertMovement($movementName,$movementType,$movementOrder,$workoutId=NULL){
-        $movementId = GenerateId();
+        $instanceId = GenerateId();
         dbQuery("
-        INSERT INTO movements(movementId, movementName, movementType,movementOrder, workoutId)
-        VALUES (".$movementId.",'".$movementName."', '".$movementType."',".$movementOrder.", ".$workoutId.")
+        INSERT INTO movementInstances(instanceId, movementName, movementType,movementOrder, workoutId)
+        VALUES (".$instanceId.",'".$movementName."', '".$movementType."',".$movementOrder.", ".$workoutId.")
         ");
-        return $movementId;
+        return $instanceId;
     };
 
-    function InsertSet($weight,$reps,$setOrder,$workoutId,$movementId){
+    function InsertSet($weight,$reps,$setOrder,$workoutId,$instanceId){
         $setId = GenerateId();
         dbQuery("
-            INSERT INTO sets(setId,weight,reps,setOrder,workoutId,movementId)
-            VALUES(".$setId.",".$weight.",".$reps.",".$setOrder.",".$workoutId.",".$movementId.")
+            INSERT INTO sets(setId,weight,reps,setOrder,workoutId,instanceId)
+            VALUES(".$setId.",".$weight.",".$reps.",".$setOrder.",".$workoutId.",".$instanceId.")
         ");
         return $setId;
     };
@@ -129,14 +129,14 @@
             workoutId = ".$workoutId."
         ");
 
-        $movements = GetMovementsForWorkout($workoutId);
+        $movements = GetMovementsForWorkout($workoutId);// Left this variable alone for now WILL need to be changed
         $sets = GetSetsForWorkout($workoutId);
 
         $movementIds = [];
         $setIds = [];
 
         foreach($movements as $m){// returns the id's of movements
-            $movementIds[] = $m['movementId'];
+            $movementIds[] = $m['instanceId'];
         }
 
         foreach($sets as $s){// returns the id's of sets
@@ -144,12 +144,12 @@
         }
         //loop thru and insert new rows for each table
         foreach($movementIds as $movementId){//movements
-            $newMovementId = GenerateId();
+            $newInstanceId = GenerateId();
             dbQuery("
-                INSERT INTO movements
-                    (movementId, movementName, movementType,movementOrder, workoutId)
+                INSERT INTO movementInstances
+                    (instanceId, movementName, movementType,movementOrder, workoutId)
                 SELECT 
-                    ".$newMovementId.", movementName, movementType, movementOrder, ".$newWorkoutId."
+                    ".$newInstanceId.", movementName, movementType, movementOrder, ".$newWorkoutId."
                 FROM 
                     movements
                 WHERE 
@@ -160,7 +160,7 @@
                 $newSetId = GenerateId();
                 dbQuery("
                     INSERT INTO sets
-                        (setId,weight,reps,setOrder,workoutId,movementId)
+                        (setId,weight,reps,setOrder,workoutId,instanceId)
                     SELECT 
                         ".$newSetId.",weight,reps,setOrder,".$newWorkoutId.", ".$newMovementId."
                     FROM 
