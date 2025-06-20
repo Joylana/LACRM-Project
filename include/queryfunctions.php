@@ -37,14 +37,14 @@
         return $program[$workoutId];
     }
 
-    // function FinishWorkout($workoutId){
-    //     $end = date("Y-m-d h:i:s");
-    //     dbQuery("
-    //     UPDATE workouts
-    //     SET dateTimeEnded = ".$end."
-    //     WHERE workoutId = ".$workoutId." 
-    //     ");
-    // }
+    function FinishWorkout($workoutId){
+        $end = date("Y-m-d h:i:s");
+        dbQuery("
+        UPDATE workouts
+        SET dateTimeEnded = '".$end."'
+        WHERE workoutId = ".$workoutId." 
+        ");
+    }
 
     //movement functions
     function GetMovementsForWorkout($workoutId){
@@ -122,7 +122,7 @@
         INSERT INTO workouts
             (workoutId, workoutName, dateTimeStarted, isProgram, userId) 
         SELECT 
-            ".$newWorkoutId.",workoutName, '".$start."', NULL, userId
+            ".$newWorkoutId.",workoutName, '". $start ."', NULL, userId
         FROM 
             workouts
         WHERE 
@@ -147,9 +147,9 @@
             $newMovementId = GenerateId();
             dbQuery("
                 INSERT INTO movements
-                    (movementId, movementName, movementType, workoutId)
+                    (movementId, movementName, movementType,movementOrder, workoutId)
                 SELECT 
-                    ".$newMovementId.", movementName, movementType, ".$newWorkoutId."
+                    ".$newMovementId.", movementName, movementType, movementOrder, ".$newWorkoutId."
                 FROM 
                     movements
                 WHERE 
@@ -160,9 +160,9 @@
                 $newSetId = GenerateId();
                 dbQuery("
                     INSERT INTO sets
-                        (setId,weight,reps,workoutId,movementId)
+                        (setId,weight,reps,setOrder,workoutId,movementId)
                     SELECT 
-                        ".$newSetId.",weight,reps,".$newWorkoutId.", ".$newMovementId."
+                        ".$newSetId.",weight,reps,setOrder,".$newWorkoutId.", ".$newMovementId."
                     FROM 
                         sets
                     WHERE 
