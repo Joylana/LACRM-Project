@@ -39,16 +39,12 @@
                 <option value="legs">Legs</option>
             </select>-->
 
-            <select name="movements" onchange="GetCurrentTime(this.value)" >
+            <select name="movements" onchange=" ShowText(this.value)" >
                 <?php MovementDropdown();?>
             </select>
-            <form style="sneakytext" action="" method="post" id="popUp">
-                <h2>New Movement:</h2>
-                <input type="text" name="movementName">
-                <input type="submit"  >
-            </form>
 
-            <span id="movementForm"></span> <!--testing line-->
+            
+
 
             <br>
             set1 weight: <input type="number" name="weight1" > reps: <input type="number" name="reps1" > 
@@ -59,38 +55,61 @@
             <br>
             <input type="submit"  >
         </form>
+        <div class="sneakytext" id="popUp">
+            <form  action="" method="post"id="popUpForm" >
+                <h2>New Movement:</h2>
+                <input type="text" name="movementName">
+                <select name="movementType" >
+                     <option value='push'>Push</option> 
+                     <option value='pull'>Pull</option> 
+                     <option value='legs'>Legs</option> 
+                </select>
+                <input type="submit"  >
+            </form>
+            uhhhhhh
+            </div>
     </body>
 </html>
 
 <script>
-    function GetCurrentTime(selectedValue){
+    function ShowText(selectedValue){
         if (selectedValue === "new") {
             const element = document.getElementById("popUp");
             element.classList.add('surprisetext');
         }
     }
+    function HidePopup(){
+            const element = document.getElementById("popUp");
+
+            element.classList.remove('surprisetext');
+        
+    }
     
-    document.getElementById('ajaxPopupForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    fetch('/submit-popup.php', {
+  const popupForm = document.getElementById('popUpForm');
+  if (popupForm) {
+    popupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('movement-submit.php', {
         method: 'POST',
         body: formData
-    })
-    /*function GetCurrentTime(selectedValue){
-        if (selectedValue === "new") {
+      }).then (data => {HidePopup();})
+
+    }
+  )};
+    
+    
+  /*const popupForm = document.getElementById('popUpForm');
+  if (popupForm) {
+    popupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('/submit-popup.php', {
+        method: 'POST',
+        body: formData
+      })
+    })};
         
-            fetch('ajax_endpoint.php').then(
-                    response =>(
-                        response.text()
-                    )
-                ).then(
-                    data=>(
-                        document.getElementById('movementForm').innerHTML = data
-                    )
-            )
-        }
-        
-    }*/
+    */
 </script>
 
