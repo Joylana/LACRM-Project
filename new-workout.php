@@ -13,6 +13,7 @@
         exit;
     };
 
+
 ?>
 
 <html>
@@ -28,6 +29,10 @@
                 <option value="push">Push</option>
                 <option value="pull">Pull</option>
                 <option value="legs">Legs</option>
+            </select>
+
+            <select name="movements" >
+                <?php MovementDropdown();?>
             </select>
             <br>
             set1 weight: <input type="number" name="weight1" > reps: <input type="number" name="reps1" > 
