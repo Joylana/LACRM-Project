@@ -15,7 +15,7 @@
 
     if (isset( $_REQUEST['movements'])  && $_REQUEST['movements']=='new'){
         
-    echo 'GetCurrentTime()';
+    //InsertNewMovement($_POST['movementName'],$_POST['movementType']);
     }
 
 
@@ -31,20 +31,10 @@
 
             Program Name: <input type="text" name="workoutName" style="height:100px;width:500px;">
             <br>
-            <!--Movement: <input type="text" name="movementName" style="height:100px;width:500px;">
-            <br>
-            <select name="movementType" >
-                <option value="push">Push</option>
-                <option value="pull">Pull</option>
-                <option value="legs">Legs</option>
-            </select>-->
 
             <select name="movements" onchange=" ShowText(this.value)" >
                 <?php MovementDropdown();?>
             </select>
-
-            
-
 
             <br>
             set1 weight: <input type="number" name="weight1" > reps: <input type="number" name="reps1" > 
@@ -53,9 +43,11 @@
             <br>
             set3 weight: <input type="number" name="weight3" > reps: <input type="number" name="reps3" > 
             <br>
+
             <input type="submit"  >
         </form>
-        <div class="sneakytext" id="popUp">
+
+        <div class="sneakytext" id="popUp"> <!-- popup menu to create new movement-->
             <form  action="" method="post"id="popUpForm" >
                 <h2>New Movement:</h2>
                 <input type="text" name="movementName">
@@ -66,8 +58,8 @@
                 </select>
                 <input type="submit"  >
             </form>
-            uhhhhhh
             </div>
+
     </body>
 </html>
 
@@ -85,7 +77,7 @@
         
     }
     
-  const popupForm = document.getElementById('popUpForm');
+  const popupForm = document.getElementById('popUpForm');//submits the form without refreshing the page, also runs InsertNewMovement()
   if (popupForm) {
     popupForm.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -98,18 +90,5 @@
     }
   )};
     
-    
-  /*const popupForm = document.getElementById('popUpForm');
-  if (popupForm) {
-    popupForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      fetch('/submit-popup.php', {
-        method: 'POST',
-        body: formData
-      })
-    })};
-        
-    */
 </script>
 

@@ -113,12 +113,13 @@
         return $workoutId;
     };
 
-    function InsertNewMovement($movementName,$movementType,$workoutId){// creates a new movement (new row in the movements table)
+    function InsertNewMovement($movementName,$movementType){// creates a new movement (new row in the movements table)
         $movementId = GenerateId();
         dbQuery("
-            INSERT INTO movements(movementId,movementName,movementType,workoutId)
-            VALUES (".$movementId.",".$movementName.",".$movementType.", ".$workoutId.")
+            INSERT INTO movements(movementId,movementName,movementType)
+            VALUES (".$movementId.",'".$movementName."','".$movementType."')
         ");
+        return $movementId;
     }
     
     function InsertMovement($movementId,$movementOrder,$workoutId){// creates a new instance of an existing movement

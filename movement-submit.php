@@ -3,5 +3,5 @@
         
     // Check if request method is POST
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        InsertNewMovement($_REQUEST['movementName'],$_REQUEST['movementType'],1);//add workoutId
+        InsertNewMovement($_POST['movementName'],$_POST['movementType']);
     };
