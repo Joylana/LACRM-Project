@@ -1,0 +1,23 @@
+/*styles n things*/
+
+.sneakytext{
+    display:none;
+}
+
+.surprisetext{
+    display:block;
+}
+
+/*just keeping this here
+    <script type="text/javascript">//Script to make content appear when title is hovered over, just putting this here
+        function ShowButtons(){
+            const element = document.getElementById("bouncy");
+
+            element.classList.add('surprisetext');
+        }
+        function HideButtons(){
+            const element = document.getElementById("bouncy");
+
+            element.classList.remove('surprisetext');
+        }
+    </script>

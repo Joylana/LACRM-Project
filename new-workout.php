@@ -1,10 +1,10 @@
 <?php 
     include("include/init.php");
 
-    if (isset( $_REQUEST['workoutName']) && isset($_REQUEST['movementName']) && isset($_REQUEST['weight1'])){
+    if (isset( $_REQUEST['workoutName'])  && isset($_REQUEST['weight1'])){
         $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
         
-        //$movementId = InsertMovement($_REQUEST['movementName'],$_REQUEST['movementType'],1,$workoutId);
+        $movementId = InsertMovement($_REQUEST['movements'],1,$workoutId);
 
         InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],1,$workoutId,$movementId);
         InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],2,$workoutId,$movementId);
@@ -13,27 +13,43 @@
         exit;
     };
 
+    if (isset( $_REQUEST['movements'])  && $_REQUEST['movements']=='new'){
+        
+    echo 'GetCurrentTime()';
+    }
+
 
 ?>
 
 <html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
     <body>
         <form action="" method="post">
             <h1>New Program:</h1>
 
             Program Name: <input type="text" name="workoutName" style="height:100px;width:500px;">
             <br>
-            Movement: <input type="text" name="movementName" style="height:100px;width:500px;">
+            <!--Movement: <input type="text" name="movementName" style="height:100px;width:500px;">
             <br>
             <select name="movementType" >
                 <option value="push">Push</option>
                 <option value="pull">Pull</option>
                 <option value="legs">Legs</option>
-            </select>
+            </select>-->
 
-            <select name="movements" >
+            <select name="movements" onchange="GetCurrentTime(this.value)" >
                 <?php MovementDropdown();?>
             </select>
+            <form style="sneakytext" action="" method="post" id="popUp">
+                <h2>New Movement:</h2>
+                <input type="text" name="movementName">
+                <input type="submit"  >
+            </form>
+
+            <span id="movementForm"></span> <!--testing line-->
+
             <br>
             set1 weight: <input type="number" name="weight1" > reps: <input type="number" name="reps1" > 
             <br>
@@ -42,8 +58,39 @@
             set3 weight: <input type="number" name="weight3" > reps: <input type="number" name="reps3" > 
             <br>
             <input type="submit"  >
-
         </form>
     </body>
 </html>
+
+<script>
+    function GetCurrentTime(selectedValue){
+        if (selectedValue === "new") {
+            const element = document.getElementById("popUp");
+            element.classList.add('surprisetext');
+        }
+    }
+    
+    document.getElementById('ajaxPopupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch('/submit-popup.php', {
+        method: 'POST',
+        body: formData
+    })
+    /*function GetCurrentTime(selectedValue){
+        if (selectedValue === "new") {
+        
+            fetch('ajax_endpoint.php').then(
+                    response =>(
+                        response.text()
+                    )
+                ).then(
+                    data=>(
+                        document.getElementById('movementForm').innerHTML = data
+                    )
+            )
+        }
+        
+    }*/
+</script>
 

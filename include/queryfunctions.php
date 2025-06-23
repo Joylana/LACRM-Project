@@ -61,6 +61,7 @@
         foreach($movements as $m){
             echo " <option value='".$m['movementId']."'>".$m['movementName']."</option> ";
         }
+        echo " <option value='new'>New Movement</option> ";
     }
 
     function GetMovementsForWorkout($workoutId){// adding join to pull movementInstances and movements together
@@ -102,6 +103,8 @@
         return $id;
     }
 
+    // Inserting functions 
+
     function InsertProgram($name,$userId){// creates a new program
         $workoutId = GenerateId();
         dbQuery("INSERT INTO workouts(workoutId,workoutName, isProgram, userId) 
@@ -110,11 +113,19 @@
         return $workoutId;
     };
 
-    function InsertMovement($movementName,$movementType,$movementOrder,$workoutId=NULL){
+    function InsertNewMovement($movementName,$movementType,$workoutId){// creates a new movement (new row in the movements table)
+        $movementId = GenerateId();
+        dbQuery("
+            INSERT INTO movements(movementId,movementName,movementType,workoutId)
+            VALUES (".$movementId.",".$movementName.",".$movementType.", ".$workoutId.")
+        ");
+    }
+    
+    function InsertMovement($movementId,$movementOrder,$workoutId){// creates a new instance of an existing movement
         $instanceId = GenerateId();
         dbQuery("
-        INSERT INTO movementInstances(instanceId, movementName, movementType,movementOrder, workoutId)
-        VALUES (".$instanceId.",'".$movementName."', '".$movementType."',".$movementOrder.", ".$workoutId.")
+            INSERT INTO movementInstances(instanceId,movementOrder,movementId, workoutId)
+            VALUES (".$instanceId.",".$movementOrder.",".$movementId.", ".$workoutId.")
         ");
         return $instanceId;
     };
