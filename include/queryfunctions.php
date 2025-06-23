@@ -151,7 +151,7 @@
         $movementIds = [];
         $setIds = [];
 
-        foreach($movements as $m){// returns the id's of movements
+        foreach($movements as $m){// returns the id's of movements INSTANCES
             $movementIds[] = $m['instanceId'];
         }
 
@@ -163,13 +163,13 @@
             $newInstanceId = GenerateId();
             dbQuery("
                 INSERT INTO movementInstances
-                    (instanceId, movementName, movementType,movementOrder, workoutId)
+                    (instanceId,movementId, workoutId,movementOrder)
                 SELECT 
-                    ".$newInstanceId.", movementName, movementType, movementOrder, ".$newWorkoutId."
+                    ".$newInstanceId.", movementId, ".$newWorkoutId.",movementOrder
                 FROM 
-                    movements
+                    movementInstances
                 WHERE 
-                    movementId = ".$movementId."
+                    instanceId = ".$movementId."
             ");
 
             foreach($setIds as $setId){//sets only adding if the id's match
@@ -178,13 +178,13 @@
                     INSERT INTO sets
                         (setId,weight,reps,setOrder,workoutId,instanceId)
                     SELECT 
-                        ".$newSetId.",weight,reps,setOrder,".$newWorkoutId.", ".$newMovementId."
+                        ".$newSetId.",weight,reps,setOrder,".$newWorkoutId.", ".$newInstanceId."
                     FROM 
                         sets
                     WHERE 
                         setId = ".$setId."
                         AND
-                        movementId = ".$movementId."
+                        instanceId = ".$movementId."
                 ");
             }
         }

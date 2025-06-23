@@ -4,7 +4,7 @@
     if (isset( $_REQUEST['workoutName']) && isset($_REQUEST['movementName']) && isset($_REQUEST['weight1'])){
         $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
         
-        $movementId = InsertMovement($_REQUEST['movementName'],$_REQUEST['movementType'],1,$workoutId);
+        //$movementId = InsertMovement($_REQUEST['movementName'],$_REQUEST['movementType'],1,$workoutId);
 
         InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],1,$workoutId,$movementId);
         InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],2,$workoutId,$movementId);
