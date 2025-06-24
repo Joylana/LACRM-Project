@@ -122,7 +122,7 @@
         return $movementId;
     }
     
-    function InsertMovement($movementId,$movementOrder,$workoutId){// creates a new instance of an existing movement
+    function InsertInstance($movementId,$movementOrder,$workoutId){// creates a new instance of an existing movement
         $instanceId = GenerateId();
         dbQuery("
             INSERT INTO movementInstances(instanceId,movementOrder,movementId, workoutId)
