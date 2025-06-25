@@ -35,7 +35,6 @@
             <select name="movements" onchange=" ShowText(this.value)" >
                 <?php MovementDropdown();?>
             </select>
-            <button>New Set</button>
 
             <br>
             set1 weight: <input type="number" name="weight1" > reps: <input type="number" name="reps1" > 
@@ -47,8 +46,10 @@
 
             <!-- new workouts need to be printed here-->
             <div id="inputContainer">
-                <button type="button" id="addButton">Add Field</button>
             </div>
+
+            <button type="button" id="addButton" onclick="NewSet()">Add Set</button>
+            <button type="button" id="addButton" onclick="NewMovement()">Add Movement</button>
 
             <input type="submit"  >
         </form>
@@ -99,8 +100,8 @@
   )};
 
 
-    document.getElementById('addButton').addEventListener('click', function() {
-        var inputContainer = document.getElementById('inputContainer');
+    function NewSet() {// creates a new input row for a set
+       var inputContainer = document.getElementById('inputContainer');
         var newInputWrapper = document.createElement('div');
         newInputWrapper.classList.add('inputWrapper');
         var weight = document.createTextNode("Weight:");//weight text
@@ -118,7 +119,7 @@
         var newInput = document.createElement('input');// reps field
         newInput.type = 'number';
         newInput.id = 'inputField' + (inputContainer.children.length);
-        newInput.name = 'reps'+ (inputContainer.children.length);;
+        newInput.name = 'reps'+ (inputContainer.children.length);
         newInputWrapper.appendChild(newInput);
 
         var newButton = document.createElement('button');
@@ -131,9 +132,36 @@
         newInputWrapper.appendChild(newButton);
 
         inputContainer.appendChild(newInputWrapper);
-    });
+    };
 
 
+    
+
+    function NewMovement(){
+        var inputContainer = document.getElementById('inputContainer');
+        var newInputWrapper = document.createElement('select');
+        newInputWrapper.classList.add('inputWrapper');
+        var thisId = "divi" + (inputContainer.children.length); 
+        newInputWrapper.id = thisId;
+
+        inputContainer.appendChild(newInputWrapper);
+        
+        fetch('endpoint.php').then(
+                response =>(
+                    response.text()
+                )
+            ).then(
+                data=>(
+                    document.getElementById(thisId).innerHTML = data
+                )
+        )
+    }
+
+
+
+
+
+    
     
 </script>
 
