@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <form action="" method="post">
+        <form action="" method="post" id="dynamicForm">
             <h1>New Program:</h1>
 
             Program Name: <input type="text" name="workoutName" style="height:100px;width:500px;">
@@ -35,6 +35,7 @@
             <select name="movements" onchange=" ShowText(this.value)" >
                 <?php MovementDropdown();?>
             </select>
+            <button>New Set</button>
 
             <br>
             set1 weight: <input type="number" name="weight1" > reps: <input type="number" name="reps1" > 
@@ -42,7 +43,12 @@
             set2 weight: <input type="number" name="weight2" > reps: <input type="number" name="reps2" > 
             <br>
             set3 weight: <input type="number" name="weight3" > reps: <input type="number" name="reps3" > 
-            <br>
+            
+
+            <!-- new workouts need to be printed here-->
+            <div id="inputContainer">
+                <button type="button" id="addButton">Add Field</button>
+            </div>
 
             <input type="submit"  >
         </form>
@@ -60,17 +66,19 @@
             </form>
             </div>
 
+
+
     </body>
 </html>
 
 <script>
-    function ShowText(selectedValue){
+    function ShowText(selectedValue){ //show new workout form
         if (selectedValue === "new") {
             const element = document.getElementById("popUp");
             element.classList.add('surprisetext');
         }
     }
-    function HidePopup(){
+    function HidePopup(){ // hides new workout form
             const element = document.getElementById("popUp");
 
             element.classList.remove('surprisetext');
@@ -89,6 +97,43 @@
 
     }
   )};
+
+
+    document.getElementById('addButton').addEventListener('click', function() {
+        var inputContainer = document.getElementById('inputContainer');
+        var newInputWrapper = document.createElement('div');
+        newInputWrapper.classList.add('inputWrapper');
+        var weight = document.createTextNode("Weight:");//weight text
+        newInputWrapper.appendChild(weight);
+
+        var newInput = document.createElement('input');//weight field
+        newInput.type = 'number';
+        newInput.id = 'inputField' + (inputContainer.children.length);
+        newInput.name = 'weight'+ (inputContainer.children.length);;
+        newInputWrapper.appendChild(newInput);
+
+        var reps = document.createTextNode(" Reps:");//reps text
+        newInputWrapper.appendChild(reps);
+
+        var newInput = document.createElement('input');// reps field
+        newInput.type = 'number';
+        newInput.id = 'inputField' + (inputContainer.children.length);
+        newInput.name = 'reps'+ (inputContainer.children.length);;
+        newInputWrapper.appendChild(newInput);
+
+        var newButton = document.createElement('button');
+        newButton.textContent = 'Remove';
+        newButton.classList.add('removeButton');
+        newButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.target.parentNode.remove();
+        });
+        newInputWrapper.appendChild(newButton);
+
+        inputContainer.appendChild(newInputWrapper);
+    });
+
+
     
 </script>
 
