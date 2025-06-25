@@ -1,7 +1,7 @@
 <?php 
     include('include/init.php');
-    $workoutId = $_REQUEST['workoutId']; // switch to $programId
-    //$workoutId = StartWorkoutFromProgram($programid);
+    $programId = $_REQUEST['workoutId']; // switch to $programId
+    $workoutId = StartWorkoutFromProgram($programId);
 
     $sets = GetSetsForWorkout($workoutId);
     $movements = GetMovementsForWorkout($workoutId);
@@ -21,7 +21,7 @@
         foreach($movements as $m){
             echo $m['movementName']."<br>";
             foreach($sets as $s){
-                if ($s['movementId'] == $m['movementId'])
+                if ($s['instanceId'] == $m['instanceId'])
                 echo "weight: ". $s['weight'] ." Reps: ". $s['reps'] ."<br>";
             }
             
