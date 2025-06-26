@@ -102,16 +102,16 @@
   )};
 
 
-    function NewSet() {// creates a new input row for a set
-       var inputContainer = document.getElementById('inputContainer');
+    function NewSet(id) {// creates a new input row for a set
+       var inputContainer = document.getElementById(id);
         var newInputWrapper = document.createElement('div');
-        newInputWrapper.classList.add('inputWrapper');
+        newInputWrapper.classList.add('inputWrapper'); //add styling?????
         var weight = document.createTextNode("Weight:");//weight text
         newInputWrapper.appendChild(weight);
 
         var newInput = document.createElement('input');//weight field
         newInput.type = 'number';
-        newInput.id = 'inputField' + (inputContainer.children.length);
+        newInput.id = 'weightField' + (inputContainer.children.length);
         newInput.name = 'weight'+ (inputContainer.children.length);;
         newInputWrapper.appendChild(newInput);
 
@@ -120,13 +120,13 @@
 
         var newInput = document.createElement('input');// reps field
         newInput.type = 'number';
-        newInput.id = 'inputField' + (inputContainer.children.length);
+        newInput.id = 'repField' + (inputContainer.children.length);
         newInput.name = 'reps'+ (inputContainer.children.length);
         newInputWrapper.appendChild(newInput);
 
         var newButton = document.createElement('button');
         newButton.textContent = 'Remove';
-        newButton.classList.add('removeButton');
+        //newButton.classList.add('removeButton'); //add styling?????
         newButton.addEventListener('click', function(event) {
             event.preventDefault();
             event.target.parentNode.remove();
@@ -141,14 +141,26 @@
 
     function NewMovement(){
         var inputContainer = document.getElementById('inputContainer');
-        var newInputWrapper = document.createElement('select');
-        newInputWrapper.classList.add('inputWrapper');
-        //newInputWrapper.onchange.add(ShowText(this.value))
-        newInputWrapper.setAttribute("onchange", "ShowText(this.value)")
-        var thisId = "divi" + (inputContainer.children.length); 
-        newInputWrapper.id = thisId;
+        var newInputWrapper = document.createElement('div'); //creates a new div for the select element, therefore the elements stack vertically
+        newInputWrapper.classList.add('inputWrapper'); //add styling?????
+        var id = 'movement' + (inputContainer.children.length);
+        newInputWrapper.id = id;
 
-        inputContainer.appendChild(newInputWrapper);
+        var select = document.createElement('select'); // creates the select element
+        select.setAttribute("onchange", "ShowText(this.value)")
+        var thisId = "divi" + (inputContainer.children.length); 
+        select.id = thisId;
+        newInputWrapper.appendChild(select); //adds the select element to the created div 
+
+        var newSetButton = document.createElement('button');
+        newSetButton.textContent = 'New Set';
+        newSetButton.addEventListener('click', function() {
+            NewSet(id)
+        });
+        newSetButton.type = "button";
+        newInputWrapper.appendChild(newSetButton); // adds button to wrapper
+
+        inputContainer.appendChild(newInputWrapper); // adds the div to the inputContainer
         
         fetch('endpoint.php').then(
                 response =>(
