@@ -68,7 +68,7 @@
             <div id="inputContainer">
             </div>
 
-            <button type="button" id="addButton" onclick="NewMovement()">Add Movement</button>
+            <button type="button" id="addButton" onclick="NewMovementRow()">Add Movement</button>
 
             <input type="submit"  >
         </form>
@@ -121,7 +121,7 @@
   )};
 
 
-    function NewSet(id) {// creates a new input row for a set within a specific movement
+    function NewSetRow(id) {// creates a new input row for a set within a specific movement
        var inputContainer = document.getElementById(id);
         var newInputWrapper = document.createElement('div');
         newInputWrapper.classList.add('inputWrapper'); //add styling?????
@@ -158,7 +158,7 @@
 
     
 
-    function NewMovement(){ // adds a new section of movements
+    function NewMovementRow(){ // adds a new section of movements
         var inputContainer = document.getElementById('inputContainer');
         var newInputWrapper = document.createElement('div'); //creates a new div for the select element, therefore the elements stack vertically
         newInputWrapper.classList.add('inputWrapper'); //add styling?????
@@ -175,7 +175,7 @@
         var newSetButton = document.createElement('button');
         newSetButton.textContent = 'New Set';
         newSetButton.addEventListener('click', function() {
-            NewSet(id)
+            NewSetRow(id)
         });
         newSetButton.type = "button"; // keeps it from submitting the form
         newInputWrapper.appendChild(newSetButton); // adds button to wrapper
