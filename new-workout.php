@@ -77,6 +77,8 @@
         if (selectedValue === "new") {
             const element = document.getElementById("popUp");
             element.classList.add('surprisetext');
+        }else{
+            HidePopup()
         }
     }
     function HidePopup(){ // hides new workout form
@@ -141,6 +143,8 @@
         var inputContainer = document.getElementById('inputContainer');
         var newInputWrapper = document.createElement('select');
         newInputWrapper.classList.add('inputWrapper');
+        //newInputWrapper.onchange.add(ShowText(this.value))
+        newInputWrapper.setAttribute("onchange", "ShowText(this.value)")
         var thisId = "divi" + (inputContainer.children.length); 
         newInputWrapper.id = thisId;
 
