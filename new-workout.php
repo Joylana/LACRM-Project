@@ -1,22 +1,18 @@
 <?php 
     include("include/init.php");
 
-    if (isset( $_REQUEST['workoutName'])  && isset($_REQUEST['weight1'])){
-        $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
+    //if (isset( $_REQUEST['workoutName'])  && isset($_REQUEST['weight1'])){
+        // $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
         
-        $movementId = InsertInstance($_REQUEST['movements'],1,$workoutId);
+        // $movementId = InsertInstance($_REQUEST['movements'],1,$workoutId);
 
-        InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],1,$workoutId,$movementId);
-        InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],2,$workoutId,$movementId);
-        InsertSet($_REQUEST['weight3'],$_REQUEST['reps3'],3,$workoutId,$movementId);
-        header("Location: new-workout.php");
-        exit;
-    };
-
-    if (isset( $_REQUEST['movements'])  && $_REQUEST['movements']=='new'){
-        
-    //InsertNewMovement($_POST['movementName'],$_POST['movementType']);
-    }
+        // InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],1,$workoutId,$movementId);
+        // InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],2,$workoutId,$movementId);
+        // InsertSet($_REQUEST['weight3'],$_REQUEST['reps3'],3,$workoutId,$movementId);
+        debugOutput($_REQUEST);
+        //header("Location: new-workout.php");
+        //exit;
+    //};
 
 
 ?>
@@ -32,6 +28,7 @@
             Program Name: <input type="text" name="workoutName" style="height:100px;width:500px;">
             <br>
 
+            <!--
             <select name="movements" onchange=" ShowText(this.value)" >
                 <?php MovementDropdown();?>
             </select>
@@ -42,13 +39,12 @@
             set2 weight: <input type="number" name="weight2" > reps: <input type="number" name="reps2" > 
             <br>
             set3 weight: <input type="number" name="weight3" > reps: <input type="number" name="reps3" > 
-            
+            -->
 
             <!-- new workouts need to be printed here-->
             <div id="inputContainer">
             </div>
 
-            <button type="button" id="addButton" onclick="NewSet()">Add Set</button>
             <button type="button" id="addButton" onclick="NewMovement()">Add Movement</button>
 
             <input type="submit"  >
@@ -81,7 +77,7 @@
             HidePopup()
         }
     }
-    function HidePopup(){ // hides new workout form
+    function HidePopup(){ // function to hide new workout form
             const element = document.getElementById("popUp");
 
             element.classList.remove('surprisetext');
@@ -102,7 +98,7 @@
   )};
 
 
-    function NewSet(id) {// creates a new input row for a set
+    function NewSet(id) {// creates a new input row for a set within a specific movement
        var inputContainer = document.getElementById(id);
         var newInputWrapper = document.createElement('div');
         newInputWrapper.classList.add('inputWrapper'); //add styling?????
@@ -112,7 +108,7 @@
         var newInput = document.createElement('input');//weight field
         newInput.type = 'number';
         newInput.id = 'weightField' + (inputContainer.children.length);
-        newInput.name = 'weight'+ (inputContainer.children.length);;
+        newInput.name = 'weight'+ (inputContainer.children.length)+ id;
         newInputWrapper.appendChild(newInput);
 
         var reps = document.createTextNode(" Reps:");//reps text
@@ -121,7 +117,7 @@
         var newInput = document.createElement('input');// reps field
         newInput.type = 'number';
         newInput.id = 'repField' + (inputContainer.children.length);
-        newInput.name = 'reps'+ (inputContainer.children.length);
+        newInput.name = 'reps'+ (inputContainer.children.length)+ id;
         newInputWrapper.appendChild(newInput);
 
         var newButton = document.createElement('button');
@@ -139,7 +135,7 @@
 
     
 
-    function NewMovement(){
+    function NewMovement(){ // adds a new section of movements
         var inputContainer = document.getElementById('inputContainer');
         var newInputWrapper = document.createElement('div'); //creates a new div for the select element, therefore the elements stack vertically
         newInputWrapper.classList.add('inputWrapper'); //add styling?????
@@ -150,6 +146,7 @@
         select.setAttribute("onchange", "ShowText(this.value)")
         var thisId = "divi" + (inputContainer.children.length); 
         select.id = thisId;
+        select.name = "workout" + id;
         newInputWrapper.appendChild(select); //adds the select element to the created div 
 
         var newSetButton = document.createElement('button');
@@ -157,7 +154,7 @@
         newSetButton.addEventListener('click', function() {
             NewSet(id)
         });
-        newSetButton.type = "button";
+        newSetButton.type = "button"; // keeps it from submitting the form
         newInputWrapper.appendChild(newSetButton); // adds button to wrapper
 
         inputContainer.appendChild(newInputWrapper); // adds the div to the inputContainer
