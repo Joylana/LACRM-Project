@@ -1,18 +1,44 @@
 <?php 
     include("include/init.php");
 
-    //if (isset( $_REQUEST['workoutName'])  && isset($_REQUEST['weight1'])){
-        // $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
+    if (isset( $_REQUEST['workoutName'])){
+        $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
         
-        // $movementId = InsertInstance($_REQUEST['movements'],1,$workoutId);
+        /// $movementId = InsertInstance($_REQUEST['movements'],1,$workoutId);
 
-        // InsertSet($_REQUEST['weight1'],$_REQUEST['reps1'],1,$workoutId,$movementId);
-        // InsertSet($_REQUEST['weight2'],$_REQUEST['reps2'],2,$workoutId,$movementId);
-        // InsertSet($_REQUEST['weight3'],$_REQUEST['reps3'],3,$workoutId,$movementId);
         debugOutput($_REQUEST);
-        //header("Location: new-workout.php");
-        //exit;
-    //};
+        // InsertInstance($movementId,$movementOrder,$workoutId)
+        // InsertSet($weight,$reps,$setOrder,$workoutId,$instanceId)
+        $movements = [];
+        $weights = [];
+        $reps = [];
+
+        $movementOrder=0;
+        $setOrder=0;
+        foreach(array_keys($_REQUEST) as $key){
+
+            
+            if (str_contains($key,"movement")){
+                $setOrder=0;
+                $movementOrder+=1;
+                $instanceId = InsertInstance($_REQUEST[$key],$movementOrder,$workoutId);
+
+            }else if (str_contains($key,"weight")){
+                $weight = $_REQUEST[$key];
+            
+
+            }else if (str_contains($key,"reps")){
+                $setOrder+=1;
+                InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId);
+
+            }
+            
+        }
+
+
+        header("Location: new-workout.php");
+        exit;
+    };
 
 
 ?>
@@ -139,14 +165,14 @@
         var inputContainer = document.getElementById('inputContainer');
         var newInputWrapper = document.createElement('div'); //creates a new div for the select element, therefore the elements stack vertically
         newInputWrapper.classList.add('inputWrapper'); //add styling?????
-        var id = 'movement' + (inputContainer.children.length);
+        var id = (inputContainer.children.length);
         newInputWrapper.id = id;
 
         var select = document.createElement('select'); // creates the select element
         select.setAttribute("onchange", "ShowText(this.value)")
         var thisId = "divi" + (inputContainer.children.length); 
         select.id = thisId;
-        select.name = "workout" + id;
+        select.name = "movement" + id;
         newInputWrapper.appendChild(select); //adds the select element to the created div 
 
         var newSetButton = document.createElement('button');
