@@ -51,20 +51,6 @@
             Program Name: <input type="text" name="workoutName" style="height:100px;width:500px;">
             <br>
 
-            <!--
-            <select name="movements" onchange=" ShowText(this.value)" >
-                <?php MovementDropdown();?>
-            </select>
-
-            <br>
-            set1 weight: <input type="number" name="weight1" > reps: <input type="number" name="reps1" > 
-            <br>
-            set2 weight: <input type="number" name="weight2" > reps: <input type="number" name="reps2" > 
-            <br>
-            set3 weight: <input type="number" name="weight3" > reps: <input type="number" name="reps3" > 
-            -->
-
-            <!-- new workouts need to be printed here-->
             <div id="inputContainer">
             </div>
 
@@ -91,21 +77,9 @@
     </body>
 </html>
 
+<script src="/include/js_functions.js"></script>
 <script>
-    function ShowText(selectedValue){ //show new workout form
-        if (selectedValue === "new") {
-            const element = document.getElementById("popUp");
-            element.classList.add('surprisetext');
-        }else{
-            HidePopup()
-        }
-    }
-    function HidePopup(){ // function to hide new workout form
-            const element = document.getElementById("popUp");
 
-            element.classList.remove('surprisetext');
-        
-    }
     
   const popupForm = document.getElementById('popUpForm');//submits the form without refreshing the page, also runs InsertNewMovement()
   if (popupForm) {
@@ -166,7 +140,7 @@
         newInputWrapper.id = id;
 
         var select = document.createElement('select'); // creates the select element
-        select.setAttribute("onchange", "ShowText(this.value)")
+        select.setAttribute("onchange", "ShowText(this.value,'popUp')")
         var thisId = "divi" + (inputContainer.children.length); 
         select.id = thisId;
         select.name = "movement" + id;
