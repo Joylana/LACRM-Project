@@ -73,6 +73,18 @@
         return $movements;
     }
 
+    function GetAllInstances(){ // highkey over kill on rows rn
+        $instances = dbQuery("
+        SELECT * FROM movementInstances INNER JOIN sets 
+        ON movementInstances.instanceId = sets.instanceId
+        INNER JOIN workouts 
+        ON sets.workoutId = workouts.workoutId
+        WHERE isProgram IS NULL
+        ORDER BY dateTimeStarted DESC
+        ")->fetchAll();
+        return $instances;
+    }
+
     //set functions
     function GetSetsForWorkout($workoutId){
         $sets = dbQuery("
