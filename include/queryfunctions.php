@@ -34,7 +34,7 @@
 
     function GetWorkout($workoutId,$userId){
         $workout = GetWorkouts($userId);
-        return $program[$workoutId];
+        return $workout[$workoutId];
     }
 
     function FinishWorkout($workoutId){
@@ -71,6 +71,74 @@
         ORDER BY movementOrder
         ")->fetchAll();
         return $movements;
+    }
+
+    function GetAllInstances(){ // highkey over kill on rows rn
+        $instances = dbQuery("
+        SELECT * FROM movementInstances INNER JOIN sets 
+        ON movementInstances.instanceId = sets.instanceId
+        INNER JOIN workouts 
+        ON sets.workoutId = workouts.workoutId
+        WHERE isProgram IS NULL
+        ORDER BY dateTimeStarted DESC
+        ")->fetchAll();
+        return $instances;
+    }
+
+    //volume functions
+
+
+    function GetVolume(){ //did stuck in the for loop and it worked, very scared to touch it now :,)
+        $instances = dbQuery("
+        SELECT movementInstances.instanceId,movementId, reps, weight, dateTimeStarted
+        FROM movementInstances INNER JOIN sets 
+        ON movementInstances.instanceId = sets.instanceId
+        INNER JOIN workouts 
+        ON sets.workoutId = workouts.workoutId
+        WHERE isProgram IS NULL
+        ORDER BY movementId, dateTimeStarted 
+        ")->fetchAll(); //isComplete needs to be taken into account later and userId should be specified
+
+        $volume = [];
+        $vol = 0;
+        $id = 0; // id is initialized to 0
+        foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
+            
+            
+            if($id==$i['dateTimeStarted']){ // adding to the volume
+                $vol = $vol+($i['reps'] * $i['weight']);
+                $movementId = $i['movementId'];
+            }else if($id == 0){
+                $movementId = $i['movementId'];
+                $id = $i['dateTimeStarted'];
+                $vol = $i['reps'] * $i['weight'];
+
+            }else{ // if id's don't match it will move on to the next id and start recalculating volume
+                $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
+                //$volume[$id] = $vol;
+                $id = $i['dateTimeStarted'];
+                $vol = $i['reps'] * $i['weight'];
+                
+            }
+        }
+        $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId);
+
+        return $volume;
+
+    }
+
+    function SeperateVolumes($movementId,$volumeData){ //seperates volumes by workout and returns an array of only those volumes
+
+        $graphArray = [];
+    
+
+        foreach($volumeData as $v){
+            if( $v['movementId'] == $movementId ){ // loops thru and adds data point of they match the given id
+                $graphArray[] = $v;
+            }
+        }
+        return $graphArray;
+
     }
 
     //set functions
