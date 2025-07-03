@@ -3,8 +3,10 @@
         const element = document.getElementById(elementId);     //element.classList.contains(sneakytext);
         if(element.classList.contains('surprisetext')){
             element.classList.remove('surprisetext');
+            element.classList.add('sneakytext');
 
         }else{
+            element.classList.remove('sneakytext');
             element.classList.add('surprisetext');
 
         }

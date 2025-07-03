@@ -97,12 +97,10 @@
         ORDER BY movementId, dateTimeStarted 
         ")->fetchAll(); //isComplete needs to be taken into account later and userId should be specified
 
-        debugOutput($instances);
-
         $volume = [];
         $vol = 0;
-        $id = 0; // id is causing issues, cannot be time started or movement id since they can both have many items per
-        foreach($instances as $i){ // needs to be organized by movement id as well as ordered by date (damn...)
+        $id = 0; // id is initialized to 0
+        foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
             
             if($id==$i['dateTimeStarted']){ // adding to the volume
@@ -114,7 +112,7 @@
                 $vol = $i['reps'] * $i['weight'];
 
             }else{ // if id's don't match it will move on to the next id and start recalculating volume
-                $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId);
+                $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
                 //$volume[$id] = $vol;
                 $id = $i['dateTimeStarted'];
                 $vol = $i['reps'] * $i['weight'];
@@ -123,8 +121,24 @@
         }
         $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId);
 
-        debugOutput($volume);
         return $volume;
+
+    }
+
+    function SeperateVolumes($movementId,$volumeData){
+
+        $graphArray = [];
+    
+
+        foreach($volumeData as $v){
+            if( $v['movementId'] == $movementId ){
+                $graphArray[] = $v;
+            }else {
+                continue;
+
+            }
+        }
+        return $graphArray;
 
     }
 
