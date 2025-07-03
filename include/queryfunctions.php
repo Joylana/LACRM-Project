@@ -85,6 +85,8 @@
         return $instances;
     }
 
+    //volume functions
+
 
     function GetVolume(){ //did stuck in the for loop and it worked, very scared to touch it now :,)
         $instances = dbQuery("
@@ -125,17 +127,14 @@
 
     }
 
-    function SeperateVolumes($movementId,$volumeData){
+    function SeperateVolumes($movementId,$volumeData){ //seperates volumes by workout and returns an array of only those volumes
 
         $graphArray = [];
     
 
         foreach($volumeData as $v){
-            if( $v['movementId'] == $movementId ){
+            if( $v['movementId'] == $movementId ){ // loops thru and adds data point of they match the given id
                 $graphArray[] = $v;
-            }else {
-                continue;
-
             }
         }
         return $graphArray;

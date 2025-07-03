@@ -16,55 +16,57 @@ use function PHPSTORM_META\elementType;
 
 
         <div style="padding:20px;line-height:25px">
-        <?php // displaying movements
+        <?php // displaying movements and graphs for volume progression
         $movements = GetAllMovements();
         $instances = GetAllInstances();
         $volumeData = GetVolume();
-        //debugOutput($instances);
         $date = NULL;
-        $x = 0;
+        $graphElementId = 0; // incrementing id for
 
         foreach($movements as $m){
 
             echo "<div style='background-color:lavender;padding:5px;margin:5px'>"; //opening div for each movement to have it's own little visual container
 
             echo "<div onclick='Show(".$m['movementId'].")' >↓".$m['movementName']."</div>".'<br>';
-            $count = 0;
+            $dataShown = False;
             echo "<div  class='sneakytext'  id=".$m['movementId']." >"; 
 
-            // display graph here :)
-            // issue with using window.onload
+            // displaying graph here :)
             $volume = SeperateVolumes($m['movementId'],$volumeData);
 
-            if(!empty($volume)){
+            if(!empty($volume)){ // displays graph as long as there is info to be displayed
 
-            echo '
-                
-                <script>
-
-                window.addEventListener("load", function() {
+                echo '
                     
-                    var chart = new CanvasJS.Chart("'. json_encode($x, JSON_UNESCAPED_UNICODE) .'", {
-                        title: {
-                            text: "Previous Volume"
-                        },
-                        axisY: {
-                            title: "Volume"
-                        },
-                        data: [{
-                            type: "line",
-                            dataPoints: '.  json_encode($volume, JSON_NUMERIC_CHECK).'
-                        }]
-                    });
-                    chart.render();
-                    });
+                    <script>
 
-                </script>
+                    window.addEventListener("load", function() {
+                        
+                        var chart = new CanvasJS.Chart("'. json_encode($graphElementId, JSON_UNESCAPED_UNICODE) .'", {
+                            title: {
+                                text: "Previous Volume",
+                                fontSize: 20
+                            },
+                            axisY: {
+                                titleFontWeight: "light",
+                                title: "Volume"
+                            },
+                            data: [{
+                                color: "#8e7cc3",
+                                type: "line",
+                                dataPoints: '.  json_encode($volume, JSON_NUMERIC_CHECK).'
+                            }]
+                        });
+                        chart.render();
+                        });
+
+                    </script>
+                    
+                    <div id="'.$graphElementId.'" style="height: 50%; width: 100%;"></div>
+                    ';
+            }
                 
-                <div id="'.$x.'" style="height: 27%; width: 100%;"></div>
-                ';}
-                //debugOutput(SeperateVolumes($m['movementId'],$volumeData));
-                $x+=1;
+            $graphElementId+=1; 
             
 
             foreach($instances as $i){
@@ -72,7 +74,7 @@ use function PHPSTORM_META\elementType;
                             
                 
                 if ($i['movementId']==$m['movementId']){ // if it matches the current movement
-                    $count+=1; //increments for each set that is shown
+                    $dataShown= True; //True if there is data to show
                     
                     $newDate = $i['dateTimeStarted'];
                     if($date == NULL or $date!=$newDate){ //if it's a new date it will echo it
@@ -84,7 +86,7 @@ use function PHPSTORM_META\elementType;
                 }
             
             }
-            if($count == 0){ // only 0 if there were no sets to be shown, if it is zero it shows a message
+            if($dataShown == False){ // only 0 if there were no sets to be shown, if it is zero it shows a message
                 echo "No records";
             }
 
@@ -100,4 +102,4 @@ use function PHPSTORM_META\elementType;
     </body>
 </html>
 <script src="/include/js_functions.js"></script> <!--each movement history will pop up when clicked on-->
-<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script> <!--library for graphs-->
