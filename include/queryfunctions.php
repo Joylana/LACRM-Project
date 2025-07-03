@@ -34,7 +34,7 @@
 
     function GetWorkout($workoutId,$userId){
         $workout = GetWorkouts($userId);
-        return $program[$workoutId];
+        return $workout[$workoutId];
     }
 
     function FinishWorkout($workoutId){
@@ -83,6 +83,49 @@
         ORDER BY dateTimeStarted DESC
         ")->fetchAll();
         return $instances;
+    }
+
+
+    function GetVolume(){ //did stuck in the for loop and it worked, very scared to touch it now :,)
+        $instances = dbQuery("
+        SELECT movementInstances.instanceId,movementId, reps, weight, dateTimeStarted
+        FROM movementInstances INNER JOIN sets 
+        ON movementInstances.instanceId = sets.instanceId
+        INNER JOIN workouts 
+        ON sets.workoutId = workouts.workoutId
+        WHERE isProgram IS NULL
+        ORDER BY movementId, dateTimeStarted 
+        ")->fetchAll(); //isComplete needs to be taken into account later and userId should be specified
+
+        debugOutput($instances);
+
+        $volume = [];
+        $vol = 0;
+        $id = 0; // id is causing issues, cannot be time started or movement id since they can both have many items per
+        foreach($instances as $i){ // needs to be organized by movement id as well as ordered by date (damn...)
+            
+            
+            if($id==$i['dateTimeStarted']){ // adding to the volume
+                $vol = $vol+($i['reps'] * $i['weight']);
+                $movementId = $i['movementId'];
+            }else if($id == 0){
+                $movementId = $i['movementId'];
+                $id = $i['dateTimeStarted'];
+                $vol = $i['reps'] * $i['weight'];
+
+            }else{ // if id's don't match it will move on to the next id and start recalculating volume
+                $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId);
+                //$volume[$id] = $vol;
+                $id = $i['dateTimeStarted'];
+                $vol = $i['reps'] * $i['weight'];
+                
+            }
+        }
+        $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId);
+
+        debugOutput($volume);
+        return $volume;
+
     }
 
     //set functions
