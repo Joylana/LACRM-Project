@@ -9,8 +9,7 @@
     include('include/queryfunctions.php');
     include('include/helper_functions.php');
 
-    //hard coding user id as 1
+    //starting the session (omg yaaaaaaay)
     session_start();
-    
-    $userId = 1;
+  
 

@@ -1,6 +1,5 @@
 <?php 
     include('include/init.php');
-    echo $_SESSION["userId"];
     
 ?>
 <html>

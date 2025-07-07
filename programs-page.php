@@ -1,7 +1,7 @@
 <?php 
     include('include/init.php');
 
-    $programs = GetPrograms($userId);
+    $programs = GetPrograms($_SESSION["userId"]);
 ?>
 
 <html>
