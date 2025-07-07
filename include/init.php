@@ -10,6 +10,7 @@
     include('include/helper_functions.php');
 
     //hard coding user id as 1
+    session_start();
     
     $userId = 1;
 

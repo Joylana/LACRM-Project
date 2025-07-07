@@ -1,5 +1,7 @@
 <?php 
     include('include/init.php');
+    echo $_SESSION["userId"];
+    
 ?>
 <html>
     <header>
@@ -12,3 +14,4 @@
         <a href="movement-history.php">Movement History</a> <br>
     </body>
 </html>
+

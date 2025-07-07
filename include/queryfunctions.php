@@ -7,6 +7,14 @@
         return $users;
     };
 
+    function VerifyUser($username,$password){
+        $userId = dbQuery("
+            SELECT userId FROM users
+            WHERE username = '".$username."' AND password = '".$password."'
+        ")->fetch();
+        return $userId;
+    }
+
     // Program Functions
     function GetPrograms($userId){
         $programs = dbQuery("
