@@ -1,11 +1,13 @@
 <?php 
     include('include/init.php');
 
-    $programs = GetPrograms($userId);
+    $programs = GetPrograms($_SESSION["userId"]);
 ?>
 
 <html>
     <body>
+
+        <a href='new-program.php'>New Program</a>
 
         <?php //displaying saved programs
         foreach ($programs as $p){

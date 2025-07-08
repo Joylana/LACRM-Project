@@ -2,7 +2,7 @@
     include("include/init.php");
 
     if (isset( $_REQUEST['workoutName'])){
-        $workoutId = InsertProgram($_REQUEST['workoutName'],$userId); // REMINDER: userId is currently hard coded 
+        $workoutId = InsertProgram($_REQUEST['workoutName'],$_SESSION["userId"]); // REMINDER: userId is currently hard coded 
 
         $movements = [];
         $weights = [];

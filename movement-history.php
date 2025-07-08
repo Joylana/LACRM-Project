@@ -1,6 +1,6 @@
 <?php
 
-use function PHPSTORM_META\elementType;
+//use function PHPSTORM_META\elementType;
 
     include('include/init.php');
 
@@ -18,8 +18,8 @@ use function PHPSTORM_META\elementType;
         <div style="padding:20px;line-height:25px">
         <?php // displaying movements and graphs for volume progression
         $movements = GetAllMovements();
-        $instances = GetAllInstances();
-        $volumeData = GetVolume();
+        $instances = GetAllInstances($_SESSION['userId']);
+        $volumeData = GetVolume($_SESSION['userId']);
         $date = NULL;
         $graphElementId = 0; // incrementing id for the graph element so each is unique
 

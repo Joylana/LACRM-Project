@@ -7,6 +7,14 @@
         return $users;
     };
 
+    function VerifyUser($username,$password){
+        $userId = dbQuery("
+            SELECT userId FROM users
+            WHERE username = '".$username."' AND password = '".$password."'
+        ")->fetch();
+        return $userId;
+    }
+
     // Program Functions
     function GetPrograms($userId){
         $programs = dbQuery("
@@ -73,13 +81,13 @@
         return $movements;
     }
 
-    function GetAllInstances(){ // highkey over kill on rows rn
+    function GetAllInstances($userId){ // highkey over kill on rows rn
         $instances = dbQuery("
         SELECT * FROM movementInstances INNER JOIN sets 
         ON movementInstances.instanceId = sets.instanceId
         INNER JOIN workouts 
         ON sets.workoutId = workouts.workoutId
-        WHERE isProgram IS NULL
+        WHERE isProgram IS NULL AND userId = ".$userId."
         ORDER BY dateTimeStarted DESC
         ")->fetchAll();
         return $instances;
@@ -88,14 +96,14 @@
     //volume functions
 
 
-    function GetVolume(){ //did stuff in the for loop and it worked, very scared to touch it now :,)
+    function GetVolume($userId){ //did stuff in the for loop and it worked, very scared to touch it now :,)
         $instances = dbQuery("
         SELECT movementInstances.instanceId,movementId, reps, weight, dateTimeStarted
         FROM movementInstances INNER JOIN sets 
         ON movementInstances.instanceId = sets.instanceId
         INNER JOIN workouts 
         ON sets.workoutId = workouts.workoutId
-        WHERE isProgram IS NULL
+        WHERE isProgram IS NULL AND userId = ".$userId."
         ORDER BY movementId, dateTimeStarted 
         ")->fetchAll(); //isComplete needs to be taken into account later and userId should be specified
 
@@ -121,7 +129,9 @@
                 
             }
         }
-        $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId);
+        if(isset($movementId)){
+            $volume[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId);
+        }
 
         return $volumes;
 

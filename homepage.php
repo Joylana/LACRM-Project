@@ -1,5 +1,6 @@
 <?php 
     include('include/init.php');
+    
 ?>
 <html>
     <header>
@@ -12,3 +13,4 @@
         <a href="movement-history.php">Movement History</a> <br>
     </body>
 </html>
+
