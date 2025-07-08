@@ -1,6 +1,6 @@
     
     function Show(elementId){
-        const element = document.getElementById(elementId);     //element.classList.contains(sneakytext);
+        const element = document.getElementById(elementId);     
         if(element.classList.contains('surprisetext')){
             element.classList.remove('surprisetext');
             element.classList.add('sneakytext');
@@ -15,16 +15,12 @@
     }
     
     function ShowText(selectedValue,elementId){ //show new workout form
+        const element = document.getElementById(elementId);
         if (selectedValue === "new") {
-            const element = document.getElementById(elementId);
             element.classList.add('surprisetext');
+
         }else{
-            HidePopup(elementId)
+            element.classList.remove('surprisetext');
         }
     }
-    function HidePopup(elementId){ // function to hide new workout form
-            const element = document.getElementById(elementId);
 
-            element.classList.remove('surprisetext');
-        
-    }

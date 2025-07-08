@@ -21,7 +21,7 @@ use function PHPSTORM_META\elementType;
         $instances = GetAllInstances();
         $volumeData = GetVolume();
         $date = NULL;
-        $graphElementId = 0; // incrementing id for
+        $graphElementId = 0; // incrementing id for the graph element so each is unique
 
         foreach($movements as $m){
 
