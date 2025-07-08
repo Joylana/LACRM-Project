@@ -96,7 +96,7 @@
     //volume functions
 
 
-    function GetVolume($userId){ //did stuck in the for loop and it worked, very scared to touch it now :,)
+    function GetVolume($userId){ //did stuff in the for loop and it worked, very scared to touch it now :,)
         $instances = dbQuery("
         SELECT movementInstances.instanceId,movementId, reps, weight, dateTimeStarted
         FROM movementInstances INNER JOIN sets 
@@ -107,33 +107,33 @@
         ORDER BY movementId, dateTimeStarted 
         ")->fetchAll(); //isComplete needs to be taken into account later and userId should be specified
 
-        $volume = [];
-        $vol = 0;
-        $id = 0; // id is initialized to 0
+        $volumes = [];
+        $volumeSum = 0;
+        $date = NULL; // date is initialized to null
         foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
             
-            if($id==$i['dateTimeStarted']){ // adding to the volume
-                $vol = $vol+($i['reps'] * $i['weight']);
+            if($date==$i['dateTimeStarted']){ // adding to the volume
+                $volumeSum +=($i['reps'] * $i['weight']);
                 $movementId = $i['movementId'];
-            }else if($id == 0){
+            }else if($date == NULL){
                 $movementId = $i['movementId'];
-                $id = $i['dateTimeStarted'];
-                $vol = $i['reps'] * $i['weight'];
+                $date = $i['dateTimeStarted'];
+                $volumeSum = $i['reps'] * $i['weight'];
 
             }else{ // if id's don't match it will move on to the next id and start recalculating volume
-                $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
+                $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
                 //$volume[$id] = $vol;
-                $id = $i['dateTimeStarted'];
-                $vol = $i['reps'] * $i['weight'];
+                $date = $i['dateTimeStarted'];
+                $volumeSum = $i['reps'] * $i['weight'];
                 
             }
         }
         if(isset($movementId)){
-            $volume[] = array("y" => $vol, "label" => $id, 'movementId'=> $movementId);
+            $volume[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId);
         }
 
-        return $volume;
+        return $volumes;
 
     }
 

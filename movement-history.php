@@ -21,7 +21,7 @@
         $instances = GetAllInstances($_SESSION['userId']);
         $volumeData = GetVolume($_SESSION['userId']);
         $date = NULL;
-        $graphElementId = 0; // incrementing id for
+        $graphElementId = 0; // incrementing id for the graph element so each is unique
 
         foreach($movements as $m){
 
