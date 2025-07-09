@@ -3,9 +3,10 @@
     $programId = $_REQUEST['workoutId']; // switch to $programId
     $workoutId = StartWorkoutFromProgram($programId);
 
+    $program = GetProgram($programId,$_SESSION['userId']);
+
     $sets = GetSetsForWorkout($programId); //pulling from the original program
     $movements = GetMovementsForWorkout($programId);
-    debugOutput($_REQUEST);
 
     if(isset($_POST['complete'])){ //fill rows n stuff here
         FinishWorkout($workoutId);
@@ -21,8 +22,11 @@
 <html>
 
     <body>
+        
         <form method="post">
         <?php // only displays the workout info rn
+
+        echo "<h2>".$program['workoutName']."</h2>";
 
         $nameNum = 0;
         foreach($movements as $m){

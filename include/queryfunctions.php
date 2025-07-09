@@ -26,8 +26,13 @@
     }
 
     function GetProgram($programId,$userId){
-        $program = GetPrograms($userId);
-        return $program[$programId];
+        $program = dbQuery("
+            SELECT * FROM workouts
+            WHERE isProgram = 1 AND
+            userId = ".$userId." AND
+            workoutId = ".$programId."
+        ")->fetch();
+        return $program;
     }
 
     // Workout Functions
