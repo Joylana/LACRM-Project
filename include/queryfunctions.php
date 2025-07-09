@@ -112,31 +112,39 @@
         ORDER BY movementId, dateTimeStarted 
         ")->fetchAll(); //isComplete needs to be taken into account later and userId should be specified
 
+
+
         $volumes = [];
         $volumeSum = 0;
         $date = NULL; // date is initialized to null
+        $instanceId = NULL;
         foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
             
-            if($date==$i['dateTimeStarted']){ // adding to the volume
+            if($date==$i['dateTimeStarted'] and $instanceId==$i['instanceId']){ // adding to the volume
                 $volumeSum +=($i['reps'] * $i['weight']);
                 $movementId = $i['movementId'];
+                
             }else if($date == NULL){
                 $movementId = $i['movementId'];
                 $date = $i['dateTimeStarted'];
-                $volumeSum = $i['reps'] * $i['weight'];
 
+                $instanceId = $i['instanceId'];
+
+                $volumeSum = $i['reps'] * $i['weight'];
             }else{ // if id's don't match it will move on to the next id and start recalculating volume
                 $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
                 //$volume[$id] = $vol;
                 $date = $i['dateTimeStarted'];
+                $instanceId = $i['instanceId'];
                 $volumeSum = $i['reps'] * $i['weight'];
                 
             }
         }
         if(isset($movementId)){
-            $volume[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId);
+            $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId);
         }
+
 
         return $volumes;
 

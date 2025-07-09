@@ -9,7 +9,7 @@
 
         AddRepsAndSets($workoutId);
         
-        header("Location: new-workout.php");
+        header("Location: programs-page.php");
         exit;
     };
 
