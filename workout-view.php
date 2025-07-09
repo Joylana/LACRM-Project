@@ -6,7 +6,7 @@
     $sets = GetSetsForWorkout($workoutId);
     $movements = GetMovementsForWorkout($workoutId);
 
-    if(isset($_POST['complete'])){
+    if(isset($_POST['complete'])){ //fill rows n stuff here
         FinishWorkout($workoutId);
         echo "Workout Finished!
         <br>
@@ -17,22 +17,25 @@
 <html>
 
     <body>
+        <form method="post">
         <?php // only displays the workout info rn
         foreach($movements as $m){
             echo $m['movementName']."<br>";
             foreach($sets as $s){
                 if ($s['instanceId'] == $m['instanceId'])
-                echo "weight: ". $s['weight'] ." Reps: ". $s['reps'] ."<br>";
+                echo "Weight:<input type='number' name='weight' value='". $s['weight'] ."' >
+                Reps:<input type='number' name='reps' value='". $s['reps'] ."' >
+                <br>";
+                
             }
             
         }
 
         ?>
 
-        <form method="post">
             <button type="submit" name="complete">Complete Workout!</button>
-        </form>
 
+        </form>
         
     </body>
 </html>
