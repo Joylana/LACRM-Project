@@ -14,30 +14,7 @@
         <a href='programs-page.php'>Return</a>
         <br>";
 
-        $movementOrder=0;
-        $setOrder=0;
-        foreach(array_keys($_REQUEST) as $key){ //inserting the same as in new workout
-
-            
-            if (str_contains($key,"movement")){
-                //echo "movement";
-                $setOrder=0;
-                $movementOrder+=1;
-                $instanceId = InsertInstance($_REQUEST[$key],$movementOrder,$workoutId); // inserting an instance
-
-            }else if (str_contains($key,"weight")){ //storing current weight for the query
-                //echo "weight";
-                $weight = $_REQUEST[$key];
-            
-
-            }else if (str_contains($key,"reps")){ //incrementing set order and grabbing variables for query
-                $setOrder+=1;
-                InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId);
-                echo "inserted , ";
-
-            }
-            
-        }
+        AddRepsAndSets($workoutId);
         
     }
 ?>

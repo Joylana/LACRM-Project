@@ -280,4 +280,36 @@
         }*/
         return $newWorkoutId;
     };
+
+    function AddRepsAndSets($workoutId){
+        $movementOrder=0;
+        $setOrder=0;
+        foreach(array_keys($_REQUEST) as $key){ //inserting the same as in new workout
+
+            
+            if (str_contains($key,"movement")){
+                //echo "movement";
+                $setOrder=0;
+                $movementOrder+=1;
+                $instanceId = InsertInstance($_REQUEST[$key],$movementOrder,$workoutId); // inserting an instance
+
+            }else if (str_contains($key,"weight")){ //storing current weight for the query
+                //echo "weight";
+                $weight = $_REQUEST[$key];
+            
+
+            }else if (str_contains($key,"reps")){ //incrementing set order and grabbing variables for query
+                $setOrder+=1;
+                InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId); //ignore the squigglys
+                echo "inserted , ";
+
+            }
+            
+        }
+         // writing this out so I can work on explaining myself o7
+          // this works because of how the form values are stored. each workout is there then each rep and weight value is underneath in pairs ([weight,reps],[weight,reps])
+          // after all sets and reps for that movement there is the variable or the next movement which has all its reps and sets underneath. since it's all in order
+          // you can loop thru the list and work with the movement first and move to the weight then to the reps
+
+    }
     
