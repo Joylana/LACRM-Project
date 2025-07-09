@@ -214,6 +214,15 @@
         return $instanceId;
     };
 
+    function UpdateSet($weight,$reps,$setId){ // updates the weight and reps of an instance
+        dbQuery("
+        UPDATE sets
+        SET weight = ".$weight.", reps = ".$reps."
+        WHERE setId = ".$setId." 
+        ");
+
+    };
+
     function InsertSet($weight,$reps,$setOrder,$workoutId,$instanceId){
         $setId = GenerateId();
         dbQuery("
@@ -306,7 +315,6 @@
             }else if (str_contains($key,"reps")){ //incrementing set order and grabbing variables for query
                 $setOrder+=1;
                 InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId); //ignore the squigglys
-                echo "inserted , ";
 
             }
             
