@@ -43,7 +43,7 @@
 
     }
 
-    function NewEditSetRow(id,weight,reps) {// creates a new input row for a set within a specific movement
+    function NewEditSetRow(id,programWeight,programReps) {// creates a new input row for a set within a specific movement
         
         var inputContainer = document.getElementById(id);
         var newInputWrapper = document.createElement('div');
@@ -53,7 +53,7 @@
 
         var newInput = document.createElement('input');//weight field
         newInput.type = 'number';
-        var weightId = 'weightField' + (inputContainer.children.length);
+        var weightId = 'weightField' + (inputContainer.children.length)+ id;
         newInput.id = weightId;
         newInput.name = 'weight'+ (inputContainer.children.length)+ id;
         newInput.value = weight;
@@ -64,7 +64,7 @@
 
         var newInput = document.createElement('input');// reps field
         newInput.type = 'number';
-        var repId = 'repField' + (inputContainer.children.length);
+        var repId = 'repField' + (inputContainer.children.length)+ id;
         newInput.id = repId;
         newInput.name = 'reps'+ (inputContainer.children.length)+ id;
         //newInput.value = reps;
@@ -79,9 +79,14 @@
         });
         newInputWrapper.appendChild(newButton);
 
-
         inputContainer.appendChild(newInputWrapper);
 
+        console.log(newInputWrapper);
+
+        document.getElementById(repId).value = programReps; //filling in values
+        document.getElementById(weightId).value = programWeight;
+        console.log(repId);
+   
     };
     </script>
 
