@@ -65,7 +65,8 @@
       fetch('movement-submit.php', {
         method: 'POST',
         body: formData
-      }).then (data => {HidePopup();})
+      }).then (data => {popupForm.classList.remove('surprisetext');
+                        popupForm.classList.add('sneakytext');})
 
     }
   )};

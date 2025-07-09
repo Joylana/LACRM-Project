@@ -45,7 +45,7 @@
                     $weightName = 'weight'.$nameNum;
                     $repName ='reps'.$nameNum;
 
-                    echo "<input type='text' name='".$s['setId']."' value='". $s['setId'] ."' >";
+                    echo "<input type='hidden' name='".$s['setId']."' value='". $s['setId'] ."' >";
 
                     echo "Weight:<input type='number' name='".$weightName."' value='". $s['weight'] ."' >
                     Reps:<input type='number' name='".$repName."' value='". $s['reps'] ."' >
