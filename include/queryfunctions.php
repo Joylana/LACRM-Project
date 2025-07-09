@@ -233,7 +233,7 @@
             workouts
         WHERE 
             workoutId = ".$workoutId."
-        ");
+        ");/*
 
         $movements = GetMovementsForWorkout($workoutId);// Left this variable alone for now WILL need to be changed
         $sets = GetSetsForWorkout($workoutId);
@@ -277,7 +277,7 @@
                         instanceId = ".$movementId."
                 ");
             }
-        }
+        }*/
         return $newWorkoutId;
     };
     
