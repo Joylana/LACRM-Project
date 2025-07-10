@@ -125,7 +125,7 @@
         $instanceId = NULL;
         foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
-            
+            $movementId = $i['movementId'];
             if($date==$i['dateTimeStarted'] and $instanceId==$i['instanceId']){ // adding to the volume
                 $volumeSum +=($i['reps'] * $i['weight']);
                 $movementId = $i['movementId'];
@@ -187,8 +187,6 @@
         ");
     }
 
-    //Inserting new workout, movement, and set
-
     // NOTE: a baddie just left the baddie factory
 
     function GenerateId(){// take the current hour, minute, and second then add a random number to return an id. (I feel like i ate with this one or the bar is in hell)
@@ -199,7 +197,7 @@
         return $id;
     }
 
-    // Inserting functions 
+    // Inserting functions and creating new workouts and programs
 
     function InsertProgram($name,$userId){// creates a new program
         $workoutId = GenerateId();
@@ -309,7 +307,10 @@
     };
 
     function AddRepsAndSets($workoutId){
-
+        $weight = NULL; //getting the squiggly lines to go away :)
+        $add = NULL;
+        $movementId = NULL;
+        $instanceId = NULL;
             
         $movementOrder=0;
         $setOrder=0;
