@@ -64,8 +64,6 @@
         var removeMovementButton = document.createElement('button');
         removeMovementButton.textContent = 'Remove Movement';
         removeMovementButton.addEventListener('click', function() {
-            console.log(removeMovementButton);
-            console.log(id);
             RemoveMovementElement(id)
         });
         removeMovementButton.type = "button";
