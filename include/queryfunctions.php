@@ -68,11 +68,16 @@
         return $movements; 
     }
 
-    function MovementDropdown(){
+    function MovementDropdown($selected=NULL){
         $movements = GetAllMovements();
 
         foreach($movements as $m){
-            echo " <option value='".$m['movementId']."'>".$m['movementName']."</option> ";
+            if($selected==$m['movementName']){
+                echo " <option value='".$m['movementId']."' selected='".$m['movementName']."'>".$m['movementName']."</option> ";
+
+            } else{
+                echo " <option value='".$m['movementId']."' >".$m['movementName']."</option> ";
+            }
         }
         echo " <option value='new'>New Movement</option> ";
     }

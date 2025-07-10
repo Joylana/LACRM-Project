@@ -25,8 +25,15 @@
 
         inputContainer.appendChild(newInputWrapper); // adds the div to the inputContainer
         
-        fetch('endpoint.php').then(
-                response =>(
+        fetch('endpoint.php', {
+            method: 'POST', // Specify the HTTP method as POST
+            headers: {
+            'Content-Type': 'application/json' // Tell server you're sending JSON
+            },
+            body: JSON.stringify({value: movementValue}) // Convert the JavaScript object to a JSON string for the request body
+            })
+
+                .then(response =>(
                     response.text()
                 )
             ).then(
@@ -34,10 +41,7 @@
                     document.getElementById(thisId).innerHTML = data
                 )
         )
-        //select.value = movementValue;
-        // document.getElementById(thisId).value = 'Squat';
-        // document.getElementById(movementValue).selected = true;
-        // console.log(movementValue);
+
 
         return id;
 
@@ -81,11 +85,9 @@
 
         inputContainer.appendChild(newInputWrapper);
 
-        console.log(newInputWrapper);
 
         document.getElementById(repId).value = programReps; //filling in values
         document.getElementById(weightId).value = programWeight;
-        console.log(repId);
    
     };
     </script>
@@ -122,16 +124,14 @@
     ?>
 <html>
     <body>
-        <form method="post" id='inputContainer'>
+        <form method="post">
+            <div id='inputContainer'>
         <?php 
         echo "<h2> Edit ".$program['workoutName']."</h2>";
 
-        $nameNum = 0;
         foreach($movements as $m){
-            echo $m['movementName']."<br>";
-            $movementName ='movement'.$nameNum;
 
-            echo "<script> var thisId = NewEditMovementRow('".json_encode($m['movementName'], JSON_UNESCAPED_UNICODE)."'); </script>";
+            echo "<script> var thisId = NewEditMovementRow(".json_encode($m['movementName'], JSON_UNESCAPED_UNICODE)."); </script>";
 
             foreach($sets as $s){
                 
@@ -139,16 +139,7 @@
 
                     echo "<script> NewEditSetRow(thisId,".json_encode($s['weight']).",".json_encode($s['reps'])."); </script>";
 
-                    $weightName = 'weight'.$nameNum;
-                    $repName ='reps'.$nameNum;
 
-                    echo "<input type='hidden' name='".$s['setId']."' value='". $s['setId'] ."' >";
-
-                    echo "Weight:<input type='number' name='".$weightName."' value='". $s['weight'] ."' >
-                    Reps:<input type='number' name='".$repName."' value='". $s['reps'] ."' >
-                    <br>";
-
-                    $nameNum +=1;
                 }
                 
             }
@@ -156,15 +147,12 @@
         }
 
         ?>
-
-            <button type="submit" name="complete">Save</button>
+        </div>
+        <button type="button" id="addButton" onclick="NewMovementRow()">Add Movement</button>
+        <button type="submit" name="complete">Save</button>
 
         </form>
         
     </body>
-    <script>
-        console.log(<?php echo json_encode($movements, JSON_UNESCAPED_UNICODE) ?>)
 
-
-    </script>
 </html>
