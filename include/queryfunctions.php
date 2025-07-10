@@ -309,6 +309,8 @@
     };
 
     function AddRepsAndSets($workoutId){
+
+            
         $movementOrder=0;
         $setOrder=0;
         foreach(array_keys($_REQUEST) as $key){ //inserting the same as in new workout
@@ -317,17 +319,22 @@
             if (str_contains($key,"movement")){
                 //echo "movement";
                 $setOrder=0;
-                $movementOrder+=1;
-                $instanceId = InsertInstance($_REQUEST[$key],$movementOrder,$workoutId); // inserting an instance
+                $movementId = $_REQUEST[$key]; // inserting an instance
+                $add = True;
 
             }else if (str_contains($key,"weight")){ //storing current weight for the query
                 //echo "weight";
                 $weight = $_REQUEST[$key];
+                if($add==True){
+                    $movementOrder+=1; // only creating an instance if there is actualu some weight following it (so if it's empty no instance is made)
+                    $instanceId = InsertInstance($movementId,$movementOrder,$workoutId);
+                }
             
 
             }else if (str_contains($key,"reps")){ //incrementing set order and grabbing variables for query
                 $setOrder+=1;
                 InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId); //ignore the squigglys
+                $add=False;
 
             }
             
@@ -336,6 +343,21 @@
           // this works because of how the form values are stored. each workout is there then each rep and weight value is underneath in pairs ([weight,reps],[weight,reps])
           // after all sets and reps for that movement there is the variable or the next movement which has all its reps and sets underneath. since it's all in order
           // you can loop thru the list and work with the movement first and move to the weight then to the reps
+
+    }
+
+    //deleting functions (omg)
+
+    function DeleteSetAndInstance($instanceId){ //deleting both the set and movementInstance together
+        dbQuery("
+        DELETE FROM sets WHERE
+        instanceId = ".$instanceId."
+        ");
+
+        dbQuery("
+        DELETE FROM movementInstances WHERE
+        instanceId = ".$instanceId."
+        ");
 
     }
     

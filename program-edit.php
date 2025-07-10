@@ -23,6 +23,7 @@
         newSetButton.type = "button"; // keeps it from submitting the form
         newInputWrapper.appendChild(newSetButton); // adds button to wrapper
 
+
         inputContainer.appendChild(newInputWrapper); // adds the div to the inputContainer
         
         fetch('endpoint.php', {
@@ -102,24 +103,40 @@
 
     if(isset($_POST['complete'])){
 
+        $movementOrder=0;
+        $setOrder=0;
         foreach(array_keys($_REQUEST) as $key){ //inserting the same as in new workout
 
             
-            if (str_contains($key,"weight")){ //storing current weight for the query
-    
+            if (str_contains($key,"movement")){
+                //echo "movement";
+                $setOrder=0;
+                $movementId = $_REQUEST[$key]; // inserting an instance
+                $add = True;
+
+            }else if (str_contains($key,"weight")){ //storing current weight for the query
+                //echo "weight";
                 $weight = $_REQUEST[$key];
+                if($add==True){
+                    $movementOrder+=1; // only creating an instance if there is actualu some weight following it (so if it's empty no instance is made)
+                    $instanceId = InsertInstance($movementId,$movementOrder,$programId);
+                }
             
+
             }else if (str_contains($key,"reps")){ //incrementing set order and grabbing variables for query
+                $setOrder+=1;
+                InsertSet($weight,$_REQUEST[$key],$setOrder,$programId,$instanceId); //ignore the squigglys
+                $add=False;
 
-                UpdateSet($weight,$_REQUEST[$key],$setId);
+            }else if (!str_contains($key,"workout") and !str_contains($key,"complete")){
+                DeleteSetAndInstance($_REQUEST[$key]); //DELETE IIIIIIT
 
-            }else{
-                $setId = $_REQUEST[$key];
             }
             
         }
-        //header('Location: program-view.php?workoutId='.$programId);
-        //exit;
+
+        header('Location: program-view.php?workoutId='.$programId);
+        exit;
     }
     ?>
 <html>
@@ -129,13 +146,17 @@
         <?php 
         echo "<h2> Edit ".$program['workoutName']."</h2>";
 
+
+
         foreach($movements as $m){
 
             echo "<script> var thisId = NewEditMovementRow(".json_encode($m['movementName'], JSON_UNESCAPED_UNICODE)."); </script>";
+            echo '<input type="hidden" value="'.$m['instanceId'].'" name="'.$m['instanceId'].'"/>';
 
             foreach($sets as $s){
                 
                 if ($s['instanceId'] == $m['instanceId']){ //change names for inputs
+                    
 
                     echo "<script> NewEditSetRow(thisId,".json_encode($s['weight']).",".json_encode($s['reps'])."); </script>";
 
