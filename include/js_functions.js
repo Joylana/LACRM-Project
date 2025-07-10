@@ -96,3 +96,7 @@
                 )
         )
     }
+
+    function RemoveMovementElement(conatinerId){
+        document.getElementById(conatinerId).remove();
+    }
