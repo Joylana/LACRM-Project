@@ -49,7 +49,6 @@
 
         var newButton = document.createElement('button');
         newButton.textContent = 'Remove';
-        //newButton.classList.add('removeButton'); //add styling?????
         newButton.addEventListener('click', function(event) {
             event.preventDefault();
             event.target.parentNode.remove();

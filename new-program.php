@@ -4,9 +4,6 @@
     if (isset( $_REQUEST['workoutName'])){
         $workoutId = InsertProgram($_REQUEST['workoutName'],$_SESSION["userId"]); // REMINDER: userId is currently hard coded 
 
-        // $movements = [];
-        // $weights = [];
-
         AddRepsAndSets($workoutId);
         
         header("Location: programs-page.php");

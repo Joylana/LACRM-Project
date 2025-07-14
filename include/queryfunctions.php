@@ -68,15 +68,15 @@
         return $movements; 
     }
 
-    function MovementDropdown($selected=NULL){
+    function MovementDropdown($selected = NULL){
         $movements = GetAllMovements();
 
-        foreach($movements as $m){
-            if($selected==$m['movementName']){
-                echo " <option value='".$m['movementId']."' selected='".$m['movementName']."'>".$m['movementName']."</option> ";
+        foreach($movements as $movement){
+            if($selected == $movement['movementName']){
+                echo " <option value='".$movement['movementId']."' selected='".$movement['movementName']."'>".$movement['movementName']."</option> ";
 
             } else{
-                echo " <option value='".$m['movementId']."' >".$m['movementName']."</option> ";
+                echo " <option value='".$movement['movementId']."' >".$movement['movementName']."</option> ";
             }
         }
         echo " <option value='new'>New Movement</option> ";
@@ -122,11 +122,11 @@
         $volumes = [];
         $volumeSum = 0;
         $date = NULL; // date is initialized to null
-        $instanceId = NULL;
+        $movementInstanceId = NULL;
         foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
             $movementId = $i['movementId'];
-            if($date==$i['dateTimeStarted'] and $instanceId==$i['instanceId']){ // adding to the volume
+            if($date == $i['dateTimeStarted'] and $movementInstanceId == $i['instanceId']){ // adding to the volume
                 $volumeSum +=($i['reps'] * $i['weight']);
                 $movementId = $i['movementId'];
                 
@@ -134,14 +134,14 @@
                 $movementId = $i['movementId'];
                 $date = $i['dateTimeStarted'];
 
-                $instanceId = $i['instanceId'];
+                $movementInstanceId = $i['instanceId'];
 
                 $volumeSum = $i['reps'] * $i['weight'];
             }else{ // if id's don't match it will move on to the next id and start recalculating volume
                 $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
                 //$volume[$id] = $vol;
                 $date = $i['dateTimeStarted'];
-                $instanceId = $i['instanceId'];
+                $movementInstanceId = $i['instanceId'];
                 $volumeSum = $i['reps'] * $i['weight'];
                 
             }
@@ -258,52 +258,10 @@
             workouts
         WHERE 
             workoutId = ".$workoutId."
-        ");/*
+        ");
 
-        $movements = GetMovementsForWorkout($workoutId);// Left this variable alone for now WILL need to be changed
-        $sets = GetSetsForWorkout($workoutId);
-
-        $movementIds = [];
-        $setIds = [];
-
-        foreach($movements as $m){// returns the id's of movements INSTANCES
-            $movementIds[] = $m['instanceId'];
-        }
-
-        foreach($sets as $s){// returns the id's of sets
-            $setIds[] = $s['setId'];
-        }
-        //loop thru and insert new rows for each table
-        foreach($movementIds as $movementId){//movements
-            $newInstanceId = GenerateId();
-            dbQuery("
-                INSERT INTO movementInstances
-                    (instanceId,movementId, workoutId,movementOrder)
-                SELECT 
-                    ".$newInstanceId.", movementId, ".$newWorkoutId.",movementOrder
-                FROM 
-                    movementInstances
-                WHERE 
-                    instanceId = ".$movementId."
-            ");
-
-            foreach($setIds as $setId){//sets only adding if the id's match
-                $newSetId = GenerateId();
-                dbQuery("
-                    INSERT INTO sets
-                        (setId,weight,reps,setOrder,workoutId,instanceId)
-                    SELECT 
-                        ".$newSetId.",weight,reps,setOrder,".$newWorkoutId.", ".$newInstanceId."
-                    FROM 
-                        sets
-                    WHERE 
-                        setId = ".$setId."
-                        AND
-                        instanceId = ".$movementId."
-                ");
-            }
-        }*/
         return $newWorkoutId;
+
     };
 
     function AddRepsAndSets($workoutId){
@@ -312,30 +270,31 @@
         $movementId = NULL;
         $instanceId = NULL;
             
-        $movementOrder=0;
-        $setOrder=0;
-        foreach(array_keys($_REQUEST) as $key){ //inserting the same as in new workout
+        $movementOrder = 0;
+        $setOrder = 0;
 
+        foreach(array_keys($_REQUEST) as $key){ //inserting the same as in new workout
             
             if (str_contains($key,"movement")){
-                //echo "movement";
-                $setOrder=0;
+
+                $setOrder = 0;
                 $movementId = $_REQUEST[$key]; // inserting an instance
                 $add = True;
 
             }else if (str_contains($key,"weight")){ //storing current weight for the query
-                //echo "weight";
+
                 $weight = $_REQUEST[$key];
-                if($add==True){
-                    $movementOrder+=1; // only creating an instance if there is actualu some weight following it (so if it's empty no instance is made)
+
+                if($add == True){
+                    $movementOrder += 1; // only creating an instance if there is actualu some weight following it (so if it's empty no instance is made)
                     $instanceId = InsertInstance($movementId,$movementOrder,$workoutId);
                 }
             
 
             }else if (str_contains($key,"reps")){ //incrementing set order and grabbing variables for query
-                $setOrder+=1;
-                InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId); //ignore the squigglys
-                $add=False;
+                $setOrder += 1;
+                InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId);
+                $add = False;
 
             }
             
