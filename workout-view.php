@@ -1,7 +1,6 @@
 <?php 
     include('include/init.php');
     $programId = $_REQUEST['workoutId']; // switch to $programId
-    $workoutId = StartWorkoutFromProgram($programId);
 
     $program = GetProgram($programId,$_SESSION['userId']);
 
@@ -9,6 +8,8 @@
     $movements = GetMovementsForWorkout($programId);
 
     if(isset($_POST['complete'])){ //fill rows n stuff here
+
+        $workoutId = $_REQUEST['newWorkoutId'];
         FinishWorkout($workoutId);
         echo "Workout Finished!
         <br>
@@ -17,6 +18,10 @@
 
         AddRepsAndSets($workoutId);
         
+    }else{
+
+        $newWorkoutId = StartWorkoutFromProgram($programId);
+
     }
 ?>
 <html>
@@ -49,6 +54,9 @@
                 
             }
             
+        }
+        if(!isset($_POST['complete'])){
+            echo "<input type='hidden' name='newWorkoutId' value='".$newWorkoutId."'/>";
         }
 
         ?>
