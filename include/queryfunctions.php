@@ -26,8 +26,13 @@
     }
 
     function GetProgram($programId,$userId){
-        $program = GetPrograms($userId);
-        return $program[$programId];
+        $program = dbQuery("
+            SELECT * FROM workouts
+            WHERE isProgram = 1 AND
+            userId = ".$userId." AND
+            workoutId = ".$programId."
+        ")->fetch();
+        return $program;
     }
 
     // Workout Functions
@@ -63,11 +68,16 @@
         return $movements; 
     }
 
-    function MovementDropdown(){
+    function MovementDropdown($selected = NULL){
         $movements = GetAllMovements();
 
-        foreach($movements as $m){
-            echo " <option value='".$m['movementId']."'>".$m['movementName']."</option> ";
+        foreach($movements as $movement){
+            if($selected == $movement['movementName']){
+                echo " <option value='".$movement['movementId']."' selected='".$movement['movementName']."'>".$movement['movementName']."</option> ";
+
+            } else{
+                echo " <option value='".$movement['movementId']."' >".$movement['movementName']."</option> ";
+            }
         }
         echo " <option value='new'>New Movement</option> ";
     }
@@ -107,31 +117,39 @@
         ORDER BY movementId, dateTimeStarted 
         ")->fetchAll(); //isComplete needs to be taken into account later and userId should be specified
 
+
+
         $volumes = [];
         $volumeSum = 0;
         $date = NULL; // date is initialized to null
+        $movementInstanceId = NULL;
         foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
-            
-            if($date==$i['dateTimeStarted']){ // adding to the volume
+            $movementId = $i['movementId'];
+            if($date == $i['dateTimeStarted'] and $movementInstanceId == $i['instanceId']){ // adding to the volume
                 $volumeSum +=($i['reps'] * $i['weight']);
                 $movementId = $i['movementId'];
+                
             }else if($date == NULL){
                 $movementId = $i['movementId'];
                 $date = $i['dateTimeStarted'];
-                $volumeSum = $i['reps'] * $i['weight'];
 
+                $movementInstanceId = $i['instanceId'];
+
+                $volumeSum = $i['reps'] * $i['weight'];
             }else{ // if id's don't match it will move on to the next id and start recalculating volume
                 $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
                 //$volume[$id] = $vol;
                 $date = $i['dateTimeStarted'];
+                $movementInstanceId = $i['instanceId'];
                 $volumeSum = $i['reps'] * $i['weight'];
                 
             }
         }
         if(isset($movementId)){
-            $volume[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId);
+            $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId);
         }
+
 
         return $volumes;
 
@@ -169,8 +187,6 @@
         ");
     }
 
-    //Inserting new workout, movement, and set
-
     // NOTE: a baddie just left the baddie factory
 
     function GenerateId(){// take the current hour, minute, and second then add a random number to return an id. (I feel like i ate with this one or the bar is in hell)
@@ -181,7 +197,7 @@
         return $id;
     }
 
-    // Inserting functions 
+    // Inserting functions and creating new workouts and programs
 
     function InsertProgram($name,$userId){// creates a new program
         $workoutId = GenerateId();
@@ -207,6 +223,15 @@
             VALUES (".$instanceId.",".$movementOrder.",".$movementId.", ".$workoutId.")
         ");
         return $instanceId;
+    };
+
+    function UpdateSet($weight,$reps,$setId){ // updates the weight and reps of an instance
+        dbQuery("
+        UPDATE sets
+        SET weight = ".$weight.", reps = ".$reps."
+        WHERE setId = ".$setId." 
+        ");
+
     };
 
     function InsertSet($weight,$reps,$setOrder,$workoutId,$instanceId){
@@ -235,49 +260,64 @@
             workoutId = ".$workoutId."
         ");
 
-        $movements = GetMovementsForWorkout($workoutId);// Left this variable alone for now WILL need to be changed
-        $sets = GetSetsForWorkout($workoutId);
-
-        $movementIds = [];
-        $setIds = [];
-
-        foreach($movements as $m){// returns the id's of movements INSTANCES
-            $movementIds[] = $m['instanceId'];
-        }
-
-        foreach($sets as $s){// returns the id's of sets
-            $setIds[] = $s['setId'];
-        }
-        //loop thru and insert new rows for each table
-        foreach($movementIds as $movementId){//movements
-            $newInstanceId = GenerateId();
-            dbQuery("
-                INSERT INTO movementInstances
-                    (instanceId,movementId, workoutId,movementOrder)
-                SELECT 
-                    ".$newInstanceId.", movementId, ".$newWorkoutId.",movementOrder
-                FROM 
-                    movementInstances
-                WHERE 
-                    instanceId = ".$movementId."
-            ");
-
-            foreach($setIds as $setId){//sets only adding if the id's match
-                $newSetId = GenerateId();
-                dbQuery("
-                    INSERT INTO sets
-                        (setId,weight,reps,setOrder,workoutId,instanceId)
-                    SELECT 
-                        ".$newSetId.",weight,reps,setOrder,".$newWorkoutId.", ".$newInstanceId."
-                    FROM 
-                        sets
-                    WHERE 
-                        setId = ".$setId."
-                        AND
-                        instanceId = ".$movementId."
-                ");
-            }
-        }
         return $newWorkoutId;
+
     };
+
+    function AddRepsAndSets($workoutId){
+        $weight = NULL; //getting the squiggly lines to go away :)
+        $add = NULL;
+        $movementId = NULL;
+        $instanceId = NULL;
+            
+        $movementOrder = 0;
+        $setOrder = 0;
+
+        foreach(array_keys($_REQUEST) as $key){ //inserting the same as in new workout
+            
+            if (str_contains($key,"movement")){
+
+                $setOrder = 0;
+                $movementId = $_REQUEST[$key]; // inserting an instance
+                $add = True;
+
+            }else if (str_contains($key,"weight")){ //storing current weight for the query
+
+                $weight = $_REQUEST[$key];
+
+                if($add == True){
+                    $movementOrder += 1; // only creating an instance if there is actualu some weight following it (so if it's empty no instance is made)
+                    $instanceId = InsertInstance($movementId,$movementOrder,$workoutId);
+                }
+            
+
+            }else if (str_contains($key,"reps")){ //incrementing set order and grabbing variables for query
+                $setOrder += 1;
+                InsertSet($weight,$_REQUEST[$key],$setOrder,$workoutId,$instanceId);
+                $add = False;
+
+            }
+            
+        }
+         // writing this out so I can work on explaining myself o7
+          // this works because of how the form values are stored. each workout is there then each rep and weight value is underneath in pairs ([weight,reps],[weight,reps])
+          // after all sets and reps for that movement there is the variable or the next movement which has all its reps and sets underneath. since it's all in order
+          // you can loop thru the list and work with the movement first and move to the weight then to the reps
+
+    }
+
+    //deleting functions (omg)
+
+    function DeleteSetAndInstance($instanceId){ //deleting both the set and movementInstance together
+        dbQuery("
+        DELETE FROM sets WHERE
+        instanceId = ".$instanceId."
+        ");
+
+        dbQuery("
+        DELETE FROM movementInstances WHERE
+        instanceId = ".$instanceId."
+        ");
+
+    }
     

@@ -15,6 +15,7 @@
         }
     
     }
+    echo " <a href='program-edit.php?workoutId=". $workoutId ."'> Edit Program </a> ";
 
 ?>
 
