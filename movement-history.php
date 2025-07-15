@@ -1,7 +1,5 @@
 <?php
 
-//use function PHPSTORM_META\elementType;
-
     include('include/init.php');
 
 ?>

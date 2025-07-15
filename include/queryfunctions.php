@@ -179,6 +179,19 @@
         return $sets;
     };
 
+    function GetSetsAndMovementsForWorkout($workoutId){ // gets all movement, set, and instance info for each set
+        $movementsAndSets = dbQuery("
+        SELECT * FROM movementInstances INNER JOIN movements 
+        ON movementInstances.movementId = movements.movementId
+        INNER JOIN sets 
+        ON movementInstances.workoutId = sets.workoutId
+        WHERE movementInstances.workoutId = ".$workoutId."
+        ORDER BY movementOrder, setOrder
+        ")->fetchAll();
+        return $movementsAndSets;
+
+    }
+
     function FinishSet($setId){
         dbQuery("
         UPDATE sets
