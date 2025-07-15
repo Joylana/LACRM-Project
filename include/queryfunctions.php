@@ -184,7 +184,7 @@
         SELECT * FROM movementInstances INNER JOIN movements 
         ON movementInstances.movementId = movements.movementId
         INNER JOIN sets 
-        ON movementInstances.workoutId = sets.workoutId
+        ON movementInstances.instanceId = sets.instanceId
         WHERE movementInstances.workoutId = ".$workoutId."
         ORDER BY movementOrder, setOrder
         ")->fetchAll();
