@@ -14,7 +14,7 @@
         $currentMovementName = NULL;
 
         foreach($workoutSets as $sets){
-            if($currentMovementName == NULL or $currentMovementName != $sets['movementName']){
+            if($currentMovementName == NULL || $currentMovementName != $sets['movementName']){
                 $currentMovementName = $sets['movementName'];
                 echo $currentMovementName."<br>";
             }

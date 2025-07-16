@@ -30,8 +30,9 @@
             SELECT * FROM workouts
             WHERE isProgram = 1 AND
             userId = ".$userId." AND
-            workoutId = ".$programId."
-        ")->fetch();
+            workoutId = :programId
+        ",
+        ['program'=>$programId])->fetch();
         return $program;
     }
 
@@ -185,9 +186,10 @@
         ON movementInstances.movementId = movements.movementId
         INNER JOIN sets 
         ON movementInstances.instanceId = sets.instanceId
-        WHERE movementInstances.workoutId = ".$workoutId."
+        WHERE movementInstances.workoutId = :workoutId
         ORDER BY movementOrder, setOrder
-        ")->fetchAll();
+        ",
+        ['workoutId'=>$workoutId])->fetchAll();
         return $movementsAndSets;
 
     }

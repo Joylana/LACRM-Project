@@ -1,7 +1,12 @@
 <?php 
     include('include/init.php');
-    $programId = $_REQUEST['workoutId']; // switch to $programId
+    if(!isset($_REQUEST['workoutId'])){
+        echo "No workout found. Please select an existing program <br>";
+        echo "<a href='programs-page.php'>Return to Programs Page</a>";
+        exit;
+    }
 
+    $programId = $_REQUEST['workoutId']; 
     $program = GetProgram($programId,$_SESSION['userId']);
 
     $sets = GetSetsForWorkout($programId); //pulling from the original program
