@@ -19,12 +19,27 @@ if (isset($_POST['username'])){
 ?>
 
 <html>
-    <body>
-        <h1>Log In:</h1>
-        <form action=''method="POST" id='login'>
-            <input type="text" name="username" >
-            <input type="text" name="password" >
-            <input type="submit" value="Log In" />
-        </form>
+    
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body style="margin: 0;">
+        <img style="width:100%;margin-top:0px" src="back-photo.jpg" alt="man flexing back muscles">
+
+        <div style="text-align: center;">
+
+            <h1> Log In:</h1>
+            <form action=''method="POST" id='login'>
+                <input type="text" name="username" >
+                <br>
+                <input type="text" name="password" >
+                <br>
+                <input type="submit" value="Log In" />
+            </form>
+
+        </div>
+
     </body>
 </html>

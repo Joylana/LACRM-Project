@@ -1,4 +1,12 @@
 /*styles n things*/
+/* body and common styles */
+
+html{
+    font-family:"Inter";
+}
+
+
+/*appearing and disappearing text*/
 
 .sneakytext{
     display:none;
