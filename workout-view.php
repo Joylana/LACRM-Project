@@ -1,14 +1,20 @@
 <?php 
     include('include/init.php');
-    $programId = $_REQUEST['workoutId']; // switch to $programId
-    $workoutId = StartWorkoutFromProgram($programId);
+    if(!isset($_REQUEST['workoutId'])){
+        echo "No workout found. Please select an existing program <br>";
+        echo "<a href='programs-page.php'>Return to Programs Page</a>";
+        exit;
+    }
 
+    $programId = $_REQUEST['workoutId']; 
     $program = GetProgram($programId,$_SESSION['userId']);
 
     $sets = GetSetsForWorkout($programId); //pulling from the original program
     $movements = GetMovementsForWorkout($programId);
 
     if(isset($_POST['complete'])){ //fill rows n stuff here
+
+        $workoutId = $_REQUEST['newWorkoutId'];
         FinishWorkout($workoutId);
         echo "Workout Finished!
         <br>
@@ -17,6 +23,10 @@
 
         AddRepsAndSets($workoutId);
         
+    }else{
+
+        $newWorkoutId = StartWorkoutFromProgram($programId);
+
     }
 ?>
 <html>
@@ -49,6 +59,9 @@
                 
             }
             
+        }
+        if(!isset($_POST['complete'])){
+            echo "<input type='hidden' name='newWorkoutId' value='".$newWorkoutId."'/>";
         }
 
         ?>
