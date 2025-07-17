@@ -17,6 +17,7 @@
 
                 <a href='homepage.php'>
                     <img  style='height: 80%' src='home-icon.png' alt='home'>
+                </a>
 
                 </div>
 
@@ -39,6 +40,7 @@
 
                 <a href='homepage.php'>
                     <img  src='home-icon.png' alt='home'>
+                </a>
 
                 </div>
 

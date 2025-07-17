@@ -31,10 +31,10 @@ if (isset($_POST['username'])){
         <div style="margin:25%;">
 
             <h1 style="text-align: left;"> Log In:</h1>
-            <form action=''method="POST" id='login' style="justify-content: flex-end;">
-                <input class="text-box" type="text" name="username" >
+            <form action=''method="POST" id='login' >
+                <input class="text-box" style="text-align:left" type="text" name="username" >
                 <br>
-                <input class="text-box" type="text" name="password" >
+                <input class="text-box" style="text-align:left" type="text" name="password" >
                 <br>
                 <div style="text-align:center;">
                 <input style="background-color:0D0C1D; text-align:center;color: white;width:35%;padding:15px;font-size:25px" type="submit" value="Log In" />
