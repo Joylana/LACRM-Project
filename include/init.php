@@ -8,6 +8,7 @@
     include('include/db_query.php');
     include('include/queryfunctions.php');
     include('include/helper_functions.php');
+    include('include/common-components.php');
 
     //starting the session (omg yaaaaaaay)
     session_start();

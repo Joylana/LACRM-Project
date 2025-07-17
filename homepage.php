@@ -3,10 +3,9 @@
     
 ?>
 <html>
-    <header>
-        <link rel="stylesheet" href="style.css">
-    </header>
+
     <body>
+        <?php NavBar(); ?>
         <h1>Home</h1>
         <a href="programs-page.php">Programs</a> <br>
         <a href="workout-history.php">Workout History</a> <br>
