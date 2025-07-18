@@ -7,6 +7,16 @@
         return $users;
     };
 
+    function GetUser($userId){
+        $user = dbQuery("
+            SELECT * FROM users
+            WHERE userId = :userId
+        ",
+        ['userId' => $userId]
+        )->fetch();
+        return $user;
+    };
+
     function VerifyUser($username,$password){
         $userId = dbQuery("
             SELECT userId FROM users
