@@ -40,18 +40,23 @@ a{
 }
 
 /* Workout/Program displays inputs and buttons */
-.workout-input-box{
+.workout-input-box{ /* rep and weight boxes */
     background-color:D9D9D9;
     box-shadow: none;
     border:none;
     text-align: center;
+    font-size: 35px;
+    margin: 25px;
     margin-bottom: 15px;
+    width: 150px;
+    height: 50px
+
 }
 
-.movement-input-box{
+.movement-input-box{ /*select movement drop down*/
     box-shadow: none;
     border:none;
-    font-size: 30px;
+    font-size: 40px;
     margin-bottom: 15px;
 }
 
@@ -60,19 +65,37 @@ a{
     box-shadow: none;
     border:none;
     float: right;
-    font-size: 25px;
+    font-size: 30px;
 }
 
-.workout-button{
+.remove-button{
+    background-color: white;
+    box-shadow: none;
+    border:none;
+    font-size: 30px;
+}
+
+.workout-button{ /*save and add movement buttons*/
     background-color:D9D9D9;
     box-shadow: none;
     border:none;
-    font-size: 25px;
+    font-size: 30px;
     padding: 15px;
 }
 
-.inputWrapper{
-    font-size: 25px;
+.setWrapper{
+    font-size: 35px;
+    margin: 30px;
+}
+
+.repWrapper{
+    float: right;
+    margin-right: 20px;
+}
+
+.movementWrapper{
+    font-size: 30px;
+    margin: 15px;
 }
 
 /*appearing and disappearing text*/

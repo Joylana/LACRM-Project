@@ -1,7 +1,7 @@
 <?php 
     include('include/init.php');
     $programId = $_REQUEST['workoutId'];
-    $program = GetProgram($programId,$_SESSION['userId']);
+    $program = GetProgram($_REQUEST['workoutId'],$_SESSION['userId']);
        
     $movements = GetMovementsForWorkout($programId);
     $sets = GetSetsForWorkout($programId);
