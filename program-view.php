@@ -1,21 +1,36 @@
 <?php 
     include('include/init.php');
     $workoutId = $_REQUEST['workoutId'];
+    $program = GetProgram($workoutId,$_SESSION["userId"]);
        
     $movements = GetMovementsForWorkout($workoutId);
     $sets = GetSetsForWorkout($workoutId);
 
-    echo " <a href='workout-view.php?workoutId=". $workoutId ."'> Start Workout </a> ";
+    NavBar(1);
+    echo "<div style='margin:15px'>";
+    echo "<h1>".$program['workoutName']."</h1>";
+    echo " <div class='big-workout-button'> 
+    <div style='margin-top:25px'>
+    <a  href='workout-view.php?workoutId=". $workoutId ."'> Start Workout </a> 
+    </div>
+    </div>
+    <div style='margin:20px;text-align:center'>
+    ";
 
     foreach($movements as $m){//displaying current program info
-        echo "<br>".$m['movementName']."<br>";
+        echo "<br>
+        <div class='program-name'>".$m['movementName']."</div>
+        <br>";
         foreach($sets as $s){
             if ($s['instanceId'] == $m['instanceId'])
-            echo "weight: ". $s['weight'] ." Reps: ". $s['reps'] ."<br>";
+            echo "<div class='set-display'> weight: ". $s['weight'] ." Reps: ". $s['reps'] ."</div><br>";
         }
     
     }
-    echo " <a href='program-edit.php?workoutId=". $workoutId ."'> Edit Program </a> ";
+    echo " <div class='big-workout-button' style='height:50px;font-size:35px'>
+    <a href='program-edit.php?workoutId=". $workoutId ."'> Edit Program </a> 
+    </div>
+    </div>";
 
 ?>
 

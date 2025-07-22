@@ -30,7 +30,7 @@
       <button type="button" id="addButton" class='workout-button' onclick="NewMovementRow()">Add Movement</button>
 
       <div style="text-align: center;margin-top:10px">
-        <input style="width:95%" class='workout-button' type="submit" value="Save" >
+        <input class='big-workout-button' type="submit" value="Save" >
       </div>
   </form>
 

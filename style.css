@@ -36,7 +36,8 @@ a{
 
 /* Workout/Program displays */
 .program-name{
-    font-size:35px ;
+    font-size:40px ;
+    text-align:left;
 }
 
 /* Workout/Program displays inputs and buttons */
@@ -51,6 +52,12 @@ a{
     width: 150px;
     height: 50px
 
+}
+
+.set-display{ /* displaying sets and reps(plain/no edit) */
+    word-spacing:50px;
+    font-size:35px;
+    margin:20px;
 }
 
 .movement-input-box{ /*select movement drop down*/
@@ -75,12 +82,24 @@ a{
     font-size: 30px;
 }
 
-.workout-button{ /*save and add movement buttons*/
+.workout-button{ /*add movement buttons*/
     background-color:D9D9D9;
     box-shadow: none;
     border:none;
     font-size: 30px;
     padding: 15px;
+}
+
+.big-workout-button{ /*save and other buttons*/
+    background-color:D9D9D9;
+    box-shadow: none;
+    border:none;
+    font-size: 40px;
+    padding: 15px;
+    width:95%;
+    text-align:center;
+    margin: 10px;
+    height: 100px;
 }
 
 .setWrapper{
