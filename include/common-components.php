@@ -39,7 +39,7 @@
                 <div style='float:right; padding:20px'>
 
                 <a href='homepage.php'>
-                    <img  src='home-icon.png' alt='home'>
+                    <img  style='height: 80%' src='home-icon.png' alt='home'>
                 </a>
 
                 </div>
