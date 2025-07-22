@@ -39,10 +39,12 @@
         $program = dbQuery("
             SELECT * FROM workouts
             WHERE isProgram = 1 AND
-            userId = ".$userId." AND
+            userId = :userId AND
             workoutId = :programId
         ",
-        ['program'=>$programId])->fetch();
+        ['programId'=>$programId,
+        'userId' => $userId
+        ])->fetch();
         return $program;
     }
 
