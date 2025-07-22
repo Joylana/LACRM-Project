@@ -78,6 +78,15 @@
         select.name = "movement" + id;
         newInputWrapper.appendChild(select); //adds the select element to the created div 
 
+        var removeMovementButton = document.createElement('button');
+        removeMovementButton.textContent = '-Movement';
+        newSetButton.classList.add('remove-button');
+        removeMovementButton.addEventListener('click', function() {
+            RemoveMovementElement(id)
+        });
+        removeMovementButton.type = "button";
+        newInputWrapper.appendChild(removeMovementButton);
+
         var newSetButton = document.createElement('button');
         newSetButton.textContent = '+Set';
         newSetButton.addEventListener('click', function() {
