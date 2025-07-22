@@ -36,6 +36,7 @@
         newInput.type = 'number';
         newInput.id = 'weightField' + (inputContainer.children.length);
         newInput.name = 'weight'+ (inputContainer.children.length)+ id;
+        newInput.classList.add('workout-input-box');
         newInputWrapper.appendChild(newInput);
 
         var reps = document.createTextNode(" Reps:");//reps text
@@ -45,6 +46,7 @@
         newInput.type = 'number';
         newInput.id = 'repField' + (inputContainer.children.length);
         newInput.name = 'reps'+ (inputContainer.children.length)+ id;
+        newInput.classList.add('workout-input-box');
         newInputWrapper.appendChild(newInput);
 
         var newButton = document.createElement('button');
@@ -71,15 +73,17 @@
         var select = document.createElement('select'); // creates the select element
         select.setAttribute("onchange", "ShowText(this.value,'popUp')")
         var thisId = "divi" + (inputContainer.children.length); 
+        select.classList.add('movement-input-box');
         select.id = thisId;
         select.name = "movement" + id;
         newInputWrapper.appendChild(select); //adds the select element to the created div 
 
         var newSetButton = document.createElement('button');
-        newSetButton.textContent = 'New Set';
+        newSetButton.textContent = '+Set';
         newSetButton.addEventListener('click', function() {
             NewSetRow(id)
         });
+        newSetButton.classList.add('add-button');
         newSetButton.type = "button"; // keeps it from submitting the form
         newInputWrapper.appendChild(newSetButton); // adds button to wrapper
 

@@ -6,6 +6,7 @@ html{
     color:0D0C1D;
 }
 
+
 h1{
     font-size: 50px;
 }
@@ -21,9 +22,8 @@ a{
     width: 100%;
     height: 4%;
     margin-bottom: 40px;
-    font-size: 40px;
+    font-size: 50px;
     text-align: center;
-
     
 }
 
@@ -34,6 +34,46 @@ a{
     height:10%;
 }
 
+/* Workout/Program displays */
+.program-name{
+    font-size:35px ;
+}
+
+/* Workout/Program displays inputs and buttons */
+.workout-input-box{
+    background-color:D9D9D9;
+    box-shadow: none;
+    border:none;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.movement-input-box{
+    box-shadow: none;
+    border:none;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.add-button{
+    background-color: white;
+    box-shadow: none;
+    border:none;
+    float: right;
+    font-size: 25px;
+}
+
+.workout-button{
+    background-color:D9D9D9;
+    box-shadow: none;
+    border:none;
+    font-size: 25px;
+    padding: 15px;
+}
+
+.inputWrapper{
+    font-size: 25px;
+}
 
 /*appearing and disappearing text*/
 
