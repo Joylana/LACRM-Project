@@ -116,6 +116,9 @@ a{
 .movementWrapper{
     font-size: 30px;
     margin: 15px;
+    border-bottom-style: solid;
+    border-bottom-color: E8E5E5 ;
+    border-bottom-width: 2px;
 }
 
 .movement-history-box{
@@ -123,6 +126,7 @@ a{
     padding: 30px;
     margin-bottom: 40px;
 }
+
 
 /*appearing and disappearing text*/
 

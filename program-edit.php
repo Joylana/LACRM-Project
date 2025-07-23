@@ -6,6 +6,8 @@
     $movements = GetMovementsForWorkout($programId);
     $sets = GetSetsForWorkout($programId);
 
+    NavBar(1);
+
     if(isset($_POST['complete'])){
 
         $movementOrder=0;
@@ -50,7 +52,7 @@
     function NewEditMovementRow(movementValue){ // adds a new section of movements
         var inputContainer = document.getElementById('inputContainer');
         var newInputWrapper = document.createElement('div'); //creates a new div for the select element, therefore the elements stack vertically
-        newInputWrapper.classList.add('inputWrapper'); //add styling?????
+        newInputWrapper.classList.add('movementWrapper'); //add styling?????
         var id = (inputContainer.children.length);
         newInputWrapper.id = id;
 
@@ -59,10 +61,12 @@
         var thisId = "divi" + (inputContainer.children.length); 
         select.id = thisId;
         select.name = "movement" + id;
+        select.classList.add('movement-input-box');
         newInputWrapper.appendChild(select); //adds the select element to the created div 
 
         var removeMovementButton = document.createElement('button');
-        removeMovementButton.textContent = 'Remove Movement';
+        removeMovementButton.textContent = '-Remove';
+        removeMovementButton.classList.add('remove-button');
         removeMovementButton.addEventListener('click', function() {
             RemoveMovementElement(id)
         });
@@ -70,11 +74,12 @@
         newInputWrapper.appendChild(removeMovementButton);
 
         var newSetButton = document.createElement('button');
-        newSetButton.textContent = 'New Set';
+        newSetButton.textContent = '+Set';
         newSetButton.addEventListener('click', function() {
             NewSetRow(id)
         });
         newSetButton.type = "button"; // keeps it from submitting the form
+        newSetButton.classList.add('add-button');
         newInputWrapper.appendChild(newSetButton); // adds button to wrapper
 
 
@@ -104,7 +109,7 @@
         
         var inputContainer = document.getElementById(id);
         var newInputWrapper = document.createElement('div');
-        newInputWrapper.classList.add('inputWrapper'); //add styling?????
+        newInputWrapper.classList.add('setWrapper'); //add styling?????
         var weight = document.createTextNode("Weight:");//weight text
         newInputWrapper.appendChild(weight);
 
@@ -114,27 +119,32 @@
         newInput.id = weightId;
         newInput.name = 'weight'+ (inputContainer.children.length)+ id;
         newInput.value = weight;
+        newInput.classList.add('workout-input-box');
         newInputWrapper.appendChild(newInput);
 
+        var newrepWrapper = document.createElement('span'); //creating a new container for all reps info
+        newrepWrapper.classList.add('repWrapper');
+
         var reps = document.createTextNode(" Reps:");//reps text
-        newInputWrapper.appendChild(reps);
+        newrepWrapper.appendChild(reps);
 
         var newInput = document.createElement('input');// reps field
         newInput.type = 'number';
         var repId = 'repField' + (inputContainer.children.length)+ id;
         newInput.id = repId;
         newInput.name = 'reps'+ (inputContainer.children.length)+ id;
-        //newInput.value = reps;
-        newInputWrapper.appendChild(newInput);
+        newInput.classList.add('workout-input-box');
+        newrepWrapper.appendChild(newInput);
 
-        var newButton = document.createElement('button');
-        newButton.textContent = 'Remove';
-        //newButton.classList.add('removeButton'); //add styling?????
-        newButton.addEventListener('click', function(event) {
+        var removeSetButton = document.createElement('button');
+        removeSetButton.textContent = '-';
+        removeSetButton.classList.add('remove-button');
+        removeSetButton.addEventListener('click', function(event) {
             event.preventDefault();
             event.target.parentNode.remove();
         });
-        newInputWrapper.appendChild(newButton);
+        newrepWrapper.appendChild(removeSetButton);
+        newInputWrapper.appendChild(newrepWrapper);
 
         inputContainer.appendChild(newInputWrapper);
 
@@ -149,7 +159,7 @@
         <form method="post">
             <div id='inputContainer'>
 <?php 
-        echo "<h2> Edit ".$program['workoutName']."</h2>";
+        echo "<h1> Edit ".$program['workoutName']."</h1>";
 
         foreach($movements as $m){
 
@@ -170,8 +180,8 @@
 
         ?>
         </div>
-        <button type="button" id="addButton" onclick="NewMovementRow()">Add Movement</button>
-        <button type="submit" name="complete">Save</button>
+        <button class='workout-button' type="button" id="addButton" onclick="NewMovementRow()">Add Movement</button>
+        <button class='big-workout-button' type="submit" name="complete">Save</button>
 
         </form>
         

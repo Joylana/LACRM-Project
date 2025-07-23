@@ -67,6 +67,7 @@
                 }
                 
             }
+            echo "<hr style='width:60%;text-align:center;'>";
             
         }
         if(!isset($_POST['complete'])){
