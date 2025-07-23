@@ -40,9 +40,7 @@
 
         echo "
         <h1>".$program['workoutName']."</h1>";
-        echo "<div>".date("h:i:s")."</div>";
-
-        echo
+        echo "<div style='font-size:40px'>".date("h:i:s")."</div>";
 
         $nameNum = 0;
         foreach($movements as $m){

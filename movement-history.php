@@ -2,14 +2,10 @@
 
     include('include/init.php');
 
-?>
-<html>
-    <header>
-        <link rel="stylesheet" href="style.css">
-    </header>
-    
+    NavBar();
 
-    <body>
+?>
+
         <h1>Movement History</h1>
 
 
@@ -23,9 +19,9 @@
 
         foreach($movements as $m){
 
-            echo "<div style='background-color:lavender;padding:5px;margin:5px'>"; //opening div for each movement to have it's own little visual container
+            echo "<div class='movement-history-box'>"; //opening div for each movement to have it's own little visual container
 
-            echo "<div onclick='Show(".$m['movementId'].")' >↓".$m['movementName']."</div>".'<br>';
+            echo "<div style='font-size: 50px;' onclick='Show(".$m['movementId'].")' >↓".$m['movementName']."</div>".'<br>';
             $dataShown = False;
             echo "<div  class='sneakytext'  id=".$m['movementId']." >"; 
 
@@ -41,16 +37,22 @@
                     window.addEventListener("load", function() {
                         
                         var chart = new CanvasJS.Chart("'. json_encode($graphElementId, JSON_UNESCAPED_UNICODE) .'", {
+                            height:300,
+                            width: 850,
                             title: {
                                 text: "Previous Volume",
-                                fontSize: 20
+                                fontSize: 50
                             },
                             axisY: {
                                 titleFontWeight: "light",
-                                title: "Volume"
+                                title: "Volume",
+                                labelFontSize: 30
+                            },
+                            axisX: {
+                                labelFontSize: 0
                             },
                             data: [{
-                                color: "#8e7cc3",
+                                color: "#0D0C1D",
                                 type: "line",
                                 dataPoints: '.  json_encode($volume, JSON_NUMERIC_CHECK).'
                             }]
@@ -60,7 +62,7 @@
 
                     </script>
                     
-                    <div id="'.$graphElementId.'" style="height: 50%; width: 100%;"></div>
+                    <div id="'.$graphElementId.'" style="height: 20%; width: 100%;"></div>
                     ';
             }
                 
@@ -76,7 +78,7 @@
                     
                     $newDate = $i['dateTimeStarted'];
                     if($date == NULL or $date!=$newDate){ //if it's a new date it will echo it
-                        echo $i['dateTimeStarted']. "<br>";
+                        echo substr($i['dateTimeStarted'],0,-9). "<br>";
                         $date = $i['dateTimeStarted'];
                     }
 
