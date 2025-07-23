@@ -21,18 +21,20 @@
 
                 </div>
 
-                </div>    
+                </div>   
+                <div style='margin:20px'> 
             ";
 
         }else{ // gonna fix the back button positioning when working on programs-page
             echo"	            
                 <div class='navbar'>
 
-                <div style='float:left; padding:20px'>
+                <div style='float:left; padding:20px;'>
 
                 <a style='color: white;font-size:300%' href='programs-page.php'>
                     < Back
                 </a>
+                
 
                 </div>
 
@@ -44,7 +46,8 @@
 
                 </div>
 
-                </div>    
+                </div>  
+                <div style='margin:30px'>  
             ";
         }
     }

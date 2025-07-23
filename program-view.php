@@ -7,7 +7,6 @@
     $sets = GetSetsForWorkout($workoutId);
 
     NavBar(1);
-    echo "<div style='margin:15px'>";
     echo "<h1>".$program['workoutName']."</h1>";
     echo " <div class='big-workout-button'> 
     <div style='margin-top:25px'>

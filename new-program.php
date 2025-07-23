@@ -13,7 +13,6 @@
     NavBar(1);
 
 ?>
-<div style='margin: 30px'>
   
     <h1>New Program:</h1>
 
