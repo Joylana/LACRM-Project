@@ -16,7 +16,7 @@
         foreach ($programs as $p){
             echo " 
             <div class='text-box' style='padding:40px 0;text-align:left;' >
-            <a style='margin-left:10px' href='program-view.php?workoutId=". $p['workoutId'] ."'>". $p['workoutName'] ."</a> 
+            <a style='margin-left:25px' href='program-view.php?workoutId=". $p['workoutId'] ."'>". $p['workoutName'] ."</a> 
             </div>
             ";
         }

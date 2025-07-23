@@ -6,6 +6,8 @@
 
     NavBar();
 
+    echo "<h1>Workout History</h1>";
+
     foreach($workoutHistory as $workout){
         echo "<div class='program-name'>".$workout['workoutName']."</div>
         <br>
@@ -25,7 +27,7 @@
                     echo "<hr style='width:60%;text-align:center;'>";
                 }
                 $currentMovementName = $sets['movementName'];
-                echo "<div class=''>
+                echo "
                 <div class='program-name'>".$currentMovementName."</div><br>";
             }
            echo "<div style='text-align:center' class='set-display'>Weight: ".$sets['weight']." Reps: ".$sets['reps']."</div><br>";

@@ -54,6 +54,7 @@
             SELECT * FROM workouts
             WHERE isProgram IS NULL AND
             userId = ".$userId."
+            ORDER BY dateTimeStarted DESC
         ")->fetchAll();
         return $workouts; 
     }

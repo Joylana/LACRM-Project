@@ -184,6 +184,21 @@
         <button class='big-workout-button' type="submit" name="complete">Save</button>
 
         </form>
+
+    <div class="sneakytext" id="popUp"> <!-- popup menu to create new movement-->
+      <form  action="" method="post"id="popUpForm" >
+          <h2>New Movement:</h2>
+          <input style='font-size:40px;width:250px' type="text" name="movementName">
+          <select style='font-size:30px' class='movement-input-box' name="movementType" >
+
+              <option value='push'>Push</option> 
+              <option value='pull'>Pull</option> 
+              <option value='legs'>Legs</option> 
+
+          </select>
+          <input class='workout-button' type="submit"  >
+      </form>
+      </div>
         
     </body>
 

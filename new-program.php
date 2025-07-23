@@ -36,15 +36,15 @@
   <div class="sneakytext" id="popUp"> <!-- popup menu to create new movement-->
       <form  action="" method="post"id="popUpForm" >
           <h2>New Movement:</h2>
-          <input type="text" name="movementName">
-          <select name="movementType" >
+          <input style='font-size:40px;width:250px' type="text" name="movementName">
+          <select style='font-size:30px' class='movement-input-box' name="movementType" >
 
               <option value='push'>Push</option> 
               <option value='pull'>Pull</option> 
               <option value='legs'>Legs</option> 
 
           </select>
-          <input type="submit"  >
+          <input class='workout-button' type="submit"  >
       </form>
       </div>
 

@@ -15,8 +15,8 @@
     $movements = GetMovementsForWorkout($programId);
 
     if(isset($_POST['complete'])){ //fill rows n stuff here
-
-        $workoutId = $_REQUEST['newWorkoutId'];
+        $newWorkoutId = StartWorkoutFromProgram($programId);
+        $workoutId = $newWorkoutId;
         FinishWorkout($workoutId);
         echo "<h1> Workout Finished! </h1>
         <br>
@@ -27,7 +27,7 @@
         
     }else{
 
-        $newWorkoutId = StartWorkoutFromProgram($programId);
+        //$newWorkoutId = StartWorkoutFromProgram($programId);
 
     }
 ?>
@@ -71,7 +71,7 @@
             
         }
         if(!isset($_POST['complete'])){
-            echo "<input type='hidden' name='newWorkoutId' value='".$newWorkoutId."'/>";
+            //echo "<input type='hidden' name='newWorkoutId' value='".$newWorkoutId."'/>";
         }
 
         ?>
