@@ -62,7 +62,7 @@
 
                     </script>
                     
-                    <div id="'.$graphElementId.'" style="height: 20%; width: 100%;"></div>
+                    <div id="'.$graphElementId.'" style="height: 300px; width: 100%;margin-bottom:10px"></div>
                     ';
             }
                 
@@ -78,11 +78,12 @@
                     
                     $newDate = $i['dateTimeStarted'];
                     if($date == NULL or $date!=$newDate){ //if it's a new date it will echo it
-                        echo substr($i['dateTimeStarted'],0,-9). "<br>";
+                        echo substr($i['dateTimeStarted'],0,-9). "<br>
+                        ";
                         $date = $i['dateTimeStarted'];
                     }
 
-                    echo "Reps:".$i['reps'] ." Weight:". $i['weight']."<br><br>"; //displays the reps and weights
+                    echo "<div style='font-size:100%' class='set-display'> Reps:".$i['reps'] ." Weight:". $i['weight']." </div>"; //displays the reps and weights
                 }
             
             }
