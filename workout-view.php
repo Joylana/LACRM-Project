@@ -6,6 +6,8 @@
         exit;
     }
 
+    NavBar();
+
     $programId = $_REQUEST['workoutId']; 
     $program = GetProgram($programId,$_SESSION['userId']);
 
@@ -16,9 +18,9 @@
 
         $workoutId = $_REQUEST['newWorkoutId'];
         FinishWorkout($workoutId);
-        echo "Workout Finished!
+        echo "<h1> Workout Finished! </h1>
         <br>
-        <a href='programs-page.php'>Return</a>
+        <a style='font-size:30px' href='programs-page.php'>Return</a>
         <br>";
 
         AddRepsAndSets($workoutId);
@@ -36,11 +38,15 @@
         <form method="post">
         <?php // only displays the workout info rn
 
-        echo "<h2>".$program['workoutName']."</h2>";
+        echo "
+        <h1>".$program['workoutName']."</h1>";
+        echo "<div>".date("h:i:s")."</div>";
+
+        echo
 
         $nameNum = 0;
         foreach($movements as $m){
-            echo $m['movementName']."<br>";
+            echo "<div class='movement-input-box'>". $m['movementName']."</div><br>";
             $movementName ='movement'.$nameNum;
             echo "<input type='hidden' name='".$movementName."' value='". $m['movementId'] ."' >";
             foreach($sets as $s){
@@ -50,8 +56,13 @@
                     $weightName = 'weight'.$nameNum;
                     $repName ='reps'.$nameNum;
 
-                    echo "Weight:<input type='number' name='".$weightName."' value='". $s['weight'] ."' >
-                    Reps:<input type='number' name='".$repName."' value='". $s['reps'] ."' >
+                    echo "
+                    <div class='setWrapper'>
+                    Weight:<input class='workout-input-box' type='number' name='".$weightName."' value='". $s['weight'] ."' >
+                    <span class='repWrapper' style='margin-right:75px'>
+                    Reps:<input class='workout-input-box' type='number' name='".$repName."' value='". $s['reps'] ."' >
+                    </span>
+                    </div>
                     <br>";
 
                     $nameNum +=1;
@@ -66,7 +77,7 @@
 
         ?>
 
-            <button type="submit" name="complete">Complete Workout!</button>
+            <button style='margin-left:28px' class='big-workout-button' type="submit" name="complete">Complete Workout!</button>
 
         </form>
         

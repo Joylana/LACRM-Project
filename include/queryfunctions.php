@@ -58,9 +58,12 @@
         return $workouts; 
     }
 
-    function GetWorkout($workoutId,$userId){
-        $workout = GetWorkouts($userId);
-        return $workout[$workoutId];
+    function GetWorkout($workoutId){
+        $workout = dbQuery("
+            SELECT * FROM workouts
+            WHERE workoutId = ".$workoutId.""
+        )->fetch();
+        return $workout;
     }
 
     function FinishWorkout($workoutId){
