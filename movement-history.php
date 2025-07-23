@@ -21,7 +21,7 @@
 
             echo "<div class='movement-history-box'>"; //opening div for each movement to have it's own little visual container
 
-            echo "<div style='font-size: 50px;' onclick='Show(".$m['movementId'].")' >↓".$m['movementName']."</div>".'<br>';
+            echo "<div style='font-size: 2.5vh;' onclick='Show(".$m['movementId'].")' >↓".$m['movementName']."</div>".'<br>';
             $dataShown = False;
             echo "<div  class='sneakytext'  id=".$m['movementId']." >"; 
 

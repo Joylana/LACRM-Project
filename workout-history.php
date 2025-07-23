@@ -28,7 +28,7 @@
                 }
                 $currentMovementName = $sets['movementName'];
                 echo "
-                <div class='program-name'>".$currentMovementName."</div><br>";
+                <div style='font-size:2vh'>".$currentMovementName."</div><br>";
             }
            echo "<div style='text-align:center' class='set-display'>Weight: ".$sets['weight']." Reps: ".$sets['reps']."</div><br>";
         }

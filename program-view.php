@@ -9,7 +9,7 @@
     NavBar(1);
     echo "<h1>".$program['workoutName']."</h1>";
     echo " <div class='big-workout-button'> 
-    <div style='margin-top:25px'>
+    <div style='margin-top:25px;font-size:2vh'>
     <a  href='workout-view.php?workoutId=". $workoutId ."'> Start Workout </a> 
     </div>
     </div>
@@ -18,7 +18,7 @@
 
     foreach($movements as $m){//displaying current program info
         echo "<br>
-        <div class='program-name'>".$m['movementName']."</div>
+        <div style='font-size:2vh;text-align:left'>".$m['movementName']."</div>
         <br>";
         foreach($sets as $s){
             if ($s['instanceId'] == $m['instanceId'])
@@ -26,7 +26,7 @@
         }
     
     }
-    echo " <div class='big-workout-button' style='height:50px;font-size:35px'>
+    echo " <div class='big-workout-button' style='height:50px;font-size:2vh'>
     <a href='program-edit.php?workoutId=". $workoutId ."'> Edit Program </a> 
     </div>
     </div>";

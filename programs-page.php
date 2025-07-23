@@ -7,8 +7,10 @@
 ?>
         <h1 style="margin:10px">Programs</h1>
         <div style="margin:45px;">
-            <div class="text-box" style="padding:40px 0;font-size:40px;height:2.5%" >
+            <div style="margin:20px;">
+            <div class="text-box" style="padding:40px 0;font-size:2vh;height:2.5%" >
                 <a href='new-program.php'>New Program</a>
+            </div>
             </div>
         
 
