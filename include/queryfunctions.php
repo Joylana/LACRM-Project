@@ -62,7 +62,9 @@
     function GetWorkout($workoutId){
         $workout = dbQuery("
             SELECT * FROM workouts
-            WHERE workoutId = ".$workoutId.""
+            WHERE workoutId = :workoutId"
+        ,
+        ['workoutId'=>$workoutId]
         )->fetch();
         return $workout;
     }
