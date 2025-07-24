@@ -25,17 +25,18 @@
     }
 
 
-    function NewSetRow(id) {// creates a new input row for a set within a specific movement
-       var inputContainer = document.getElementById(id);
+    function NewSetRow(id,programWeight=null,programReps=null) {// creates a new input row for a set within a specific movement
+        
+        var inputContainer = document.getElementById(id);
         var newInputWrapper = document.createElement('div');
         newInputWrapper.classList.add('setWrapper'); //add styling?????
-
         var weight = document.createTextNode("Weight:");//weight text
         newInputWrapper.appendChild(weight);
 
         var newInput = document.createElement('input');//weight field
         newInput.type = 'number';
-        newInput.id = 'weightField' + (inputContainer.children.length);
+        var weightId = 'weightField' + (inputContainer.children.length)+ id;
+        newInput.id = weightId;
         newInput.name = 'weight'+ (inputContainer.children.length)+ id;
         newInput.classList.add('workout-input-box');
         newInputWrapper.appendChild(newInput);
@@ -48,7 +49,8 @@
 
         var newInput = document.createElement('input');// reps field
         newInput.type = 'number';
-        newInput.id = 'repField' + (inputContainer.children.length);
+        var repId = 'repField' + (inputContainer.children.length)+ id;
+        newInput.id = repId;
         newInput.name = 'reps'+ (inputContainer.children.length)+ id;
         newInput.classList.add('workout-input-box');
         newrepWrapper.appendChild(newInput);
@@ -64,6 +66,12 @@
         newInputWrapper.appendChild(newrepWrapper);
 
         inputContainer.appendChild(newInputWrapper);
+        console.log(programReps);
+        if(programReps != null && programWeight != null){
+        document.getElementById(repId).value = programReps; //filling in values
+        document.getElementById(weightId).value = programWeight;
+        }
+   
     };
 
 

@@ -105,53 +105,6 @@
 
     }
 
-    function NewEditSetRow(id,programWeight,programReps) {// creates a new input row for a set within a specific movement
-        
-        var inputContainer = document.getElementById(id);
-        var newInputWrapper = document.createElement('div');
-        newInputWrapper.classList.add('setWrapper'); //add styling?????
-        var weight = document.createTextNode("Weight:");//weight text
-        newInputWrapper.appendChild(weight);
-
-        var newInput = document.createElement('input');//weight field
-        newInput.type = 'number';
-        var weightId = 'weightField' + (inputContainer.children.length)+ id;
-        newInput.id = weightId;
-        newInput.name = 'weight'+ (inputContainer.children.length)+ id;
-        newInput.value = weight;
-        newInput.classList.add('workout-input-box');
-        newInputWrapper.appendChild(newInput);
-
-        var newrepWrapper = document.createElement('span'); //creating a new container for all reps info
-        newrepWrapper.classList.add('repWrapper');
-
-        var reps = document.createTextNode(" Reps:");//reps text
-        newrepWrapper.appendChild(reps);
-
-        var newInput = document.createElement('input');// reps field
-        newInput.type = 'number';
-        var repId = 'repField' + (inputContainer.children.length)+ id;
-        newInput.id = repId;
-        newInput.name = 'reps'+ (inputContainer.children.length)+ id;
-        newInput.classList.add('workout-input-box');
-        newrepWrapper.appendChild(newInput);
-
-        var removeSetButton = document.createElement('button');
-        removeSetButton.textContent = '-';
-        removeSetButton.classList.add('remove-button');
-        removeSetButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            newrepWrapper.parentNode.remove();
-        });
-        newrepWrapper.appendChild(removeSetButton);
-        newInputWrapper.appendChild(newrepWrapper);
-
-        inputContainer.appendChild(newInputWrapper);
-
-        document.getElementById(repId).value = programReps; //filling in values
-        document.getElementById(weightId).value = programWeight;
-   
-    };
     </script>
 
 <html>
@@ -170,7 +123,7 @@
                 
                 if ($s['instanceId'] == $m['instanceId']){ //change names for inputs
 
-                    echo "<script> NewEditSetRow(thisId,".json_encode($s['weight']).",".json_encode($s['reps'])."); </script>";
+                    echo "<script> NewSetRow(thisId,".json_encode($s['weight']).",".json_encode($s['reps'])."); </script>";
 
                 }
                 
