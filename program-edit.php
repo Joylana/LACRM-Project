@@ -47,65 +47,7 @@
     }
 ?>
 <script src="/include/js_functions.js"></script>
-<script>
-    var yes = 1;
-    function NewEditMovementRow(movementValue){ // adds a new section of movements
-        var inputContainer = document.getElementById('inputContainer');
-        var newInputWrapper = document.createElement('div'); //creates a new div for the select element, therefore the elements stack vertically
-        newInputWrapper.classList.add('movementWrapper'); //add styling?????
-        var id = (inputContainer.children.length);
-        newInputWrapper.id = id;
 
-        var select = document.createElement('select'); // creates the select element
-        select.setAttribute("onchange", "ShowText(this.value,'popUp')")
-        var thisId = "divi" + (inputContainer.children.length); 
-        select.id = thisId;
-        select.name = "movement" + id;
-        select.classList.add('movement-input-box');
-        newInputWrapper.appendChild(select); //adds the select element to the created div 
-
-        var removeMovementButton = document.createElement('button');
-        removeMovementButton.textContent = '-Remove';
-        removeMovementButton.classList.add('remove-button');
-        removeMovementButton.addEventListener('click', function() {
-            RemoveMovementElement(id)
-        });
-        removeMovementButton.type = "button";
-        newInputWrapper.appendChild(removeMovementButton);
-
-        var newSetButton = document.createElement('button');
-        newSetButton.textContent = '+Set';
-        newSetButton.addEventListener('click', function() {
-            NewSetRow(id)
-        });
-        newSetButton.type = "button"; // keeps it from submitting the form
-        newSetButton.classList.add('add-button');
-        newInputWrapper.appendChild(newSetButton); // adds button to wrapper
-
-
-        inputContainer.appendChild(newInputWrapper); // adds the div to the inputContainer
-        
-        fetch('endpoint.php', {
-            method: 'POST', // Specify the HTTP method as POST
-            headers: {
-            'Content-Type': 'application/json' // Tell server you're sending JSON
-            },
-            body: JSON.stringify({value: movementValue}) // Convert the JavaScript object to a JSON string for the request body
-            }
-            ).then(response =>(
-                    response.text()
-                )
-            ).then(
-                data=>(
-                    document.getElementById(thisId).innerHTML = data
-                )
-        )
-
-        return id;
-
-    }
-
-    </script>
 
 <html>
     <body>
@@ -116,7 +58,7 @@
 
         foreach($movements as $m){
 
-            echo "<script> var thisId = NewEditMovementRow(".json_encode($m['movementName'], JSON_UNESCAPED_UNICODE)."); </script>";
+            echo "<script> var thisId = NewMovementRow(".json_encode($m['movementName'], JSON_UNESCAPED_UNICODE)."); </script>";
             echo '<input type="hidden" value="'.$m['instanceId'].'" name="'.$m['instanceId'].'"/>';
 
             foreach($sets as $s){

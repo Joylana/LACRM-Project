@@ -77,7 +77,7 @@
 
     
 
-    function NewMovementRow(){ // adds a new section of movements
+    function NewMovementRow(movementValue=null){ // adds a new section of movements
         var inputContainer = document.getElementById('inputContainer');
         var newInputWrapper = document.createElement('div'); //creates a new div for the select element, therefore the elements stack vertically
         newInputWrapper.classList.add('movementWrapper'); //add styling?????
@@ -111,9 +111,27 @@
         newInputWrapper.appendChild(newSetButton); // adds button to wrapper
 
         inputContainer.appendChild(newInputWrapper); // adds the div to the inputContainer
+
+        if(movementValue == null){
         
-        fetch('endpoint.php').then(
-                response =>(
+            fetch('endpoint.php').then(
+                    response =>(
+                        response.text()
+                    )
+                ).then(
+                    data=>(
+                        document.getElementById(thisId).innerHTML = data
+                    )
+            )
+        } else {
+                    fetch('endpoint.php', {
+            method: 'POST', // Specify the HTTP method as POST
+            headers: {
+            'Content-Type': 'application/json' // Tell server you're sending JSON
+            },
+            body: JSON.stringify({value: movementValue}) // Convert the JavaScript object to a JSON string for the request body
+            }
+            ).then(response =>(
                     response.text()
                 )
             ).then(
@@ -121,6 +139,9 @@
                     document.getElementById(thisId).innerHTML = data
                 )
         )
+        }
+
+        return id;
     }
 
     function RemoveMovementElement(conatinerId){
