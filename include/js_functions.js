@@ -58,7 +58,7 @@
         removeSetButton.classList.add('remove-button');
         removeSetButton.addEventListener('click', function(event) {
             event.preventDefault();
-            event.target.parentNode.remove();
+            newrepWrapper.parentNode.remove();
         });
         newrepWrapper.appendChild(removeSetButton);
         newInputWrapper.appendChild(newrepWrapper);
