@@ -6,8 +6,14 @@ html{
     color:0D0C1D;
 }
 
+
 h1{
-    font-size: 50px;
+    font-size: 3.5vh;
+
+}
+
+h2{
+    font-size: 2vh;
 }
 
 a{    
@@ -19,11 +25,10 @@ a{
     box-shadow: none;
     border:none;
     width: 100%;
-    height: 4%;
+    height: 4vh;
     margin-bottom: 40px;
-    font-size: 40px;
+    font-size: 2.5vh;
     text-align: center;
-
     
 }
 
@@ -32,6 +37,99 @@ a{
     background-color: 0D0C1D;
     border-top:0px;
     height:10%;
+}
+
+/* Workout/Program displays */
+.program-name{
+    font-size:3vh ;
+    text-align:left;
+}
+
+/* Workout/Program displays inputs and buttons */
+.workout-input-box{ /* rep and weight boxes */
+    background-color:D9D9D9;
+    box-shadow: none;
+    border:none;
+    text-align: center;
+    font-size: 2vh;
+    margin: 25px;
+    margin-bottom: 15px;
+    width: 150px;
+    height: 50px
+
+}
+
+.set-display{ /* displaying sets and reps(plain/no edit) */
+    word-spacing:50px;
+    font-size:1.8vh;
+    margin:20px;
+}
+
+.movement-input-box{ /*select movement drop down*/
+    box-shadow: none;
+    border:none;
+    font-size: 2.5vh;
+    margin-bottom: 15px;
+}
+
+.add-button{
+    background-color: white;
+    box-shadow: none;
+    border:none;
+    float: right;
+    font-size: 2vh;
+}
+
+.remove-button{
+    background-color: white;
+    box-shadow: none;
+    border:none;
+    font-size: 2vh;
+}
+
+.workout-button{ /*add movement buttons*/
+    background-color:D9D9D9;
+    box-shadow: none;
+    border:none;
+    font-size: 2vh;
+    padding: 15px;
+    margin: 10px;
+}
+
+.big-workout-button{ /*save and other buttons*/
+    background-color:D9D9D9;
+    box-shadow: none;
+    border:none;
+    font-size: 2.5vh;
+    padding: 15px;
+    width:95%;
+    text-align:center;
+    margin: 10px;
+    height: 100px;
+}
+
+.setWrapper{
+    font-size: 2vh;
+    margin: 30px;
+}
+
+.repWrapper{
+    float: right;
+    margin-right: 20px;
+}
+
+.movementWrapper{
+    font-size: 1.5vh;
+    margin: 15px;
+    border-bottom-style: solid;
+    border-bottom-color: E8E5E5 ;
+    border-bottom-width: 2px;
+}
+
+.movement-history-box{
+    background-color:D9D9D9;
+    padding: 30px;
+    margin-bottom: 40px;
 }
 
 

@@ -39,10 +39,12 @@
         $program = dbQuery("
             SELECT * FROM workouts
             WHERE isProgram = 1 AND
-            userId = ".$userId." AND
+            userId = :userId AND
             workoutId = :programId
         ",
-        ['program'=>$programId])->fetch();
+        ['programId'=>$programId,
+        'userId' => $userId
+        ])->fetch();
         return $program;
     }
 
@@ -52,13 +54,17 @@
             SELECT * FROM workouts
             WHERE isProgram IS NULL AND
             userId = ".$userId."
+            ORDER BY dateTimeStarted DESC
         ")->fetchAll();
         return $workouts; 
     }
 
-    function GetWorkout($workoutId,$userId){
-        $workout = GetWorkouts($userId);
-        return $workout[$workoutId];
+    function GetWorkout($workoutId){
+        $workout = dbQuery("
+            SELECT * FROM workouts
+            WHERE workoutId = ".$workoutId.""
+        )->fetch();
+        return $workout;
     }
 
     function FinishWorkout($workoutId){
