@@ -70,7 +70,7 @@
     }
 
     function FinishWorkout($workoutId){
-        $end = date("Y-m-d h:i:s");
+        $end = date("Y-m-d H:i:s");
         dbQuery("
         UPDATE workouts
         SET dateTimeEnded = '".$end."'
@@ -242,7 +242,7 @@
 
     function InsertWorkoutsRow($name,$userId){// creates a new program
         $workoutId = GenerateId();
-        $start = date("Y-m-d h:i:s"); //dateTimeStarted
+        $start = date("Y-m-d H:i:s"); //dateTimeStarted
         dbQuery("INSERT INTO workouts(workoutId, dateTimeStarted, workoutName, userId) 
         VALUES (".$workoutId.",'". $start ."','".$name."',".$userId.")
         ");
@@ -292,7 +292,7 @@
 
         //create a new row in workouts
         $newWorkoutId = GenerateId();
-        $start = date("Y-m-d h:i:s"); //dateTimeStarted
+        $start = date("Y-m-d H:i:s"); //dateTimeStarted
         dbQuery("
         INSERT INTO workouts
             (workoutId, workoutName, dateTimeStarted, isProgram, userId) 
