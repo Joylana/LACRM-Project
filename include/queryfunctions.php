@@ -238,6 +238,17 @@
         return $workoutId;
     };
 
+    function InsertWorkoutsRow($name,$userId){// creates a new program
+        $workoutId = GenerateId();
+        $start = date("Y-m-d h:i:s"); //dateTimeStarted
+        dbQuery("INSERT INTO workouts(workoutId, dateTimeStarted, workoutName, userId) 
+        VALUES (".$workoutId.",'". $start ."','".$name."',".$userId.")
+        ");
+        return $workoutId;
+    };
+
+
+
     function InsertNewMovement($movementName,$movementType){// creates a new movement (new row in the movements table)
         $movementId = GenerateId();
         dbQuery("
