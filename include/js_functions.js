@@ -124,7 +124,7 @@
                     )
             )
         } else {
-                    fetch('endpoint.php', {
+            fetch('endpoint.php', {
             method: 'POST', // Specify the HTTP method as POST
             headers: {
             'Content-Type': 'application/json' // Tell server you're sending JSON
