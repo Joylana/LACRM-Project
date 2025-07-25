@@ -23,7 +23,7 @@
                 <a  href="movement-history.php">Movement History</a> <br>
             </div>
             <div class="text-box" style="padding:125px 0;">
-                <a  href="workout-view.php">Start New Workout</a> <br>
+                <a  href="empty-workout.php">Start New Workout</a> <br>
             </div>
         </div>
 
