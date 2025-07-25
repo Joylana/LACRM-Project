@@ -37,7 +37,9 @@ if (isset($_POST['username'])){
                 <input class="text-box" style="text-align:left" type="text" name="password" >
                 <br>
                 <div style="text-align:center;">
-                <input style="background-color:0D0C1D; text-align:center;color: white;width:35%;padding:15px;font-size:25px" type="submit" value="Log In" />
+                <input style="background-color:0D0C1D; text-align:center;color: white;width:35%;padding:15px;font-size:25px;margin-bottom:10px" type="submit" value="Log In" />
+                <br>
+                <a href='sign-up.php'>Sign Up</a>
                 </div>
             </form>
 
