@@ -56,8 +56,6 @@
 
 
 </div>
-    </body>
-</html>
 
 <script src="/include/js_functions.js"></script>
 <script>
@@ -77,4 +75,7 @@
   )};
     
 </script>
+
+</body>
+</html>
 
