@@ -32,14 +32,17 @@ if (isset($_POST['username'])){
 
             <h1 style="text-align: left;"> Log In:</h1>
             <form action=''method="POST" id='login' >
+                <div> <label for="username">Username</label>
                 <input class="text-box" style="text-align:left" type="text" name="username" >
-                <br>
-                <input class="text-box" style="text-align:left" type="text" name="password" >
+                </div>
+                <div><label for="password">Password</label>
+                <input class="text-box" style="text-align:left" type="password" name="password" >
+                </div>
                 <br>
                 <div style="text-align:center;">
-                <input style="background-color:0D0C1D; text-align:center;color: white;width:35%;padding:15px;font-size:25px;margin-bottom:10px" type="submit" value="Log In" />
+                <input style="background-color:0D0C1D; text-align:center;color: white;width:40%;padding:15px;font-size:40px;margin-bottom:10px" type="submit" value="Log In" />
                 <br>
-                <a href='sign-up.php'>Sign Up</a>
+                <a style='font-size:35px' href='sign-up.php'>Sign Up</a>
                 </div>
             </form>
 

@@ -2,7 +2,7 @@
     include('include/init.php');
     NavBar();
 
-    if(isset($_REQUEST['username']) && isset($_REQUEST['username'])){
+    if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
         $_SESSION['userId'] = CreateNewUser($_REQUEST['firstname'], $_REQUEST['lastname'], $_REQUEST['username'], $_REQUEST['password'], $_REQUEST['goal'], $_REQUEST['weight']);
         header('Location: homepage.php');
         exit;
