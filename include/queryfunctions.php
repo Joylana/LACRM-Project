@@ -18,11 +18,16 @@
     };
 
     function VerifyUser($username,$password){
-        $userId = dbQuery("
-            SELECT userId FROM users
-            WHERE username = '".$username."' AND password = '".$password."'
+        $user = dbQuery("
+            SELECT userId, password FROM users
+            WHERE username = '".$username."'
         ")->fetch();
-        return $userId;
+
+        if(password_verify($password,$user['password'])){
+            return $user['userId'];
+        }else{
+            return FALSE;
+        }
     }
 
     // Program Functions
