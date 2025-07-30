@@ -249,8 +249,13 @@
         $workoutId = GenerateId();
         $start = date("Y-m-d H:i:s"); //dateTimeStarted
         dbQuery("INSERT INTO workouts(workoutId, dateTimeStarted, workoutName, userId) 
-        VALUES (".$workoutId.",'". $start ."','".$name."',".$userId.")
-        ");
+        VALUES (:workoutId, :start, :name, :userId)
+        ",
+        ['workoutId'=>$workoutId,
+        'start'=>$start,
+        'name'=>$name,
+        'userId'=>$userId
+        ]);
         return $workoutId;
     };
 

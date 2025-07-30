@@ -18,6 +18,26 @@
 
 
 ?>
+<head>
+<script src="/include/js_functions.js"></script>
+<script>
+    
+  const popupForm = document.getElementById('popUpForm');//submits the form without refreshing the page, also runs InsertNewMovement()
+  if (popupForm) {
+    popupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('movement-submit.php', {
+        method: 'POST',
+        body: formData
+      }).then (data => {popupForm.classList.remove('surprisetext');
+                        popupForm.classList.add('sneakytext');})
+
+    }
+  )};
+    
+</script>
+</head>
   
     <h1>New Workout</h1>
 
@@ -56,25 +76,9 @@
 
 
 </div>
-    </body>
+
+
+
+</body>
 </html>
-
-<script src="/include/js_functions.js"></script>
-<script>
-    
-  const popupForm = document.getElementById('popUpForm');//submits the form without refreshing the page, also runs InsertNewMovement()
-  if (popupForm) {
-    popupForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      fetch('movement-submit.php', {
-        method: 'POST',
-        body: formData
-      }).then (data => {popupForm.classList.remove('surprisetext');
-                        popupForm.classList.add('sneakytext');})
-
-    }
-  )};
-    
-</script>
 
