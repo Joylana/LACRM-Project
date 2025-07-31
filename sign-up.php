@@ -14,30 +14,30 @@
     <h1 style="text-align: left;"> Sign Up:</h1>
     <div style='font-size:2vh'>
     <form action=''method="POST" id='signup' >
-        First Name: 
+        <label for="firstname">First Name: </label>
         <br>
-        <input class="text-box signup-box" type="text" name="firstname" >
+        <input class="text-box signup-box" type="text" name="firstname" id="firstname" >
         <br>
-        Last Name: 
+        <label for="lastname">Last Name: </label>
         <br>
-        <input class="text-box signup-box" type="text" name="lastname" >
+        <input class="text-box signup-box" type="text" name="lastname" id="lastname" >
         <br>
-        Username: 
+        <label for="username">Username: </label>
         <br>
-        <input class="text-box signup-box" type="text" name="username" >
+        <input class="text-box signup-box" type="text" name="username" id="username" >
         <br>
-        Password: 
+        <label for="password">Password: </label>
         <br>
-        <input class="text-box signup-box" type="text" name="password" >
+        <input class="text-box signup-box" type="text" name="password" id="password" >
         <div style='font-size:0.75em;color:rgba(13, 12, 29, 0.86)'>*Optional:</div>
         <br>
-        Goal: 
+        <label for="goal">Goal: </label>
         <br>
-        <input class="text-box signup-box" type="text" name="goal" >
+        <input class="text-box signup-box" type="text" name="goal" id="goal" >
         <br>
-        Weight: 
+        <label for="weight">Weight: </label>
         <br>
-        <input class="text-box signup-box" type="text" name="weight" >
+        <input class="text-box signup-box" type="text" name="weight" id="weight" >
         <div style="text-align:center;">
         <input style="background-color:0D0C1D; text-align:center;color: white;width:35%;padding:15px;font-size:25px;margin-bottom:10px" type="submit" value="Sign Up" />
         </div>
