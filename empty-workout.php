@@ -44,9 +44,9 @@
     <form action="" method="post" id="dynamicForm" style="margin:20px">
 
       <?php echo "<div style='font-size:40px'>".date("h:i:s")."</div>"; ?>
-      <span class="program-name" > Workout Name: </span>
+      <label class="program-name" for="workoutName"> Workout Name: </label>
       <br>
-      <input type="text" name="workoutName" class="text-box" style="height:100px;width:100%;text-align: left;">
+      <input type="text" name="workoutName" id="workoutName" class="text-box" style="height:100px;width:100%;text-align: left;">
       <br>
 
       <div id="inputContainer">
