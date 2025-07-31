@@ -262,7 +262,7 @@
         ",
         ['bodyPartId'=>$bodyPartId,
         'userId'=>$userId]
-        )->fetch();
+        )->fetchAll();
 
         return $measurements;
     }
@@ -438,6 +438,16 @@
         'date'=>$date,
         'userId'=>$userId]
         );
+    }
+
+    function ProcessMeasurements($measurements){
+
+        $measurementArray = [];
+
+        foreach($measurements as $m){
+            $measurementArray[] = array("y" => $m['size'], "label" => $m['dateLogged']);
+        }
+        return $measurementArray;
     }
 
     //deleting functions (omg)
