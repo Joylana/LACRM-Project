@@ -253,6 +253,20 @@
         return $latestEntry;
     }
 
+    function GetAllMeasurements($bodyPartId,$userId){
+
+        $measurements = dbQuery("
+        SELECT * FROM measurements
+        WHERE bodyPartId= :bodyPartId AND userId = :userId
+        ORDER BY dateLogged DESC
+        ",
+        ['bodyPartId'=>$bodyPartId,
+        'userId'=>$userId]
+        )->fetch();
+
+        return $measurements;
+    }
+
     // Inserting functions and creating new workouts and programs
 
     function InsertProgram($name,$userId){// creates a new program
@@ -407,6 +421,23 @@
             );
 
         return $userId;
+    }
+
+    function NewMeasurement($bodyPartId,$measurement,$userId){
+        $date = date("Y-m-d");
+        $measurementId = GenerateId();
+
+        dbQuery("
+        INSERT INTO measurements
+        (measurementId, size, dateLogged, userId, bodyPartId)
+        VALUES (:measurementId, :measurement, :date, :userId, :bodyPartId)
+        ",
+        ['measurementId'=>$measurementId,
+        'bodyPartId'=>$bodyPartId,
+        'measurement'=>$measurement,
+        'date'=>$date,
+        'userId'=>$userId]
+        );
     }
 
     //deleting functions (omg)
