@@ -235,6 +235,24 @@
         return $id;
     }
 
+    // measurement functions
+
+    function GetLatestMeasurement($bodyPartId,$userId){
+
+        $latestEntry = dbQuery("
+        SELECT size
+        FROM measurements
+        WHERE bodyPartId= :bodyPartId AND userId = :userId
+        ORDER BY dateLogged DESC
+        LIMIT 1;
+        ",
+        ['bodyPartId'=>$bodyPartId,
+        'userId'=>$userId]
+        )->fetch();
+
+        return $latestEntry;
+    }
+
     // Inserting functions and creating new workouts and programs
 
     function InsertProgram($name,$userId){// creates a new program
