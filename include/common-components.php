@@ -31,7 +31,7 @@
 
                 <div style='float:left; padding:20px;'>
 
-                <a style='color: white;font-size:300%' href='programs-page.php'>
+                <a style='color: white;font-size:300%' href='".$back."'>
                     < Back
                 </a>
                 

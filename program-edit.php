@@ -6,7 +6,7 @@
     $movements = GetMovementsForWorkout($programId);
     $sets = GetSetsForWorkout($programId);
 
-    NavBar(1);
+    NavBar("program-view.php?workoutId=".$_REQUEST['workoutId']);
 
     if(isset($_POST['complete'])){
 

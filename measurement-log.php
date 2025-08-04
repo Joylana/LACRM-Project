@@ -1,6 +1,6 @@
 <?php
     include('include/init.php');
-    NavBar();
+    NavBar("measurement-history.php");
 
     echo "<h1>".$_REQUEST['bodyPartName']."</h1>";
 
