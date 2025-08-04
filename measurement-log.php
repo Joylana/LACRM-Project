@@ -75,7 +75,7 @@
     <div style="height:500px" id="graphContainer"></div>
     <?php
     foreach($allMeasurements as $m){
-        echo "<div style='text-align:center' class='set-display'>".$m['dateLogged']." ".$m['size']."</div><br>";
+        echo "<div style='text-align:center;word-spacing:30vw' class='set-display'>".$m['dateLogged']." ".$m['size']."</div><br>";
     }
     ?>
 </body>
