@@ -146,11 +146,10 @@
         $volumes = [];
         $volumeSum = 0;
         $date = NULL; // date is initialized to null
-        $movementInstanceId = NULL;
+        $movementId = NULL;
         foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
-            $movementId = $i['movementId'];
-            if($date == $i['dateTimeStarted'] and $movementInstanceId == $i['instanceId']){ // adding to the volume
+            if($date == $i['dateTimeStarted'] ){ // adding to the volume
                 $volumeSum +=($i['reps'] * $i['weight']);
                 $movementId = $i['movementId'];
                 
@@ -158,15 +157,13 @@
                 $movementId = $i['movementId'];
                 $date = $i['dateTimeStarted'];
 
-                $movementInstanceId = $i['instanceId'];
-
                 $volumeSum = $i['reps'] * $i['weight'];
             }else{ // if id's don't match it will move on to the next id and start recalculating volume
                 $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
                 //$volume[$id] = $vol;
                 $date = $i['dateTimeStarted'];
-                $movementInstanceId = $i['instanceId'];
                 $volumeSum = $i['reps'] * $i['weight'];
+                $movementId = $i['movementId'];
                 
             }
         }
