@@ -4,7 +4,7 @@
     NavBar();
 
     if (isset( $_REQUEST['workoutName'])){
-        $workoutId = InsertWorkoutsRow($_REQUEST['workoutName'],$_SESSION["userId"]); // REMINDER: userId is currently hard coded 
+        $workoutId = InsertWorkoutsRow($_REQUEST['workoutName'],$_SESSION["userId"]);
 
         AddRepsAndSets($workoutId);
         
