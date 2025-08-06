@@ -12,7 +12,7 @@
     ]
     ?>
     <h1>Measurement Log</h1>
-<div style="margin:20px">
+<div class="setWrapper" style="margin:20px">
 <?php 
     $i = 1;
     foreach($bodyParts as $part){
