@@ -3,17 +3,17 @@ include('include/init.php');
 
 
 if (isset($_POST['username'])){
+
     $id = VerifyUser($_POST['username'],$_POST['password']);
 
-    if(!empty($id)){
+    if ($id == FALSE){
+        echo "Invalid username or password";
+    } else{
 
-        $_SESSION["userId"]=$id['userId'];
+        $_SESSION["userId"]=$id;
         header('Location: homepage.php');
         exit;
 
-    }
-    else{
-        echo "Invalid username or password";
     }
 }
 ?>
