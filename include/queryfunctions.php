@@ -355,6 +355,37 @@
 
     }
 
+    function CreateNewUser($userFn, $userLn, $username, $password, $goal, $weight){
+
+        $date = date("Y-m-d");
+        $userId = GenerateId();
+
+        if(empty($goal)){
+            $goal = NULL;
+        }
+        if(empty($weight)){
+            $weight = NULL;
+        }
+
+        dbQuery('
+            INSERT INTO users
+            (userId, userName, userFirstName, userLastName, weight, goal, startDate, password)
+            VALUES (:userId, :userName, :userFirstName, :userLastName, :weight, :goal, :startDate, :password)
+            ',
+            ['userId' => $userId,
+            'userName' => $username,
+            'userFirstName' => $userFn,
+            'userLastName' => $userLn,
+            'weight' => $weight,
+            'goal' => $goal,
+            'startDate' => $date,
+            'password' => $password
+            ]
+            );
+
+        return $userId;
+    }
+
     //deleting functions (omg)
 
     function DeleteSetAndInstance($instanceId){ //deleting both the set and movementInstance together
@@ -369,4 +400,5 @@
         ");
 
     }
+
     
