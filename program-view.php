@@ -6,7 +6,7 @@
     $movements = GetMovementsForWorkout($workoutId);
     $sets = GetSetsForWorkout($workoutId);
 
-    NavBar(1);
+    NavBar("programs-page.php");
     echo "<h1>".$program['workoutName']."</h1>";
     echo " <div class='big-workout-button'> 
     <div style='margin-top:25px;font-size:2vh'>

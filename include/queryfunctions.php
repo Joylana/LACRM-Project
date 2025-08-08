@@ -146,11 +146,10 @@
         $volumes = [];
         $volumeSum = 0;
         $date = NULL; // date is initialized to null
-        $movementInstanceId = NULL;
+        $movementId = NULL;
         foreach($instances as $i){ // organized by movement id as well as ordered by date (damn...)
             
-            $movementId = $i['movementId'];
-            if($date == $i['dateTimeStarted'] and $movementInstanceId == $i['instanceId']){ // adding to the volume
+            if($date == $i['dateTimeStarted'] ){ // adding to the volume
                 $volumeSum +=($i['reps'] * $i['weight']);
                 $movementId = $i['movementId'];
                 
@@ -158,15 +157,13 @@
                 $movementId = $i['movementId'];
                 $date = $i['dateTimeStarted'];
 
-                $movementInstanceId = $i['instanceId'];
-
                 $volumeSum = $i['reps'] * $i['weight'];
             }else{ // if id's don't match it will move on to the next id and start recalculating volume
                 $volumes[] = array("y" => $volumeSum, "label" => $date, 'movementId'=> $movementId); //ignore that squiggly line (trust me)
                 //$volume[$id] = $vol;
                 $date = $i['dateTimeStarted'];
-                $movementInstanceId = $i['instanceId'];
                 $volumeSum = $i['reps'] * $i['weight'];
+                $movementId = $i['movementId'];
                 
             }
         }
@@ -233,6 +230,38 @@
         $id = $id +$add;
 
         return $id;
+    }
+
+    // measurement functions
+
+    function GetLatestMeasurement($bodyPartId,$userId){
+
+        $latestEntry = dbQuery("
+        SELECT size
+        FROM measurements
+        WHERE bodyPartId= :bodyPartId AND userId = :userId
+        ORDER BY dateLogged DESC
+        LIMIT 1;
+        ",
+        ['bodyPartId'=>$bodyPartId,
+        'userId'=>$userId]
+        )->fetch();
+
+        return $latestEntry;
+    }
+
+    function GetAllMeasurements($bodyPartId,$userId){
+
+        $measurements = dbQuery("
+        SELECT * FROM measurements
+        WHERE bodyPartId= :bodyPartId AND userId = :userId
+        ORDER BY dateLogged DESC
+        ",
+        ['bodyPartId'=>$bodyPartId,
+        'userId'=>$userId]
+        )->fetchAll();
+
+        return $measurements;
     }
 
     // Inserting functions and creating new workouts and programs
@@ -389,6 +418,33 @@
             );
 
         return $userId;
+    }
+
+    function NewMeasurement($bodyPartId,$measurement,$userId){
+        $date = date("Y-m-d");
+        $measurementId = GenerateId();
+
+        dbQuery("
+        INSERT INTO measurements
+        (measurementId, size, dateLogged, userId, bodyPartId)
+        VALUES (:measurementId, :measurement, :date, :userId, :bodyPartId)
+        ",
+        ['measurementId'=>$measurementId,
+        'bodyPartId'=>$bodyPartId,
+        'measurement'=>$measurement,
+        'date'=>$date,
+        'userId'=>$userId]
+        );
+    }
+
+    function ProcessMeasurements($measurements){
+
+        $measurementArray = [];
+
+        foreach($measurements as $m){
+            $measurementArray[] = array("y" => $m['size'], "label" => $m['dateLogged']);
+        }
+        return $measurementArray;
     }
 
     //deleting functions (omg)

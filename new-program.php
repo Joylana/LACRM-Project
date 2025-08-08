@@ -10,7 +10,7 @@
         exit;
     };
 
-    NavBar(1);
+    NavBar("programs-page.php");
 
 ?>
   
